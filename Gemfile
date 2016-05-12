@@ -20,6 +20,25 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'openbill-ruby', github: 'dapi/openbill-ruby'
+gem 'slim-rails'
+gem 'sass-rails', '~> 5.0'
+gem 'nprogress-rails'
+gem 'semver2'
+gem 'bootstrap', '~> 4.0.0.alpha3'
+
+gem 'bugsnag'
+gem 'virtus'
+gem 'hashie'
+
+gem 'simple-navigation', git: 'git://github.com/andi/simple-navigation.git'
+gem 'simple-navigation-bootstrap'
+
+gem 'font-awesome-rails'
+gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
+
+gem 'active_link_to'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -33,6 +52,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  gem 'pry-pretty-numeric'
+  # gem 'pry-highlight'
+  # step, next, finish, continue, break
+  gem 'pry-nav'
+
+  # Добавляет show-stack
+  gem 'pry-stack_explorer'
+
 end
 
 group :development do
