@@ -1,0 +1,27 @@
+h1 Accounts
+h2 Categories
+- categories.each do |cat|
+  = "#{cat.name} (#{cat.accounts_count})"
+
+= render 'pagination', scope: accounts
+
+table.table.table-condensed
+  thead
+    tr
+      th Category
+      th Key
+      th Amount
+      th Last update date
+      th Details
+  tbody
+    - accounts.each do |account|
+      tr
+        td= account.category
+        td= account.key
+        td= humanized_amount account.amount
+        td= l account.updated_at, format: :short
+        td= account.details
+
+hr
+
+= render 'pagination', scope: accounts

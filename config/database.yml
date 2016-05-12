@@ -1,0 +1,29 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: kiiiosk_development_2
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: kormilica_test
+  pool: 5
+  username:
+  password:
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: kormilica_test
+  pool: 5
+  username:
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: kiiiosk_development
+  pool: 5
+  username:
+  password:

@@ -20,7 +20,14 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'openbill-ruby', github: 'dapi/openbill-ruby'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views', git: 'https://github.com/klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
+gem 'sequel'
+gem 'pg'
+gem 'money'
+gem 'money-rails'
+# gem 'openbill-ruby', github: 'dapi/openbill-ruby'
+gem 'openbill-ruby', path: '../openbill-ruby'
 gem 'slim-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'nprogress-rails'
@@ -53,14 +60,19 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
+  gem 'pry-rails'
+  gem 'pry-theme'
+
   gem 'pry-pretty-numeric'
   # gem 'pry-highlight'
   # step, next, finish, continue, break
   gem 'pry-nav'
 
+  gem 'pry-doc'
+  gem 'pry-docmore'
+
   # Добавляет show-stack
   gem 'pry-stack_explorer'
-
 end
 
 group :development do
@@ -70,4 +82,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
