@@ -1,0 +1,9 @@
+                 Prefix Verb URI Pattern                                      Controller#Action
+                   root GET  /                                                welcome#index
+   account_transactions GET  /accounts/:account_id/transactions(.:format)     account_transactions#index
+                        POST /accounts/:account_id/transactions(.:format)     account_transactions#create
+new_account_transaction GET  /accounts/:account_id/transactions/new(.:format) account_transactions#new
+    account_transaction GET  /accounts/:account_id/transactions/:id(.:format) account_transactions#show
+               accounts GET  /accounts(.:format)                              accounts#index
+                account GET  /accounts/:id(.:format)                          accounts#show
+           transactions GET  /transactions(.:format)                          transactions#index

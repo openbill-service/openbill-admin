@@ -1,0 +1,5 @@
+ul.nav.nav-pills
+  - categories.each do |cat|
+    li.nav-item
+      = link_to "#{cat.name} (#{cat.accounts_count})", accounts_path( category: cat.name), class: current_category == cat.name ? 'nav-link active' : 'nav-link'
+br

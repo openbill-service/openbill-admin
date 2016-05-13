@@ -1,5 +1,20 @@
 source 'https://rubygems.org'
 
+def darwin?
+  RbConfig::CONFIG['host_os'] =~ /darwin/
+end
+
+def windows_only(require_as)
+  RbConfig::CONFIG['host_os'] =~ /mingw|mswin/i ? require_as : false
+end
+
+def linux_only(require_as)
+  RbConfig::CONFIG['host_os'] =~ /linux/ ? require_as : false
+end
+# Mac OS X
+def darwin_only(require_as)
+  RbConfig::CONFIG['host_os'] =~ /darwin/ ? require_as : false
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -29,7 +44,6 @@ gem 'money-rails'
 # gem 'openbill-ruby', github: 'dapi/openbill-ruby'
 gem 'openbill-ruby', path: '../openbill-ruby'
 gem 'slim-rails'
-gem 'sass-rails', '~> 5.0'
 gem 'nprogress-rails'
 gem 'semver2'
 gem 'bootstrap', '~> 4.0.0.alpha3'
@@ -46,6 +60,8 @@ gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
 
 gem 'active_link_to'
 
+gem 'philtre'
+gem 'philtre-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -73,6 +89,17 @@ group :development, :test do
 
   # Добавляет show-stack
   gem 'pry-stack_explorer'
+
+  gem 'listen', '~> 3.0'
+  gem 'guard', '> 2.12'
+  gem 'terminal-notifier-guard', '~> 1.6.1', require: darwin_only('terminal-notifier-guard')
+
+  # gem 'guard-rspec'
+  gem 'guard-rails'
+  # gem 'guard-shell'
+  gem 'guard-bundler'
+  gem 'guard-ctags-bundler'
+  # gem 'guard-rubocop'
 end
 
 group :development do
