@@ -48,6 +48,8 @@ gem 'nprogress-rails'
 gem 'semver2'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 
+gem 'rack_password'
+
 gem 'bugsnag'
 gem 'virtus'
 gem 'hashie'

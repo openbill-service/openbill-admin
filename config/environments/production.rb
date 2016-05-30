@@ -73,4 +73,6 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.middleware.use RackPassword::Block, auth_codes: Rails.application.secrets.password.presence || 'belkaops'
 end
