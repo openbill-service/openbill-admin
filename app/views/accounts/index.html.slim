@@ -11,7 +11,8 @@ table.table.table-condensed.table-striped
       th= order_by filter, :updated_at
       th= order_by filter, :transactions_count
       th= t :meta
-      th= t :actions
+      th
+        .pull-xs-right= t :actions
   tbody
     - accounts.each do |account|
       tr

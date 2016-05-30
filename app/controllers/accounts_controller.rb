@@ -15,13 +15,16 @@ class AccountsController < ApplicationController
   private
 
   def current_category
-    category_name = params[:category]
-    return category_name if categories.map(&:name).include? category_name
-    default_category
+    category_key = params[:category_key]
+    if category_key.present?
+      categories[key: category_key]
+    else
+      default_category
+    end
   end
 
   def default_category
-    categories.first.try(:name) || 'UNKNOWN'
+    categories[key: 'system']
   end
 
   def filter_params
@@ -33,7 +36,7 @@ class AccountsController < ApplicationController
   end
 
   def accounts
-    filter.apply(Openbill.service.accounts).where(category: current_category).paginate page, per_page
+    filter.apply(Openbill.service.accounts).where(category_id: current_category.id).paginate page, per_page
   end
 
   def categories

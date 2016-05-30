@@ -1,0 +1,24 @@
+h1= "Account: #{account_title account}"
+h2= "Create #{direction} transaction"
+
+= simple_form_for account_transaction_form, url: account_transactions_path, method: :create do |f|
+  = f.input :direction, as: :hidden
+  = f.input :amount_currency, as: :hidden
+  .row
+    .col-md-6
+      .p-m
+        = f.error_notification
+
+        .form-group
+          = f.label :amount_cents, class: 'form-control-label'
+          .input-group
+            .input-group-addon= money_symbol_from_string account_transaction_form.amount_currency
+            = f.input_field :amount_cents, class: 'form-control', autofocus: true
+          = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
+    .col-md-6
+      = f.input :opposite_account_id, collection: opposite_accounts_collection
+  .row
+    .col-md-12
+      = f.input :details, as: :text
+
+  = f.submit :make, class: 'btn btn-success'

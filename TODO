@@ -1,0 +1,17 @@
+  PAYMENTS_NS = :payments
+  GATEWAYS = [Payments::CLOUDPAYMENTS_GATEWAY_KEY]
+
+  # TODO Remove SystemRegistry
+  SystemRegistry = Openbill::Registry.new Openbill.current do |registry|
+    GATEWAYS.each do |gateway|
+r     registry.define [PAYMENTS_NS, gateway].join('-'), "Счет с которого поступает оплата через #{gateway}" #, available_incoming: false, meta: { gateway: gateway }
+    end
+    registry.define :gift,          'Счет для ручного зачисления' #, available_incoming: false
+    registry.define :ip_pismenny,     'ИП Письменный Д.В.'
+
+    registry.define :subscriptions, 'Абонентская плата' # , available_outgoing: false
+    registry.define :development,   'Доработки' # , available_outgoing: false
+
+    # Walletone: 120464954417 (Единая касса: абоненская плата)
+    # Walletone: 150006462123 (Единый кошелек)
+
