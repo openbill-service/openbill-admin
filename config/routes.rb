@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   # All transactions
   resources :transactions, only: [:index]
+  resources :categories
 end

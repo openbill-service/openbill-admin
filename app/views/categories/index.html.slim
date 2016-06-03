@@ -1,0 +1,25 @@
+h1
+  | Categories
+  .pull-xs-right= link_to 'New category', new_category_path, class: 'btn btn-sm btn-success'
+
+table.table.table-condensed.table-striped.m-t-3
+  thead.thead-default
+    tr
+      th Name
+      th Parent
+      th Accounts count
+      th
+        .pull-xs-right= t :actions
+  tbody
+    - categories.each do |category|
+      tr
+        td
+          = link_to category.name, edit_category_path(category.id)
+          br
+          small.text-muted
+            = category.key
+        td= category.parent_id
+        td= accounts_count(category)
+        td.pull-xs-right
+          .btn-group
+            = destroy_button category_path(category.id)
