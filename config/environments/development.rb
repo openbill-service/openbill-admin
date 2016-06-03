@@ -35,6 +35,4 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
-  config.middleware.use RackPassword::Block, auth_codes: Rails.application.secrets.password.presence || 'belkaops'
 end

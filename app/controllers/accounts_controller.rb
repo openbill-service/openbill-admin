@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  DEFAULT_CATEGORY_ID = '12832d8d-43f5-499b-82a1-3466cadcd809'
 
   helper_method :filter, :filter_params, :current_category
 
@@ -15,16 +16,16 @@ class AccountsController < ApplicationController
   private
 
   def current_category
-    category_key = params[:category_key]
-    if category_key.present?
-      categories[key: category_key]
+    category_id = params[:category_id]
+    if category_id.present?
+      categories[id: category_id]
     else
       default_category
     end
   end
 
   def default_category
-    categories[key: 'system']
+    categories[id: DEFAULT_CATEGORY_ID]
   end
 
   def filter_params

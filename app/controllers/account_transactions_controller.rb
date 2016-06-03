@@ -4,7 +4,7 @@ class AccountTransactionsController < ApplicationController
       direction: direction,
       account: account,
       account_transaction_form: account_transaction_form,
-      opposite_accounts_collection: opposite_accounts_collection
+      opposite_accounts_collection: opposite_accounts(account, direction)
     }
   end
 
@@ -17,12 +17,41 @@ class AccountTransactionsController < ApplicationController
 
   DIRECTIONS = [INCOME_DIRECTION, OUTCOME_DIRECTION]
 
-  def opposite_accounts_collection
+  def opposite_accounts(account, direction)
     case direction
     when INCOME_DIRECTION
-      Openbill.service.accounts.where(available_outgoing: true, category: COMMON_CATEGORY)
+      # Ищем все аккаунты с которых можно перечислять на данный
+      policies = Openbill.service.policies.where('(to_account_id = ? or to_account_id is null) and (to_category_id = ? or to_category_id is null)', account.id, account.category_id);
+      where = policies.map do |policy|
+        account_id = policy.from_account_id
+        category_id = policy.from_category_id
+
+        queries = []
+        queries.push "id = '#{account_id}'" unless account_id.nil?
+        queries.push "category_id = '#{category_id}'" unless category_id.nil?
+        queries.join(' and ')
+      end.join(' or ')
+
+      return [] if where.blank?
+      Openbill.service.accounts.where(where).all.map do |acc|
+        ["#{acc.key} [#{acc.details}]", acc.id]
+      end
     when OUTCOME_DIRECTION
-      Openbill.service.accounts.where(available_incoming: true, category: COMMON_CATEGORY)
+      policies = Openbill.service.policies.where('(from_account_id = ? or from_account_id is null) and (from_category_id = ? or from_category_id is null)', account.id, account.category_id);
+      where = policies.map do |policy|
+        account_id = policy.to_account_id
+        category_id = policy.to_category_id
+
+        queries = []
+        queries.push "id = '#{account_id}'" unless account_id.nil?
+        queries.push "category_id = '#{category_id}'" unless category_id.nil?
+        queries.join(' and ')
+      end.join(' or ')
+
+      return [] if where.blank?
+      Openbill.service.accounts.where(where).all.map do |acc|
+        ["#{acc.key} [#{acc.details}]", acc.id]
+      end
     else
       fail "Unknown direction #{direction}"
     end
