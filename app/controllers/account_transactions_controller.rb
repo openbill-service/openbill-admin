@@ -17,6 +17,8 @@ class AccountTransactionsController < ApplicationController
 
   DIRECTIONS = [INCOME_DIRECTION, OUTCOME_DIRECTION]
 
+  # Отдаем список аккаунтов с которыми можно делать
+  # транзакцию в этом направлении согласно Policy
   def opposite_accounts(account, direction)
     case direction
     when INCOME_DIRECTION
