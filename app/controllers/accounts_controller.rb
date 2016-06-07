@@ -54,7 +54,7 @@ class AccountsController < ApplicationController
   end
 
   def current_category
-    category_id = params[:category_id]
+    category_id = params[:philtre].try(:[], :category_id)
     if category_id.present?
       categories[id: category_id]
     else
