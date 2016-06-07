@@ -1,10 +1,9 @@
 class CategoryForm < FormBase
   include Virtus.model
 
-  attribute :id, Integer
+  attribute :id, String
   attribute :parent_id, Integer
   attribute :name, String
-  attribute :key, String
 
   def to_hash
     attributes.except(:id).select { |k, v| v.present? }
