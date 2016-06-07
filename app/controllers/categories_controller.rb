@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    redirect_to accounts_path(category_id: params[:id])
+    redirect_to accounts_path(philtre: { category_id: params[:id] })
   end
 
   def edit
