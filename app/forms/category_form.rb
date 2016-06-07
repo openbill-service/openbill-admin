@@ -2,8 +2,10 @@ class CategoryForm < FormBase
   include Virtus.model
 
   attribute :id, String
-  attribute :parent_id, Integer
   attribute :name, String
+  attribute :parent_id, String
+
+  validates :name, presence: true
 
   def to_hash
     attributes.except(:id).select { |k, v| v.present? }
