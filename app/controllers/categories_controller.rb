@@ -26,9 +26,14 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    category_form = CategoryForm.new permitted_params
-    category.update category_form.to_hash
-    redirect_to categories_path
+    category_form = CategoryForm.new({ **permitted_params.symbolize_keys, id: category.id })
+
+    if category_form.valid?
+      category.update category_form.to_hash
+      redirect_to categories_path
+    else
+      render :edit, locals: { category: category_form }
+    end
   rescue => err
     flash.now[:error] = err.message
     render :edit, locals: { category: category_form }
