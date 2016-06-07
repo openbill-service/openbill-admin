@@ -6,8 +6,8 @@ GIT
       activesupport (>= 2.3.2)
 
 GIT
-  remote: git://github.com/dapi/openbill-ruby.git
-  revision: 14a357c8065fb5d940f3d5e90a2d41fd311783fd
+  remote: git://github.com/openbill-service/openbill-ruby.git
+  revision: 97189cc189b0e0ee9025ecc09bd154ff4e3c2d13
   specs:
     openbill-ruby (0.1.17)
       money
