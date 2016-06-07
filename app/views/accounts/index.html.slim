@@ -31,6 +31,8 @@ table.table.table-condensed.table-striped
           .btn-group.text-nowrap style="min-width: 180px"
             = income_transaction_button income_account: account
             = outcome_transaction_button outcome_account: account
+          .btn-group.text-nowrap
+            = edit_button edit_account_path(account.id)
 
 hr
 

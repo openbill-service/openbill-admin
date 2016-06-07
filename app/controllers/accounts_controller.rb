@@ -17,6 +17,30 @@ class AccountsController < ApplicationController
     }
   end
 
+  def edit
+    account_form = AccountForm.new account
+    render locals: { account: account_form }
+  end
+
+  def update
+    account_form = AccountForm.new({ **permitted_params.symbolize_keys,
+                                     id: account.id })
+
+    if account_form.valid?
+      account.update account_form.to_hash
+      redirect_to accounts_path
+    else
+      render :edit, locals: { account: account_form }
+    end
+
+  rescue JSON::ParserError => err
+    redirect_to :back, flash: { error: err.message }
+
+  rescue => err
+    flash.now[:error] = err.message
+    render :edit, locals: { account: account_form }
+  end
+
   private
 
   def transactions
@@ -48,5 +72,9 @@ class AccountsController < ApplicationController
 
   def categories
     @_categories ||= Openbill.service.categories
+  end
+
+  def permitted_params
+    params.require(:account).permit(:details, :meta)
   end
 end
