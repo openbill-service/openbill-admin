@@ -1,7 +1,18 @@
 h1 Accounts
 
 = render 'categories', categories: categories
-= render 'pagination', scope: accounts
+
+.row
+  .col-md-6
+    = form_for filter.for_form, url: params.slice(:controller,:action), method: 'get' do |f|
+      = f.hidden_field :order
+      = f.hidden_field :category_id, value: current_category.id
+      = f.text_field :key_like
+      = f.text_field :details_like
+      = f.submit 'Filter', name: nil, class: 'btn btn-primary btn-sm'
+
+  .col-md-6
+    = render 'pagination', scope: accounts
 
 table.table.table-condensed.table-striped
   thead.thead-default
@@ -23,8 +34,8 @@ table.table.table-condensed.table-striped
             = account.details
         td= humanized_amount account.amount
         td= l account.updated_at, format: :short
-        td= account.transactions_count
-        td.text-muted= account.meta
+        td= link_to account.transactions_count, account_path(account.id)
+        td.text-muted= humanized_meta account.meta
         td.pull-xs-right
           .btn-group
             = income_transaction_button income_account: account

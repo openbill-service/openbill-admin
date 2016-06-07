@@ -1,0 +1,36 @@
+h1 Transactions (#{transactions.count})
+
+= render 'pagination', scope: transactions
+
+table.table.table-condensed
+  thead
+    tr
+      th Time
+      th Source account
+      th Destination account
+      th Amount
+      th Key
+      th Details
+      th Meta
+      th Actions
+
+  tbody
+  - transactions.each do |t|
+    tr
+      td
+        p = I18n.l t.created_at, format: :short
+        small.text-muted= t.id
+      td= link_to Openbill.service.get_account(t.from_account_id), account_path(t.from_account_id)
+      td= link_to Openbill.service.get_account(t.to_account_id), account_path(t.to_account_id)
+      td= humanized_amount t.amount
+      td
+        code = t.key
+      td
+        .text-muted= t.details
+      td= humanized_meta t.meta
+      td= link_to 'Notify', notify_transaction_path(t.id), method: 'POST', class: 'btn btn-warning btn-sm'
+
+
+hr
+
+= render 'pagination', scope: transactions

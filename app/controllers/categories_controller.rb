@@ -7,6 +7,10 @@ class CategoriesController < ApplicationController
     render locals: { category: CategoryForm.new }
   end
 
+  def show
+    redirect_to accounts_path(category_id: params[:id])
+  end
+
   def edit
     category_form = CategoryForm.new category
     render :edit, locals: { category: category_form }

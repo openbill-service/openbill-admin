@@ -1,2 +1,25 @@
-h1 Accounts#show
-p Find me in app/views/accounts/show.html.slim
+h1 Accounts ##{account.key}
+.row
+  .col-md-6
+    div style="padding: 1.5em"
+      dl.dl-horizontal
+        dt.col-sm-3 Amount
+        dd.col-sm-9= humanized_amount account.amount
+        dt.col-sm-3 Details
+        dd.col-sm-9= account.details
+        dt.col-sm-3 Meta
+        dd.col-sm-9.text-muted= humanized_meta account.meta
+  .col-md-6
+    div style="padding: 1.5em"
+      dl.dl-horizontal
+        dt.col-sm-3 ID
+        dd.col-sm-9= account.id
+        dt.col-sm-3 Category
+        dd.col-sm-9
+          = link_to Openbill.service.get_category(account.category_id), category_path(account.category_id)
+
+.row
+  .col-md-12
+    h2 Transactions (#{account.transactions_count})
+
+    = render 'transactions', transactions: transactions
