@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end
 
   # All transactions
-  resources :transactions, only: [:index]
+  resources :transactions, only: [:index] do
+    member do
+      post :notify
+    end
+  end
   resources :categories
 end

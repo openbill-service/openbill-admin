@@ -23,8 +23,8 @@ table.table.table-condensed.table-striped
             = account.details
         td= humanized_amount account.amount
         td= l account.updated_at, format: :short
-        td= account.transactions_count
-        td.text-muted= account.meta
+        td= link_to account.transactions_count, account_path(account.id)
+        td.text-muted= humanized_meta account.meta
         td.pull-xs-right
           .btn-group
             = income_transaction_button income_account: account

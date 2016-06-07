@@ -11,9 +11,23 @@ class AccountsController < ApplicationController
   end
 
   def show
+    render locals: {
+      account: account,
+      transactions: transactions
+    }
   end
 
   private
+
+  def transactions
+    Openbill.service.account_transactions(account).reverse_order(:created_at).map do |t|
+      AccountTransaction.new account, t
+    end
+  end
+
+  def account
+    @account ||= Openbill.service.get_account params[:id]
+  end
 
   def current_category
     category_id = params[:category_id]
@@ -28,16 +42,8 @@ class AccountsController < ApplicationController
     categories[id: DEFAULT_CATEGORY_ID]
   end
 
-  def filter_params
-    params[:philtre]
-  end
-
-  def filter
-    Philtre.new(filter_params)
-  end
-
   def accounts
-    filter.apply(Openbill.service.accounts).where(category_id: current_category.id).paginate page, per_page
+    filter.apply(Openbill.service.accounts.reverse_order(:created_at)).where(category_id: current_category.id).paginate page, per_page
   end
 
   def categories
