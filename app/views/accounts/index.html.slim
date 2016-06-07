@@ -1,7 +1,18 @@
 h1 Accounts
 
 = render 'categories', categories: categories
-= render 'pagination', scope: accounts
+
+.row
+  .col-md-6
+    = form_for filter.for_form, url: params.slice(:controller,:action), method: 'get' do |f|
+      = f.hidden_field :order
+      = f.hidden_field :category_id, value: current_category.id
+      = f.text_field :key_like
+      = f.text_field :details_like
+      = f.submit 'Filter', name: nil, class: 'btn btn-primary btn-sm'
+
+  .col-md-6
+    = render 'pagination', scope: accounts
 
 table.table.table-condensed.table-striped
   thead.thead-default
