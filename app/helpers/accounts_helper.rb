@@ -10,4 +10,8 @@ module AccountsHelper
   def account_title(account)
     "#{account.category}/#{account.key} (#{account.details})"
   end
+
+  def account_select_item(acc)
+    ["#{acc.key} [#{acc.details}]", acc.id]
+  end
 end

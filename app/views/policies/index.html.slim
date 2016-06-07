@@ -1,0 +1,26 @@
+h1
+  | Policies
+  .pull-xs-right= link_to 'New policy', new_policy_path, class: 'btn btn-sm btn-success'
+
+table.table.table-condensed.table-striped.m-t-3
+  thead.thead-default
+    tr
+      th Name
+      th From category
+      th To category
+      th From account
+      th To account
+      th
+        .pull-xs-right= t :actions
+  tbody
+    - policies.each do |policy|
+      tr
+        td
+          = link_to policy.name, edit_policy_path(policy.id)
+        td= policy.from_category
+        td= policy.to_category
+        td= policy.from_account
+        td= policy.to_account
+        td.pull-xs-right
+          .btn-group
+            = destroy_button policy_path(policy.id)

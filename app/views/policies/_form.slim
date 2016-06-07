@@ -1,0 +1,14 @@
+= simple_form_for policy do |f|
+    = f.input :name
+    .row
+      .col-md-6
+        = f.input :from_category_id, collection: policy_categories_collection
+      .col-md-6
+        = f.input :to_category_id, collection: policy_categories_collection
+    .row
+      .col-md-6
+        = f.input :from_account_id, collection: policy_accounts_collection
+      .col-md-6
+        = f.input :to_account_id, collection: policy_accounts_collection
+
+    = f.submit class: 'btn btn-success'
