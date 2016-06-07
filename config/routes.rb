@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   # All transactions
   resources :transactions, only: [:index]
   resources :categories
+  resources :policies
 end

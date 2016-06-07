@@ -1,4 +1,6 @@
 class AccountTransactionsController < ApplicationController
+  include AccountsHelper
+
   def new
     render locals: {
       direction: direction,
@@ -36,7 +38,7 @@ class AccountTransactionsController < ApplicationController
 
       return [] if where.blank?
       Openbill.service.accounts.where(where).all.map do |acc|
-        ["#{acc.key} [#{acc.details}]", acc.id]
+        account_select_item acc
       end
     when OUTCOME_DIRECTION
       policies = Openbill.service.policies.where('(from_account_id = ? or from_account_id is null) and (from_category_id = ? or from_category_id is null)', account.id, account.category_id);
@@ -52,7 +54,7 @@ class AccountTransactionsController < ApplicationController
 
       return [] if where.blank?
       Openbill.service.accounts.where(where).all.map do |acc|
-        ["#{acc.key} [#{acc.details}]", acc.id]
+        account_select_item acc
       end
     else
       fail "Unknown direction #{direction}"
