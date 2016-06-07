@@ -43,7 +43,7 @@ class AccountsController < ApplicationController
   end
 
   def accounts
-    filter.apply(Openbill.service.accounts.reverse_order(:created_at)).where(category_id: current_category.id).paginate page, per_page
+    filter.apply(Openbill.service.accounts).where(category_id: current_category.id).paginate page, per_page
   end
 
   def categories

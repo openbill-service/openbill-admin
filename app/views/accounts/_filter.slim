@@ -1,0 +1,10 @@
+= simple_form_for filter.for_form, url: accounts_path(category_id: category.id), method: 'get' do |f|
+  = f.hidden_field :order
+  .row
+    .col-md-6
+      = f.input :key_like
+      = f.input :details_like
+    .col-md-6
+      = f.input :amount_cents_gte
+      = f.input :amount_cents_lte
+  = f.button :submit
