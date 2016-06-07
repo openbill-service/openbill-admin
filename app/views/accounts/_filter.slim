@@ -1,4 +1,4 @@
-= simple_form_for filter.for_form, url: accounts_path(category_id: category.id), method: 'get' do |f|
+= simple_form_for filter.for_form, url: accounts_path, method: 'get' do |f|
   = f.hidden_field :order
   = f.hidden_field :category_id
   .row
