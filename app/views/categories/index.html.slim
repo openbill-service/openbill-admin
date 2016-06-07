@@ -15,9 +15,6 @@ table.table.table-condensed.table-striped.m-t-3
       tr
         td
           = link_to category.name, edit_category_path(category.id)
-          br
-          small.text-muted
-            = category.key
         td= category.parent_id
         td= accounts_count(category)
         td.pull-xs-right
