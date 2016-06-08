@@ -102,6 +102,9 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-ctags-bundler'
   # gem 'guard-rubocop'
+
+  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :development do
