@@ -27,12 +27,11 @@ table.table.table-condensed.table-striped
         td= l account.updated_at, format: :short
         td= link_to account.transactions_count, account_path(account.id)
         td.text-muted= humanized_meta account.meta
-        td.pull-xs-right
-          .btn-group.text-nowrap style="min-width: 180px"
-            = income_transaction_button income_account: account
-            = outcome_transaction_button outcome_account: account
-          .btn-group.text-nowrap
-            = edit_button edit_account_path(account.id)
+        td  style="min-width: 180px"
+          .pull-xs-right
+            .btn-group.text-nowrap
+              = income_transaction_button income_account: account
+              = outcome_transaction_button outcome_account: account
 
 hr
 

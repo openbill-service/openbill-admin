@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
 
   def edit
     account_form = AccountForm.new account
-    render locals: { account: account_form }
+    render locals: { account: account_form, account_key: account.key }
   end
 
   def update
@@ -30,7 +30,7 @@ class AccountsController < ApplicationController
       account.update account_form.to_hash
       redirect_to accounts_path
     else
-      render :edit, locals: { account: account_form }
+      render :edit, locals: { account_key: account.key, account: account_form }
     end
 
   rescue JSON::ParserError => err
@@ -38,7 +38,7 @@ class AccountsController < ApplicationController
 
   rescue => err
     flash.now[:error] = err.message
-    render :edit, locals: { account: account_form }
+    render :edit, locals: { account_key: account.key, account: account_form }
   end
 
   private
