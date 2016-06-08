@@ -1,6 +1,6 @@
 module ApplicationHelper
   def application_title
-    'Openbill Admin'
+    "Openbill Admin #{AppVersion}"
   end
 
   def humanized_meta(meta)
