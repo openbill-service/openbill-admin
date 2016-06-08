@@ -5,11 +5,11 @@ h1 Transactions (#{transactions.count})
 table.table.table-condensed.table-striped
   thead
     tr
-      th Time
-      th Source account
-      th Destination account
-      th Amount
-      th Key
+      th= order_by filter, :created_at, label: 'Time'
+      th= order_by filter, :from_account_id, label: 'Source account'
+      th= order_by filter, :to_account_id, label: 'Destination account'
+      th= order_by filter, :amount_cents, label: 'Amount'
+      th= order_by filter, :key
       th Details
       th Meta
       th Actions
