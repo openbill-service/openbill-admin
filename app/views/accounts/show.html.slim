@@ -23,4 +23,4 @@ h1 Accounts ##{account.key}
   .col-md-12
     h2 Transactions (#{account.transactions_count})
 
-    = render 'transactions', transactions: transactions
+    = render 'transactions', transactions: transactions, account: account

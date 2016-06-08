@@ -44,9 +44,7 @@ class AccountsController < ApplicationController
   private
 
   def transactions
-    Openbill.service.account_transactions(account).reverse_order(:created_at).map do |t|
-      AccountTransaction.new account, t
-    end
+    Openbill.service.account_transactions(account).reverse_order(:created_at).paginate(page, per_page)
   end
 
   def account
