@@ -1,29 +1,34 @@
-= render 'pagination', scope: transactions
-table.table.table-condensed.table-striped
-  thead
-    tr
-      th Time
-      th Opposite account
-      th Amount
-      th Key
-      th Details
-      th Meta
-      th Actions
+- if transactions.any?
 
-  tbody
-    - transactions.each do |transaction|
-      - t = AccountTransaction.new account, transaction
+  = render 'pagination', scope: transactions
+  table.table.table-condensed.table-striped
+    thead
       tr
-        td
-          p = I18n.l t.created_at, format: :short
-          small.text-muted= t.id
-        td= link_to t.opposite_account, account_path(t.opposite_account.id)
-        td= humanized_amount t.amount
-        td
-          code = t.key
-        td
-          .text-muted= t.details
-        td= humanized_meta t.meta
-        td= link_to 'Notify', notify_transaction_path(t.id), method: 'POST', class: 'btn btn-warning btn-sm'
-hr
-= render 'pagination', scope: transactions
+        th Time
+        th Opposite account
+        th Amount
+        th Key
+        th Details
+        th Meta
+        th Actions
+
+    tbody
+      - transactions.each do |transaction|
+        - t = AccountTransaction.new account, transaction
+        tr
+          td
+            p = I18n.l t.created_at, format: :short
+            small.text-muted= t.id
+          td= link_to t.opposite_account, account_path(t.opposite_account.id)
+          td= humanized_amount t.amount
+          td
+            code = t.key
+          td
+            .text-muted= t.details
+          td= humanized_meta t.meta
+          td= link_to 'Notify', notify_transaction_path(t.id), method: 'POST', class: 'btn btn-warning btn-sm'
+  hr
+  = render 'pagination', scope: transactions
+
+- else
+  p.lead No transactions

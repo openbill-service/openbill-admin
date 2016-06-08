@@ -29,9 +29,7 @@ table.table.table-condensed.table-striped
         td.text-muted= humanized_meta account.meta
         td  style="min-width: 180px"
           .pull-xs-right
-            .btn-group.text-nowrap
-              = income_transaction_button income_account: account
-              = outcome_transaction_button outcome_account: account
+            = render 'account_actions', account: account
 
 hr
 

@@ -1,4 +1,7 @@
-.pull-xs-right= edit_button edit_account_path(account.id)
+.pull-xs-right
+  = edit_button edit_account_path(account.id)
+  br
+  = render 'account_actions', account: account
 h1 Accounts ##{account.key}
 .row
   .col-md-6

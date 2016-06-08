@@ -4,7 +4,7 @@ begin
     config.max_connections = 10
     config.database = YAML.load(ERB.new(IO.read('./config/database.yml')).result)[Rails.env].symbolize_keys
   end
-  Openbill.service
+  Openbill.service.db.extension :connection_validator
 rescue Sequel::DatabaseError => err
   Rails.logger.error err
 end
