@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  helper_method :filter
+
   def index
     render locals: {
       transactions: transactions
