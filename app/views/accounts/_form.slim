@@ -1,5 +1,13 @@
 = simple_form_for account do |f|
   .row
+    .col-xs-3
+      = f.input :key
+    .col-xs-6
+      = f.input :category_id, collection: categories_collection, include_blank: false
+    - unless account.persisted?
+      .col-xs-3
+        = f.input :amount_currency, collection: currencies_collection, include_blank: false
+  .row
     .col-xs-6
       = f.input :meta
     .col-xs-6

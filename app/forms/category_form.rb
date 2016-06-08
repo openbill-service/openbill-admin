@@ -16,7 +16,7 @@ class CategoryForm < FormBase
   end
 
   def to_param
-    id.to_s
+    id
   end
 
   def persisted?
