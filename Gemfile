@@ -38,7 +38,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
 gem 'bootstrap-kaminari-views', git: 'https://github.com/klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
 gem 'sequel'
-gem 'sequel-rails'
 gem 'pg'
 gem 'money'
 gem 'money-rails'

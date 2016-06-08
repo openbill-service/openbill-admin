@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/openbill-service/openbill-ruby.git
-  revision: d093700f7e37dd2d23c84f3691f33d08fbfcf9c9
+  revision: 967d9ea0c7ad3bdd14a3c51e113ae974720763b3
   specs:
     openbill-ruby (0.1.17)
       money
@@ -283,11 +283,6 @@ GEM
       rdoc (~> 4.0)
     semver2 (3.4.2)
     sequel (4.35.0)
-    sequel-rails (0.9.12)
-      actionpack (>= 3.2.0)
-      activemodel
-      railties (>= 3.2.0)
-      sequel (>= 3.28, < 5.0)
     shellany (0.0.1)
     simple-navigation-bootstrap (1.0.0)
       railties (>= 3.1)
@@ -384,7 +379,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   semver2
   sequel
-  sequel-rails
   simple-navigation!
   simple-navigation-bootstrap
   simple_form!
