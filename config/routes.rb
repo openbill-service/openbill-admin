@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  resources :accounts, only: [:index, :show, :edit, :update] do
+  resources :accounts, except: [:destroy] do
     resources :transactions, controller: 'account_transactions', only: [:index, :new, :create, :show]
   end
 

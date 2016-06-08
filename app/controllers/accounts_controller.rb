@@ -10,6 +10,10 @@ class AccountsController < ApplicationController
     }
   end
 
+  def new
+    render locals: { account: AccountForm.new }
+  end
+
   def show
     render locals: {
       account: account,
@@ -20,6 +24,15 @@ class AccountsController < ApplicationController
   def edit
     account_form = AccountForm.new account
     render locals: { account: account_form, account_key: account.key }
+  end
+
+  def create
+    account_form = AccountForm.new permitted_params
+    accounts.insert account_form.to_hash
+    redirect_to accounts_path
+  rescue => err
+    flash.now[:error] = err.message
+    render :new, locals: { account: account_form }
   end
 
   def update
@@ -73,6 +86,6 @@ class AccountsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:account).permit(:details, :meta)
+    params.require(:account).permit(:key, :category_id, :amount_currency, :details, :meta)
   end
 end
