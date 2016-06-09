@@ -7,6 +7,25 @@ class TransactionsController < ApplicationController
     }
   end
 
+  def new
+    render locals: { transaction: TransactionForm.new }
+  end
+
+  def create
+    transaction_form = TransactionForm.new permitted_params
+
+    if transaction_form.valid?
+      transactions.insert transaction_form.to_hash
+      redirect_to transactions_path
+    else
+      render :new, { transaction: transaction_form }
+    end
+
+  rescue => err
+    flash.now[:error] = err.message
+    render :new, locals: { transaction: transaction_form }
+  end
+
   def notify
     flash[:success] = "Transaction #{transaction.id} is notified"
     Openbill.service.notify_transaction transaction
@@ -21,5 +40,10 @@ class TransactionsController < ApplicationController
 
   def transactions
     filter.apply(Openbill.service.transactions.reverse_order(:created_at)).paginate page, per_page
+  end
+
+  def permitted_params
+    params.require(:transaction).permit(:username, :from_account_id, :to_account_id,
+                                        :amount_cents, :amount_currency, :key, :details, :meta)
   end
 end

@@ -24,13 +24,18 @@ describe AccountsController do
     assert_response :success
   end
 
+  it '#new' do
+    get :new
+    assert_response :success
+  end
+
   it '#edit' do
     get :edit, id: 1
     assert_response :success
   end
 
   it '#create' do
-    post :create, account: { details: 'details' }
+    post :create, account: { key: 1, category_id: 1, details: 'details' }
     assert_response :redirect
   end
 

@@ -11,6 +11,12 @@ module AccountsHelper
     "#{account.category}/#{account.key} (#{account.details})"
   end
 
+  def accounts_collection
+    Openbill.service.accounts.all.map do |acc|
+      account_select_item acc
+    end
+  end
+
   def account_select_item(acc)
     ["#{acc.key} [#{acc.details}]", acc.id]
   end

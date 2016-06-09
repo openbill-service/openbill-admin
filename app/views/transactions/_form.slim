@@ -1,0 +1,21 @@
+= simple_form_for transaction do |f|
+  = f.input :username
+  .row
+    .col-md-6
+      = f.input :from_account_id, collection: accounts_collection, include_blank: false
+    .col-md-6
+      = f.input :to_account_id, collection: accounts_collection, include_blank: false
+  .row
+    .col-md-6
+      = f.input :amount_cents
+    .col-md-6
+      = f.input :amount_currency, collection: currencies_collection, include_blank: false
+  .row
+    .col-md-4
+      = f.input :key
+    .col-md-4
+      = f.input :details
+    .col-md-4
+      = f.input :meta
+
+  = f.submit class: 'btn btn-success'

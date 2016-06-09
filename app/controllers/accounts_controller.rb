@@ -28,8 +28,14 @@ class AccountsController < ApplicationController
 
   def create
     account_form = AccountForm.new permitted_params
-    accounts.insert account_form.to_hash
-    redirect_to accounts_path
+
+    if account_form.valid?
+      accounts.insert account_form.to_hash
+      redirect_to accounts_path
+    else
+      render :new, locals: { account: account_form }
+    end
+
   rescue => err
     flash.now[:error] = err.message
     render :new, locals: { account: account_form }
@@ -45,9 +51,6 @@ class AccountsController < ApplicationController
     else
       render :edit, locals: { account_key: account.key, account: account_form }
     end
-
-  rescue JSON::ParserError => err
-    redirect_to :back, flash: { error: err.message }
 
   rescue => err
     flash.now[:error] = err.message

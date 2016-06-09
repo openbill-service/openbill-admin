@@ -1,4 +1,6 @@
-h1 Transactions (#{transactions.count})
+h1
+  | Transactions (#{transactions.count})
+  .pull-xs-right= link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
 
 = render 'pagination', scope: transactions
 
