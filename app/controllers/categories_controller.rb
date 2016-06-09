@@ -18,8 +18,14 @@ class CategoriesController < ApplicationController
 
   def create
     category_form = CategoryForm.new permitted_params
-    categories.insert category_form.to_hash
-    redirect_to categories_path
+
+    if category_form.valid?
+      categories.insert category_form.to_hash
+      redirect_to categories_path
+    else
+      render :new, locals: { category: category_form }
+    end
+
   rescue => err
     flash.now[:error] = err.message
     render :new, locals: { category: category_form }
@@ -34,6 +40,7 @@ class CategoriesController < ApplicationController
     else
       render :edit, locals: { category: category_form }
     end
+
   rescue => err
     flash.now[:error] = err.message
     render :edit, locals: { category: category_form }
