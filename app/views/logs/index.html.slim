@@ -1,0 +1,11 @@
+h1 Webhook logs
+
+- if db_error.present?
+  .alert.alert-danger= db_error
+
+- else
+  = render 'table', logs: logs
+
+  hr
+
+  = render 'pagination', scope: logs

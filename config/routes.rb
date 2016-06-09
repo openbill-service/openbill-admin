@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   end
   resources :categories
   resources :policies
+  resources :logs, only: [:index]
 end
