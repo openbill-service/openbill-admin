@@ -5,9 +5,12 @@ describe AccountsController do
     accounts = double(insert: true, update: true)
     account = double(id: 1, key: :key, update: true, delete: true, to_hash: {})
     account_transactions = double(reverse_order: double(paginate: accounts))
+    default_category = double(id: described_class::DEFAULT_CATEGORY_ID)
+    categories = double(:[] => default_category)
 
     allow(accounts).to receive(:where).and_return(accounts)
     allow(accounts).to receive(:paginate).and_return(accounts)
+    allow(Openbill.service).to receive(:categories).and_return categories
     allow(Openbill.service).to receive(:accounts).and_return accounts
     allow(Openbill.service).to receive(:get_account).and_return account
     allow(Openbill.service).to receive(:account_transactions).and_return account_transactions
@@ -24,13 +27,18 @@ describe AccountsController do
     assert_response :success
   end
 
+  it '#new' do
+    get :new
+    assert_response :success
+  end
+
   it '#edit' do
     get :edit, id: 1
     assert_response :success
   end
 
   it '#create' do
-    post :create, account: { details: 'details' }
+    post :create, account: { key: 1, category_id: 1, details: 'details' }
     assert_response :redirect
   end
 

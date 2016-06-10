@@ -5,7 +5,7 @@ class AccountForm < FormBase
   attribute :key, String
   attribute :category_id, String
   attribute :amount_currency, String
-  attribute :meta, AccountMeta
+  attribute :meta, VirtusSequelHstore
   attribute :details, String
 
   validates :key, :category_id, presence: true
@@ -13,8 +13,12 @@ class AccountForm < FormBase
   def to_hash
     {
       **attributes.except(:id, :meta).select { |k, v| v.present? },
-      meta: meta
+      meta: meta_hstore
     }
+  end
+
+  def meta_hstore
+    Sequel::Postgres::HStore.new JSON.parse(meta)
   end
 
   def to_model
