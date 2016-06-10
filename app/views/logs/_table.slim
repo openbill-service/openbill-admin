@@ -1,0 +1,19 @@
+table.table.table-condensed.table-striped
+  thead
+    tr
+      th= order_by filter, :created_at, label: 'Time'
+      th Message
+      th= order_by filter, :url
+      th= order_by filter, :transaction_id, label: 'Transaction'
+      th= order_by filter, :status
+
+  tbody
+    - logs.each do |l|
+      tr
+        td
+          p = I18n.l l.created_at, format: :short
+          small.text-muted= l.pid
+        td= l.message
+        td= l.url
+        td= l.transaction_id
+        td= l.status
