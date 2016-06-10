@@ -10,8 +10,7 @@ class TransactionForm < FormBase
   attribute :details, String
   attribute :meta, VirtusSequelHstore
 
-  validates :username,
-            :from_account_id, :to_account_id,
+  validates :from_account_id, :to_account_id,
             :amount_cents, :amount_currency,
             :key, :details, presence: true
 
