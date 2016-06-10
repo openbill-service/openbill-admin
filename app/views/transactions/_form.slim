@@ -1,5 +1,4 @@
 = simple_form_for transaction do |f|
-  = f.input :username
   .row
     .col-md-6
       = f.input :from_account_id, collection: accounts_collection, include_blank: false
