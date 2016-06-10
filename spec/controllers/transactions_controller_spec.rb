@@ -3,7 +3,6 @@ require 'rails_helper'
 describe TransactionsController do
   let(:transaction_params) do
     {
-      username: :username,
       from_account_id: 1,
       to_account_id: 1,
       amount_cents: 100,
