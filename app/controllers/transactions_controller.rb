@@ -43,7 +43,7 @@ class TransactionsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:transaction).permit(:username, :from_account_id, :to_account_id,
+    params.require(:transaction).permit(:from_account_id, :to_account_id,
                                         :amount_cents, :amount_currency, :key, :details, :meta)
   end
 end
