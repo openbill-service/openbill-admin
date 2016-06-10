@@ -1,7 +1,6 @@
 class TransactionForm < FormBase
   include Virtus.model
 
-  attribute :username, String
   attribute :from_account_id, String
   attribute :to_account_id, String
   attribute :amount_cents, String
