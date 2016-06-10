@@ -12,6 +12,7 @@ class TransactionForm < FormBase
   validates :from_account_id, :to_account_id,
             :amount_cents, :amount_currency,
             :key, :details, presence: true
+  validates :amount, numericality: { greater_than: 0 }
 
   def to_hash
     {
@@ -22,7 +23,7 @@ class TransactionForm < FormBase
   end
 
   def amount
-    amount_cents.to_s.to_money(amount_currency)
+    @_amount ||= amount_cents.to_s.to_money(amount_currency)
   end
 
   def meta_hstore
