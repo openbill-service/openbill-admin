@@ -17,8 +17,14 @@ class PoliciesController < ApplicationController
 
   def create
     policy_form = PolicyForm.new permitted_params
-    policies.insert policy_form.to_hash
-    redirect_to policies_path
+
+    if policy_form.valid?
+      policies.insert policy_form.to_hash
+      redirect_to policies_path
+    else
+      render :new, locals: { policy: policy_form }
+    end
+
   rescue => err
     flash.now[:error] = err.message
     render :new, locals: { policy: policy_form }
@@ -33,6 +39,7 @@ class PoliciesController < ApplicationController
     else
       render :edit, locals: { policy: policy_form }
     end
+
   rescue => err
     flash.now[:error] = err.message
     render :edit, locals: { policy: policy_form }
