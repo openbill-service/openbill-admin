@@ -23,7 +23,7 @@ class TransactionForm < FormBase
   end
 
   def amount
-    @_amount ||= amount_cents.to_s.to_money(amount_currency)
+    amount_cents.to_s.to_money(amount_currency)
   end
 
   def meta_hstore
