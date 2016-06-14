@@ -3,7 +3,29 @@ class AccountTransactionsController < ApplicationController
 
   def new
     render locals: {
-      direction: direction,
+      account: account,
+      account_transaction_form: account_transaction_form,
+      opposite_accounts_collection: opposite_accounts(account, direction)
+    }
+  end
+
+  def create
+    account_transaction_form = account_transaction_form(permitted_params)
+
+    if account_transaction_form.valid?
+      transactions.insert account_transaction_form.to_hash
+      redirect_to accounts_path
+    else
+      render :new, locals: {
+        account: account,
+        account_transaction_form: account_transaction_form,
+        opposite_accounts_collection: opposite_accounts(account, direction)
+      }
+    end
+
+  rescue => err
+    flash.now[:error] = err.message
+    render :new, locals: {
       account: account,
       account_transaction_form: account_transaction_form,
       opposite_accounts_collection: opposite_accounts(account, direction)
@@ -12,18 +34,11 @@ class AccountTransactionsController < ApplicationController
 
   private
 
-  COMMON_CATEGORY = 'common'
-
-  INCOME_DIRECTION = 'income'
-  OUTCOME_DIRECTION = 'outcome'
-
-  DIRECTIONS = [INCOME_DIRECTION, OUTCOME_DIRECTION]
-
   # Отдаем список аккаунтов с которыми можно делать
   # транзакцию в этом направлении согласно Policy
   def opposite_accounts(account, direction)
     case direction
-    when INCOME_DIRECTION
+    when AccountTransactionForm::INCOME_DIRECTION
       # Ищем все аккаунты с которых можно перечислять на данный
       policies = Openbill.service.policies.where('(to_account_id = ? or to_account_id is null) and (to_category_id = ? or to_category_id is null)', account.id, account.category_id);
       where = policies.map do |policy|
@@ -40,7 +55,7 @@ class AccountTransactionsController < ApplicationController
       Openbill.service.accounts.where(where).all.map do |acc|
         account_select_item acc
       end
-    when OUTCOME_DIRECTION
+    when AccountTransactionForm::OUTCOME_DIRECTION
       policies = Openbill.service.policies.where('(from_account_id = ? or from_account_id is null) and (from_category_id = ? or from_category_id is null)', account.id, account.category_id);
       where = policies.map do |policy|
         account_id = policy.to_account_id
@@ -61,13 +76,23 @@ class AccountTransactionsController < ApplicationController
     end
   end
 
-  def account_transaction_form
-    AccountTransactionForm.new amount_currency: account.amount_currency
+  def account_transaction_form(attrs = {})
+    AccountTransactionForm.new({ **attrs.symbolize_keys, account_id: account.id, amount_currency: account.amount_currency, direction: direction })
+  end
+
+  def transactions
+    Openbill.service.transactions
   end
 
   def direction
-    return params[:direction] if DIRECTIONS.include? params[:direction]
+    return params[:direction] if AccountTransactionForm::DIRECTIONS.include? params[:direction]
     fail "Unknown direction #{params[:direction]}"
+  end
+
+  def permitted_params
+    params.require(:account_transaction_form).permit(
+      :opposite_account_id,
+      :amount_cents, :amount_currency, :key, :details, :meta)
   end
 
   def account

@@ -1,8 +1,8 @@
 h1= "Account: #{account_title account}"
-h2= "Create #{direction} transaction"
+h2= "Create #{account_transaction_form.direction} transaction"
 
 = simple_form_for account_transaction_form, url: account_transactions_path, method: :create do |f|
-  = f.input :direction, as: :hidden
+  = hidden_field_tag :direction, f.object.direction
   = f.input :amount_currency, as: :hidden
   .row
     .col-md-6
@@ -18,7 +18,11 @@ h2= "Create #{direction} transaction"
             = f.input_field :amount_cents, class: 'form-control', autofocus: true
           = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
   .row
-    .col-md-12
+    .col-md-4
       = f.input :details, as: :text
+    .col-md-4
+      = f.input :key
+    .col-md-4
+      = f.input :meta
 
   = f.submit :make, class: 'btn btn-success'
