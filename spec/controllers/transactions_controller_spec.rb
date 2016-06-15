@@ -13,11 +13,13 @@ describe TransactionsController do
   end
 
   before do
-    transactions = double(insert: true, update: true)
+    transactions = double(insert: true, update: true, pagination_record_count: 1)
     transaction = double(id: 1)
 
     allow(transactions).to receive(:paginate).and_return transactions
     allow(transactions).to receive(:reverse_order).and_return transactions
+    allow(transactions).to receive(:eager).and_return transactions
+    allow(transactions).to receive(:all).and_return transactions
     allow(Openbill.service).to receive(:transactions).and_return transactions
     allow(Openbill.service).to receive(:notify_transaction)
     allow(Openbill.service).to receive(:get_transaction).and_return transaction

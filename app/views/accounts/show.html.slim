@@ -20,7 +20,7 @@ h1 Accounts ##{account.key}
         dd.col-sm-9= account.id
         dt.col-sm-3 Category
         dd.col-sm-9
-          = link_to Openbill.service.get_category(account.category_id), category_path(account.category_id)
+          = link_to account.category, category_path(account.category_id)
 
 .row
   .col-md-12

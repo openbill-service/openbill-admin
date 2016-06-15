@@ -19,6 +19,13 @@ h2= "Create #{account_transaction_form.direction} transaction"
           = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
   .row
     .col-md-4
+      = f.input :good_id, collection: goods_collection
+    .col-md-4
+      = f.input :good_value
+    .col-md-4
+      = f.input :good_unit, collection: good_units_collection, include_blank: false
+  .row
+    .col-md-4
       = f.input :details, as: :text
     .col-md-4
       = f.input :key

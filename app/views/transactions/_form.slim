@@ -10,6 +10,13 @@
     .col-md-6
       = f.input :amount_currency, collection: currencies_collection, include_blank: false
   .row
+    .col-md-6
+      = f.input :good_id, collection: goods_collection
+    .col-md-6
+      = f.input :good_value
+    .col-md-6
+      = f.input :good_unit, collection: good_units_collection, include_blank: false
+  .row
     .col-md-4
       = f.input :key
     .col-md-4

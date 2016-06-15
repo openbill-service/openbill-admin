@@ -92,10 +92,11 @@ class AccountTransactionsController < ApplicationController
   def permitted_params
     params.require(:account_transaction_form).permit(
       :opposite_account_id,
+      :good_id, :good_value, :good_unit,
       :amount_cents, :amount_currency, :key, :details, :meta)
   end
 
   def account
-    Openbill.service.get_account_by_id params[:account_id]
+    @_account ||= Openbill.service.get_account_by_id params[:account_id]
   end
 end
