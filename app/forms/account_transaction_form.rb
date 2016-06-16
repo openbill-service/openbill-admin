@@ -16,13 +16,20 @@ class AccountTransactionForm < FormBase
   attribute :key, String
   attribute :meta, VirtusSequelHstore
 
+  attribute :good_id, String
+  attribute :good_value, Integer
+  attribute :good_unit, String
+
   validates :amount_cents, :amount_currency, :account_id, :opposite_account_id, :details, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :direction, inclusion: { in: DIRECTIONS }
+  validates :good_value, numericality: { greater_than: 0 }, if: 'good_id.present?'
+  validates :good_unit, presence: true, if: 'good_id.present?'
 
   def to_hash
     {
-      **attributes.slice(:amount_currency, :details, :key),
+      **attributes.slice(:amount_currency, :details, :key, :good_id, :good_value, :good_unit),
+      **attributes.slice(:good_id, :good_value, :good_unit).select { |k, v| v.present? },
       from_account_id: from_account_id,
       to_account_id: to_account_id,
       amount_cents: amount.cents,

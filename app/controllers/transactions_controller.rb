@@ -3,7 +3,8 @@ class TransactionsController < ApplicationController
 
   def index
     render locals: {
-      transactions: transactions
+      transactions: transactions.eager(:good, :from_account, :to_account).all,
+      transactions_count: transactions.pagination_record_count
     }
   end
 
@@ -18,7 +19,7 @@ class TransactionsController < ApplicationController
       transactions.insert transaction_form.to_hash
       redirect_to transactions_path
     else
-      render :new, { transaction: transaction_form }
+      render :new, locals: { transaction: transaction_form }
     end
 
   rescue => err
@@ -44,6 +45,7 @@ class TransactionsController < ApplicationController
 
   def permitted_params
     params.require(:transaction).permit(:from_account_id, :to_account_id,
+                                        :good_id, :good_value, :good_unit,
                                         :amount_cents, :amount_currency, :key, :details, :meta)
   end
 end

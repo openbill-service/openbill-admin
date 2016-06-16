@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :categories
   resources :policies
   resources :logs, only: [:index]
+  resources :goods
+  resources :goods_availabilities
 end

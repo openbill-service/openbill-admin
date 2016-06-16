@@ -1,5 +1,5 @@
 h1
-  | Transactions (#{transactions.pagination_record_count})
+  | Transactions (#{transactions_count})
   .pull-xs-right= link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
 
 = render 'pagination', scope: transactions
@@ -12,6 +12,8 @@ table.table.table-condensed.table-striped
       th= order_by filter, :to_account_id, label: 'Destination account'
       th= order_by filter, :amount_cents, label: 'Amount'
       th= order_by filter, :key
+      th Good
+      th Good amount
       th Details
       th Meta
       th Actions
@@ -22,11 +24,17 @@ table.table.table-condensed.table-striped
       td
         p = I18n.l t.created_at, format: :short
         small.text-muted= t.id
-      td= link_to Openbill.service.get_account(t.from_account_id), account_path(t.from_account_id)
-      td= link_to Openbill.service.get_account(t.to_account_id), account_path(t.to_account_id)
+      td= link_to t.from_account, account_path(t.from_account_id)
+      td= link_to t.to_account, account_path(t.to_account_id)
       td= humanized_amount t.amount
       td
         code = t.key
+      - if t.good.present?
+        td= link_to t.good.title, edit_good_path(t.good.id)
+        td= "#{t.good_value} #{t.good_unit}"
+      - else
+        td
+        td
       td
         .text-muted= t.details
       td= humanized_meta t.meta

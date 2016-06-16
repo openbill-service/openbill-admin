@@ -1,0 +1,14 @@
+= simple_form_for good_form do |f|
+  .row
+    .col-xs-6
+      = f.input :title
+    .col-xs-3
+      = f.input :unit
+    .col-xs-3
+      = f.input :group_id, collection: goods_collection
+  .row
+    .col-xs-6
+      = f.input :details
+    .col-xs-6
+      = f.input :meta
+  = f.submit class: 'btn btn-success'

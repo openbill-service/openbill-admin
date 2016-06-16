@@ -18,4 +18,16 @@ module ApplicationHelper
       [currency.upcase, currency.upcase]
     end
   end
+
+  def goods_collection
+    Openbill.service.goods.where(group_id: nil).map do |good|
+      [good.title, good.id]
+    end
+  end
+
+  def good_units_collection
+    Openbill.service.good_units.map do |good|
+      [good.unit, good.unit]
+    end
+  end
 end

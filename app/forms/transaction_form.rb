@@ -5,6 +5,9 @@ class TransactionForm < FormBase
   attribute :to_account_id, String
   attribute :amount_cents, String
   attribute :amount_currency, String, default: 'RUB'
+  attribute :good_id, String
+  attribute :good_value, Integer
+  attribute :good_unit, String
   attribute :key, String
   attribute :details, String
   attribute :meta, VirtusSequelHstore
@@ -13,10 +16,13 @@ class TransactionForm < FormBase
             :amount_cents, :amount_currency,
             :key, :details, presence: true
   validates :amount, numericality: { greater_than: 0 }
+  validates :good_value, numericality: { greater_than: 0 }, if: 'good_id.present?'
+  validates :good_unit, presence: true, if: 'good_id.present?'
 
   def to_hash
     {
-      **attributes.except(:amount_cents, :meta),
+      **attributes.except(:amount_cents, :meta, :good_id, :good_value, :good_unit),
+      **attributes.slice(:good_id, :good_value, :good_unit).select { |k, v| v.present? },
       amount_cents: amount.cents,
       meta: meta_hstore
     }
