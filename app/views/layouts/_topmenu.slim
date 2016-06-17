@@ -6,4 +6,5 @@ nav.navbar.navbar-light.bg-faded
     = navbar_link_to t(:categories), categories_path
     = navbar_link_to t(:policies), policies_path
     = navbar_link_to t(:webhook_logs), logs_path
-    = navbar_link_to t(:goods), goods_path
+    - if Features.has_goods?
+      = navbar_link_to t(:goods), goods_path

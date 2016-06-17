@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   def index
     render locals: {
-      transactions: transactions.eager(:good, :from_account, :to_account).all,
+      transactions: transactions.eager(*transaction_eager).all,
       transactions_count: transactions.pagination_record_count
     }
   end
@@ -34,6 +34,14 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+  def transaction_eager
+    if Features.has_goods?
+      [:good, :from_account, :to_account]
+    else
+      [:from_account, :to_account]
+    end
+  end
 
   def transaction
     Openbill.service.get_transaction params[:id]
