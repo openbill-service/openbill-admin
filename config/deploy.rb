@@ -60,7 +60,7 @@ namespace :deploy do
     on roles(:web), in: :sequence, wait: 5 do |_server|
       # sidekiqapp = "sidekiq app=/home/#{server.user}/#{fetch(:application)}/current"
       begin
-        execute "/etc/init.d/unicorn-#{fetch(:application)} upgrade"
+        execute "#{fetch(:unicorn_restart_cmd)}"
       rescue StandardError => err_msg
         if err_msg.to_s.include?('master failed to start, check stderr log for details')
           execute "tail -n 80 #{shared_path}/log/unicorn.stderr.log" do |channel, stream, data|
