@@ -19,7 +19,10 @@
           td
             p = I18n.l t.created_at, format: :short
             small.text-muted= t.id
-          td= link_to t.opposite_account, account_path(t.opposite_account.id)
+          td
+            = link_to t.opposite_account, account_path(t.opposite_account.id)
+            div
+              small.text-muted= t.opposite_account.details
           td= humanized_amount t.amount
           td
             code = t.key

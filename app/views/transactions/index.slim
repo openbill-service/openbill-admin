@@ -28,8 +28,14 @@ table.table.table-condensed.table-striped
         small.text-muted= t.id
       td
         = I18n.l t.date, format: :short
-      td= link_to t.from_account, account_path(t.from_account_id)
-      td= link_to t.to_account, account_path(t.to_account_id)
+      td
+        = link_to t.from_account, account_path(t.from_account_id)
+        div
+          small.text-muted= t.from_account.details
+      td
+        = link_to t.to_account, account_path(t.to_account_id)
+        div
+          small.text-muted= t.to_account.details
       td= humanized_amount t.amount
       td
         code = t.key
