@@ -68,12 +68,27 @@ class AccountsController < ApplicationController
   end
 
   def current_category
-    category_id = params[:philtre].try(:[], :category_id)
-    if category_id.present?
-      categories[id: category_id]
+    if session_category_id.present?
+      categories[id: session_category_id]
     else
-      default_category
+      OpenStruct.new(id: nil)
     end
+  end
+
+  def session_category_id
+    if filter_set?
+      session[:accounts_filter_category_id] = param_category_id
+    else
+      session[:accounts_filter_category_id]
+    end
+  end
+
+  def param_category_id
+    params[:philtre].try(:[], :category_id)
+  end
+
+  def filter_set?
+    params[:philtre].present?
   end
 
   def default_category
@@ -81,7 +96,9 @@ class AccountsController < ApplicationController
   end
 
   def accounts
-    filter.apply(Openbill.service.accounts).where(category_id: current_category.id).paginate page, per_page
+    scope = filter.apply(Openbill.service.accounts)
+    scope = scope.where(category_id: current_category.id) if current_category.id.present?
+    scope.paginate page, per_page
   end
 
   def categories
