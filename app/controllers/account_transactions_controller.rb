@@ -14,7 +14,7 @@ class AccountTransactionsController < ApplicationController
 
     if account_transaction_form.valid?
       transactions.insert account_transaction_form.to_hash
-      redirect_to accounts_path
+      redirect_to account_path(account.id)
     else
       render :new, locals: {
         account: account,
