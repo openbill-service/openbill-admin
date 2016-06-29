@@ -60,7 +60,7 @@ class AccountsController < ApplicationController
   private
 
   def transactions
-    Openbill.service.account_transactions(account).reverse_order(:created_at).paginate(page, per_page)
+    filter.apply(Openbill.service.account_transactions(account).reverse_order(:created_at)).paginate(page, per_page)
   end
 
   def account
