@@ -4,10 +4,11 @@
   table.table.table-condensed.table-striped
     thead
       tr
-        th Time
+        th= order_by filter, :created_at, label: 'Time'
+        th= order_by filter, :date, label: 'Record date'
         th Opposite account
-        th Amount
-        th Key
+        th= order_by filter, :amount_cents, label: 'Amount'
+        th= order_by filter, :key
         th Details
         th Meta
         th Actions
@@ -19,6 +20,8 @@
           td
             p = I18n.l t.created_at, format: :short
             small.text-muted= t.id
+          td
+            = I18n.l t.date, format: :short
           td
             = link_to t.opposite_account, account_path(t.opposite_account.id)
             div
