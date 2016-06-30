@@ -32,7 +32,7 @@ class AccountTransactionForm < FormBase
   def to_hash
     {
       **attributes.slice(:amount_currency, :details, :key, :good_id, :good_value, :good_unit),
-      **attributes.slice(:good_id, :good_value, :good_unit).select { |k, v| v.present? },
+      **attributes.slice(:good_id, :good_value, :good_unit, :date).select { |k, v| v.present? },
       from_account_id: from_account_id,
       to_account_id: to_account_id,
       amount_cents: amount.cents,

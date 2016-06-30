@@ -21,7 +21,7 @@
             p = I18n.l t.created_at, format: :short
             small.text-muted= t.id
           td
-            = I18n.l t.date, format: :short
+            = I18n.l t.date, format: :long
           td
             = link_to t.opposite_account, account_path(t.opposite_account.id)
             div
