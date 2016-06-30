@@ -77,7 +77,19 @@ class AccountTransactionsController < ApplicationController
   end
 
   def account_transaction_form(attrs = {})
-    AccountTransactionForm.new({ **attrs.symbolize_keys, account_id: account.id, amount_currency: account.amount_currency, direction: direction })
+    AccountTransactionForm.new({
+      **attrs.symbolize_keys,
+      account_id: account.id,
+      amount_currency: account.amount_currency,
+      direction: direction,
+      date: date
+    })
+  end
+
+  def date
+    Date.new permitted_params['date(1i)'].to_i, permitted_params['date(2i)'].to_i, permitted_params['date(3i)'].to_i
+  rescue => err
+    Bugsnag.notify err
   end
 
   def transactions
@@ -93,7 +105,7 @@ class AccountTransactionsController < ApplicationController
     params.require(:account_transaction_form).permit(
       :opposite_account_id,
       :good_id, :good_value, :good_unit,
-      :amount_cents, :amount_currency, :key, :details, :meta)
+      :amount_cents, :amount_currency, :key, :details, :meta, :date)
   end
 
   def account
