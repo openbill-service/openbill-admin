@@ -5,6 +5,7 @@ class TransactionForm < FormBase
   attribute :to_account_id, String
   attribute :amount_cents, String
   attribute :amount_currency, String, default: 'RUB'
+  attribute :reverse_transaction_id, String
 
   if Features.has_goods?
     attribute :good_id, String

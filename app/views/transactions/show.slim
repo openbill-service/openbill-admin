@@ -1,5 +1,14 @@
 h1
   | Transaction (#{transaction.id})
+p
+  = link_to 'Notify', notify_transaction_path(transaction.id), method: 'POST', class: 'btn btn-warning btn-sm'
+
+- if transaction.reverse_transaction_id.present?
+  = link_to "Original transaction", transaction_path(transaction.reverse_transaction_id)
+- elsif transaction.reversation_transaction.present?
+  = link_to 'Reversation transaction', transaction_path(transaction.reversation_transaction.id)
+- else
+  = link_to 'Reverse', new_transaction_path(transaction: { reverse_transaction_id: transaction.id })
 
 .row
   .col-md-6
@@ -8,7 +17,7 @@ h1
         dt.col-sm-3 Created at
         dd.col-sm-9= I18n.l transaction.created_at, format: :short
         dt.col-sm-3 Record date
-        dd.col-sm-9= I18n.l transaction.date, format: :short
+        dd.col-sm-9= humanized_date transaction.date
         dt.col-sm-3 Key
         dd.col-sm-9= transaction.key
         dt.col-sm-3 From account

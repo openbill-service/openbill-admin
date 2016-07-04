@@ -9,7 +9,17 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    render locals: { transaction: TransactionForm.new }
+    transaction_form = TransactionForm.new permitted_params
+    if reverse_transaction.present?
+      transaction_form.amount_cents = reverse_transaction.amount.to_f
+      transaction_form.amount_currency = reverse_transaction.amount_currency
+      transaction_form.from_account_id = reverse_transaction.to_account_id
+      transaction_form.to_account_id = reverse_transaction.from_account_id
+      transaction_form.key = reverse_transaction.key + '-reverse'
+      transaction_form.date = reverse_transaction.date
+      transaction_form.details = "Reverse of #{reverse_transaction.details}"
+    end
+    render locals: { transaction: transaction_form }
   end
 
   def create
@@ -47,6 +57,11 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def reverse_transaction
+    return nil unless permitted_params[:reverse_transaction_id].present?
+    Openbill.service.get_transaction permitted_params[:reverse_transaction_id]
+  end
+
   def transaction
     Openbill.service.get_transaction params[:id]
   end
@@ -56,8 +71,8 @@ class TransactionsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:transaction).permit(:from_account_id, :to_account_id,
-                                        :good_id, :good_value, :good_unit,
-                                        :amount_cents, :amount_currency, :key, :details, :meta)
+    return {} unless params[:transaction].present?
+    # Allow any parameters
+    params.require(:transaction).permit!
   end
 end

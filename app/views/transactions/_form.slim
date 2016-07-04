@@ -1,4 +1,7 @@
+- if transaction.reverse_transaction_id.present?
+  h2 Make a reverse transaction
 = simple_form_for transaction do |f|
+  = f.input :reverse_transaction_id, as: :hidden
   .row
     .col-md-6
       = f.input :from_account_id, collection: accounts_collection, include_blank: false
