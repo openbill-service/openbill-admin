@@ -10,6 +10,7 @@ table.table.table-condensed.table-striped.m-t-3
       th To category
       th From account
       th To account
+      th Allow reverse
       th
         .pull-xs-right= t :actions
   tbody
@@ -21,6 +22,7 @@ table.table.table-condensed.table-striped.m-t-3
         td= policy.to_category
         td= policy.from_account
         td= policy.to_account
+        td= policy.allow_reverse
         td.pull-xs-right
           .btn-group
             = destroy_button policy_path(policy.id)

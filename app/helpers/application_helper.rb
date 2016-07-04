@@ -3,6 +3,13 @@ module ApplicationHelper
     "Openbill Admin #{AppVersion}"
   end
 
+  def humanized_date(date)
+    return '-' unless date.present?
+    content_tag :div, class: 'text-nowrap' do
+      I18n.l date, format: :long
+    end
+  end
+
   def show_attribute(record, attribute_name)
     value = record.send attribute_name
 
