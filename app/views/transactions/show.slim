@@ -1,0 +1,33 @@
+h1
+  | Transaction (#{transaction.id})
+
+.row
+  .col-md-6
+    div style="padding: 1.5em"
+      dl.dl-horizontal
+        dt.col-sm-3 Created at
+        dd.col-sm-9= I18n.l transaction.created_at, format: :short
+        dt.col-sm-3 Record date
+        dd.col-sm-9= I18n.l transaction.date, format: :short
+        dt.col-sm-3 Key
+        dd.col-sm-9= transaction.key
+        dt.col-sm-3 From account
+        dd.col-sm-9
+          = link_to account_path(transaction.from_account_id) do
+             = Openbill.service.get_account transaction.from_account_id
+        dt.col-sm-3 To account
+        dd.col-sm-9
+          = link_to account_path(transaction.to_account_id) do
+            = Openbill.service.get_account transaction.to_account_id
+
+  .col-md-6
+    div style="padding: 1.5em"
+      dl.dl-horizontal
+        dt.col-sm-3 Amount
+        dd.col-sm-9= humanized_amount transaction.amount
+        dt.col-sm-3 Details
+        dd.col-sm-9= transaction.details
+        dt.col-sm-3 Meta
+        dd.col-sm-9.text-muted= humanized_meta transaction.meta
+        dt.col-sm-3 Username
+        dd.col-sm-9= transaction.username

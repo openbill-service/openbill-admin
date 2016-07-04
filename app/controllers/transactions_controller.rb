@@ -33,6 +33,10 @@ class TransactionsController < ApplicationController
     redirect_to :back
   end
 
+  def show
+    render locals: { transaction: transaction }
+  end
+
   private
 
   def transaction_eager
