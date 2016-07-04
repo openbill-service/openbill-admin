@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   # All transactions
-  resources :transactions, only: [:index, :new, :create] do
+  resources :transactions, only: [:index, :new, :create, :show] do
     member do
       post :notify
     end

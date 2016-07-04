@@ -18,8 +18,8 @@
         - t = AccountTransaction.new account, transaction
         tr
           td
-            p = I18n.l t.created_at, format: :short
-            small.text-muted= t.id
+            = link_to transaction_path t.id do
+              .text-nowrap= I18n.l t.created_at, format: :short
           td
             .text-nowrap= I18n.l t.date, format: :long
           td

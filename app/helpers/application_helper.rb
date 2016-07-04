@@ -3,6 +3,18 @@ module ApplicationHelper
     "Openbill Admin #{AppVersion}"
   end
 
+  def show_attribute(record, attribute_name)
+    value = record.send attribute_name
+
+    if attribute_name.to_s.end_with? '_at'
+      I18n.l value, format: :short
+    else
+      value
+    end
+
+    content_tag :p, "#{attribute_name}: #{value}"
+  end
+
   def humanized_meta(meta)
     content_tag :code, meta
   end
