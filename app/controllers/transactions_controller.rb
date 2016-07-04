@@ -3,8 +3,8 @@ class TransactionsController < ApplicationController
 
   def index
     render locals: {
-      transactions: transactions.eager(*transaction_eager).all,
-      transactions_count: transactions.pagination_record_count
+      transactions: transactions.eager(*transaction_eager).paginate(page, per_page),
+      transactions_count: transactions.count
     }
   end
 
@@ -52,7 +52,7 @@ class TransactionsController < ApplicationController
   end
 
   def transactions
-    filter.apply(Openbill.service.transactions.reverse_order(:created_at)).paginate page, per_page
+    filter.apply(Openbill.service.transactions.reverse_order(:created_at))
   end
 
   def permitted_params
