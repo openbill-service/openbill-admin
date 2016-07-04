@@ -87,9 +87,11 @@ class AccountTransactionsController < ApplicationController
   end
 
   def date
+    return unless params.key?(:account_transaction_form)
     Date.new permitted_params['date(1i)'].to_i, permitted_params['date(2i)'].to_i, permitted_params['date(3i)'].to_i
   rescue => err
     Bugsnag.notify err
+    nil
   end
 
   def transactions
