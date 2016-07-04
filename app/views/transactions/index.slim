@@ -27,7 +27,7 @@ table.table.table-condensed.table-striped
         p = I18n.l t.created_at, format: :short
         small.text-muted= t.id
       td
-        = I18n.l t.date, format: :long
+        .text-nowrap= I18n.l t.date, format: :long
       td
         = link_to t.from_account, account_path(t.from_account_id)
         div
