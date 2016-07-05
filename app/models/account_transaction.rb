@@ -1,5 +1,5 @@
 class AccountTransaction
-  delegate :id, :created_at, :details, :meta, :key, :date, to: :raw_transaction
+  delegate :id, :created_at, :revrese_transaction_id, :details, :meta, :key, :date, to: :raw_transaction
 
   def initialize(billing_account, raw_transaction)
     @billing_account = billing_account
