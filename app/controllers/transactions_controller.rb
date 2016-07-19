@@ -9,7 +9,6 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    transaction_form = TransactionForm.new permitted_params
     if reverse_transaction.present?
       transaction_form.amount_cents = reverse_transaction.amount.to_f
       transaction_form.amount_currency = reverse_transaction.amount_currency
@@ -22,11 +21,28 @@ class TransactionsController < ApplicationController
     render locals: { transaction: transaction_form }
   end
 
-  def create
-    transaction_form = TransactionForm.new permitted_params
+  def edit
+    transaction_form = TransactionForm.new transaction
+    render :new, locals: { transaction: transaction_form }
+  end
 
+  def create
     if transaction_form.valid?
       transactions.insert transaction_form.to_hash
+      redirect_to transactions_path
+    else
+      render :new, locals: { transaction: transaction_form }
+    end
+
+  rescue => err
+    flash.now[:error] = err.message
+    render :new, locals: { transaction: transaction_form }
+  end
+
+  def update
+    transaction_form = TransactionForm.new({ **permitted_params.symbolize_keys, id: transaction.id, date: date })
+    if transaction_form.valid?
+      transaction.update transaction_form.to_hash
       redirect_to transactions_path
     else
       render :new, locals: { transaction: transaction_form }
@@ -47,7 +63,26 @@ class TransactionsController < ApplicationController
     render locals: { transaction: transaction }
   end
 
+  def destroy
+    transaction.delete
+    redirect_to :back
+  rescue => err
+    redirect_to :back, flash: { error: err.message }
+  end
+
   private
+
+  def transaction_form
+    TransactionForm.new({
+      **permitted_params.symbolize_keys,
+      date: date
+    })
+  end
+
+  def date
+    return unless params.key?(:transaction)
+    TransactionDate.parse permitted_params
+  end
 
   def transaction_eager
     if Features.has_goods?

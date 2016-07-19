@@ -6,4 +6,8 @@ module ButtonsHelper
   def edit_button(link)
     link_to t('edit'), link, class: 'btn btn-sm btn-default'
   end
+
+  def show_button(link)
+    link_to t('show'), link, class: 'btn btn-sm btn-default'
+  end
 end

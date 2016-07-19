@@ -1,6 +1,7 @@
 class TransactionForm < FormBase
   include Virtus.model
 
+  attribute :id, String
   attribute :from_account_id, String
   attribute :to_account_id, String
   attribute :amount_cents, String
@@ -27,8 +28,8 @@ class TransactionForm < FormBase
 
   def to_hash
     {
-      **attributes.except(:amount_cents, :meta, :good_id, :good_value, :good_unit),
-      **attributes.slice(:good_id, :good_value, :good_unit).select { |k, v| v.present? },
+      **attributes.except(:id, :amount_cents, :meta, :good_id, :good_value, :good_unit, :reverse_transaction_id),
+      **attributes.slice(:good_id, :good_value, :good_unit, :reverse_transaction_id).select { |k, v| v.present? },
       amount_cents: amount.cents,
       meta: meta_hstore
     }
@@ -46,8 +47,12 @@ class TransactionForm < FormBase
     self
   end
 
+  def to_param
+    id
+  end
+
   def persisted?
-    false
+    id.present?
   end
 
   def model_name

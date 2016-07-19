@@ -13,8 +13,8 @@ describe TransactionsController do
   end
 
   before do
-    transactions = double(insert: true, update: true, pagination_record_count: 1)
-    transaction = double(id: 1)
+    transactions = double(insert: true, pagination_record_count: 1)
+    transaction = double(id: 1, update: true, delete: true, to_hash: {})
 
     allow(transactions).to receive(:paginate).and_return transactions
     allow(transactions).to receive(:reverse_order).and_return transactions
@@ -36,8 +36,23 @@ describe TransactionsController do
     assert_response :success
   end
 
+  it '#edit' do
+    get :edit, id: 1
+    assert_response :success
+  end
+
   it '#create' do
     post :create, transaction: transaction_params
+    assert_response :redirect
+  end
+
+  it '#update' do
+    patch :update, id: 1, transaction: transaction_params
+    assert_response :redirect
+  end
+
+  it '#destroy' do
+    delete :destroy, id: 1
     assert_response :redirect
   end
 

@@ -49,7 +49,9 @@ table.table.table-condensed.table-striped
         .text-muted= t.details
       td= humanized_meta t.meta
       td
-        = link_to 'Show', transaction_path(t.id)
+        = show_button transaction_path(t.id)
+        = edit_button edit_transaction_path(t.id)
+        = destroy_button transaction_path(t.id)
         - if t.reverse_transaction_id.present?
           br
           = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
