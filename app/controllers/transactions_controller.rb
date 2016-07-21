@@ -99,7 +99,7 @@ class TransactionsController < ApplicationController
   end
 
   def transaction
-    Openbill.service.get_transaction params[:id]
+    Openbill.service.get_transaction(params[:id]) || fail(NotFound)
   end
 
   def transactions
