@@ -23,6 +23,7 @@ class TransactionsController < ApplicationController
 
   def edit
     transaction_form = TransactionForm.new transaction
+    transaction_form.amount_cents = transaction_form.amount.to_f
     render :new, locals: { transaction: transaction_form }
   end
 
