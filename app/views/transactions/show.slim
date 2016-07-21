@@ -1,7 +1,9 @@
 h1
   | Transaction (#{transaction.id})
 p
-  = link_to 'Notify', notify_transaction_path(transaction.id), method: 'POST', class: 'btn btn-warning btn-sm'
+  = notify_button notify_transaction_path(transaction.id)
+  = edit_button edit_transaction_path(transaction.id)
+  = destroy_button transaction_path(transaction.id)
 
 - if transaction.reverse_transaction_id.present?
   = link_to "Original transaction", transaction_path(transaction.reverse_transaction_id)

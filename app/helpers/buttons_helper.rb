@@ -1,4 +1,8 @@
 module ButtonsHelper
+  def notify_button(link)
+    link_to 'Notify', link, method: 'POST', class: 'btn btn-warning btn-sm'
+  end
+
   def destroy_button(link)
     link_to t('delete'), link, method: :delete, 'data-confirm' => 'Точно удалить?', class: 'btn btn-sm btn-danger'
   end

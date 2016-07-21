@@ -50,8 +50,6 @@ table.table.table-condensed.table-striped
       td= humanized_meta t.meta
       td
         = show_button transaction_path(t.id)
-        = edit_button edit_transaction_path(t.id)
-        = destroy_button transaction_path(t.id)
         - if t.reverse_transaction_id.present?
           br
           = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
