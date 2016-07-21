@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/openbill-service/openbill-ruby.git
-  revision: 2673dd59562dd295d56679edbcd71e2b0ac81d3b
+  revision: 5e4afec339de3c731030cb93c355c92c7e5e1d98
   specs:
     openbill-ruby (0.1.18)
       money
