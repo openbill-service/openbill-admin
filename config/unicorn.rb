@@ -2,7 +2,7 @@ rails_env = ENV['RACK_ENV'] || 'production'
 
 APP_ROOT = File.expand_path(File.dirname(File.dirname(__FILE__)))
 
-worker_processes 3
+worker_processes ENV['OPENBILL_UNICORN_WORKERS'].to_i ||  10
 working_directory APP_ROOT
 listen APP_ROOT + '/tmp/sockets/unicorn.sock'
 listen '0.0.0.0:3031',  tcp_nopush: true
@@ -11,7 +11,7 @@ stderr_path APP_ROOT + '/log/unicorn.stderr.log'
 stdout_path APP_ROOT + '/log/unicorn.stdout.log'
 
 if rails_env == 'production'
-  worker_processes 10
+  worker_processes ENV['OPENBILL_UNICORN_PROD_WORKERS'].to_i || ENV['OPENBILL_UNICORN_WORKERS'].to_i || 10
 end
 
 # Helps ensure the correct unicorn binary is used when upgrading with USR2
