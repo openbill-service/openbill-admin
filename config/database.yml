@@ -21,9 +21,11 @@ staging:
   password:
 
 production:
-  adapter: postgresql
+  adapter: <%= ENV["OPENBILL_DATABASE_ADAPTER"] %>
   encoding: unicode
-  database: kiiiosk_development
-  pool: 5
-  username:
-  password:
+  database: <%= ENV["OPENBILL_DATABASE_NAME"] %>
+  pool: <%= ENV["OPENBILL_DATABASE_POOL"] %>
+  host: <%= ENV["OPENBILL_DATABASE_HOST"] %>
+  port: <%= ENV["OPENBILL_DATABASE_PORT"] %>
+  username: <%= ENV["OPENBILL_DATABASE_USERNAME"] %>
+  password: <%= ENV["OPENBILL_DATABASE_PASSWORD"] %>
