@@ -1,8 +1,4 @@
-.pull-xs-right
-  = edit_button edit_account_path(account.id)
-  br
-  = render 'account_actions', account: account
-h1 Accounts ##{account.key}
+= render 'header', account: account
 .row
   .col-md-6
     div style="padding: 1.5em"
@@ -24,6 +20,6 @@ h1 Accounts ##{account.key}
 
 .row
   .col-md-12
-    h2 Transactions (#{account.transactions_count})
 
+    = link_to 'all transactions', account_transactions_path(account.id)
     = render 'transactions', transactions: transactions, account: account

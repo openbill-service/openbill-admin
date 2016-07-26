@@ -1,11 +1,13 @@
-= simple_form_for filter.for_form, url: accounts_path, method: 'get' do |f|
+= simple_form_for filter.for_form, url: transactions_path, method: 'get' do |f|
   = f.hidden_field :order
-  = f.hidden_field :category_id
   .row
     .col-md-6
+      = f.input :from_account_id, required: false
+      = f.input :date, required: false
       = f.input :key_like, required: false
       = f.input :details_like, required: false
     .col-md-6
+      = f.input :to_account_id, required: false
       = f.input :amount_cents_lte, required: false
       = f.input :amount_cents_gte, required: false
   = f.button :submit

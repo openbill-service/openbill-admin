@@ -1,5 +1,13 @@
 class AccountTransactionsController < ApplicationController
   include AccountsHelper
+  helper_method :filter
+
+  def index
+    render locals: {
+      account: account,
+      transactions: transactions
+    }
+  end
 
   def new
     render locals: {
@@ -13,7 +21,7 @@ class AccountTransactionsController < ApplicationController
     account_transaction_form = account_transaction_form(permitted_params)
 
     if account_transaction_form.valid?
-      transactions.insert account_transaction_form.to_hash
+      Openbill.service.transactions.insert account_transaction_form.to_hash
       redirect_to account_path(account.id)
     else
       render :new, locals: {
@@ -92,7 +100,11 @@ class AccountTransactionsController < ApplicationController
   end
 
   def transactions
-    Openbill.service.transactions
+    res = filter
+      .apply( Openbill.service.account_transactions(account).reverse_order(:created_at) )
+
+    res
+      .paginate(page, per_page)
   end
 
   def direction
@@ -109,5 +121,17 @@ class AccountTransactionsController < ApplicationController
 
   def account
     @_account ||= Openbill.service.get_account_by_id params[:account_id]
+  end
+
+  def filter
+    Philtre.new filter_params do
+      def opposite_account_id(id)
+        Sequel.expr(from_account_id: id) | Sequel.expr(to_account_id: id)
+      end
+
+      def month(date)
+        (Sequel.expr(:date) >= Date.parse(date).beginning_of_month) & (Sequel.expr(:date) <= Date.parse(date).end_of_month)
+      end
+    end
   end
 end

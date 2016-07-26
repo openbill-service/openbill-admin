@@ -1,9 +1,57 @@
-                 Prefix Verb URI Pattern                                      Controller#Action
-                   root GET  /                                                welcome#index
-   account_transactions GET  /accounts/:account_id/transactions(.:format)     account_transactions#index
-                        POST /accounts/:account_id/transactions(.:format)     account_transactions#create
-new_account_transaction GET  /accounts/:account_id/transactions/new(.:format) account_transactions#new
-    account_transaction GET  /accounts/:account_id/transactions/:id(.:format) account_transactions#show
-               accounts GET  /accounts(.:format)                              accounts#index
-                account GET  /accounts/:id(.:format)                          accounts#show
-           transactions GET  /transactions(.:format)                          transactions#index
+                 Prefix Verb   URI Pattern                                      Controller#Action
+                   root GET    /                                                welcome#index
+   account_transactions GET    /accounts/:account_id/transactions(.:format)     account_transactions#index
+                        POST   /accounts/:account_id/transactions(.:format)     account_transactions#create
+new_account_transaction GET    /accounts/:account_id/transactions/new(.:format) account_transactions#new
+    account_transaction GET    /accounts/:account_id/transactions/:id(.:format) account_transactions#show
+        account_reports GET    /accounts/:account_id/reports(.:format)          account_reports#index
+         account_report GET    /accounts/:account_id/reports/:id(.:format)      account_reports#show
+               accounts GET    /accounts(.:format)                              accounts#index
+                        POST   /accounts(.:format)                              accounts#create
+            new_account GET    /accounts/new(.:format)                          accounts#new
+           edit_account GET    /accounts/:id/edit(.:format)                     accounts#edit
+                account GET    /accounts/:id(.:format)                          accounts#show
+                        PATCH  /accounts/:id(.:format)                          accounts#update
+                        PUT    /accounts/:id(.:format)                          accounts#update
+     notify_transaction POST   /transactions/:id/notify(.:format)               transactions#notify
+           transactions GET    /transactions(.:format)                          transactions#index
+                        POST   /transactions(.:format)                          transactions#create
+        new_transaction GET    /transactions/new(.:format)                      transactions#new
+       edit_transaction GET    /transactions/:id/edit(.:format)                 transactions#edit
+            transaction GET    /transactions/:id(.:format)                      transactions#show
+                        PATCH  /transactions/:id(.:format)                      transactions#update
+                        PUT    /transactions/:id(.:format)                      transactions#update
+                        DELETE /transactions/:id(.:format)                      transactions#destroy
+             categories GET    /categories(.:format)                            categories#index
+                        POST   /categories(.:format)                            categories#create
+           new_category GET    /categories/new(.:format)                        categories#new
+          edit_category GET    /categories/:id/edit(.:format)                   categories#edit
+               category GET    /categories/:id(.:format)                        categories#show
+                        PATCH  /categories/:id(.:format)                        categories#update
+                        PUT    /categories/:id(.:format)                        categories#update
+                        DELETE /categories/:id(.:format)                        categories#destroy
+               policies GET    /policies(.:format)                              policies#index
+                        POST   /policies(.:format)                              policies#create
+             new_policy GET    /policies/new(.:format)                          policies#new
+            edit_policy GET    /policies/:id/edit(.:format)                     policies#edit
+                 policy GET    /policies/:id(.:format)                          policies#show
+                        PATCH  /policies/:id(.:format)                          policies#update
+                        PUT    /policies/:id(.:format)                          policies#update
+                        DELETE /policies/:id(.:format)                          policies#destroy
+                   logs GET    /logs(.:format)                                  logs#index
+                  goods GET    /goods(.:format)                                 goods#index
+                        POST   /goods(.:format)                                 goods#create
+               new_good GET    /goods/new(.:format)                             goods#new
+              edit_good GET    /goods/:id/edit(.:format)                        goods#edit
+                   good GET    /goods/:id(.:format)                             goods#show
+                        PATCH  /goods/:id(.:format)                             goods#update
+                        PUT    /goods/:id(.:format)                             goods#update
+                        DELETE /goods/:id(.:format)                             goods#destroy
+   goods_availabilities GET    /goods_availabilities(.:format)                  goods_availabilities#index
+                        POST   /goods_availabilities(.:format)                  goods_availabilities#create
+ new_goods_availability GET    /goods_availabilities/new(.:format)              goods_availabilities#new
+edit_goods_availability GET    /goods_availabilities/:id/edit(.:format)         goods_availabilities#edit
+     goods_availability GET    /goods_availabilities/:id(.:format)              goods_availabilities#show
+                        PATCH  /goods_availabilities/:id(.:format)              goods_availabilities#update
+                        PUT    /goods_availabilities/:id(.:format)              goods_availabilities#update
+                        DELETE /goods_availabilities/:id(.:format)              goods_availabilities#destroy

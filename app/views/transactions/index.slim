@@ -2,6 +2,7 @@ h1
   | Transactions (#{transactions_count})
   .pull-xs-right= link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
 
+= render 'filter'
 = render 'pagination', scope: transactions
 
 table.table.table-condensed.table-striped

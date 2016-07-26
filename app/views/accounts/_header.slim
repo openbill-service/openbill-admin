@@ -1,0 +1,12 @@
+.pull-xs-right
+  = edit_button edit_account_path(account.id)
+  br
+  = render 'account_actions', account: account
+  br
+  = link_to t(:reports), account_reports_path(account.id)
+h1 
+  | Account 
+  = link_to "##{account.key}", account_path(account.id)
+p= account.details
+
+.clearfix

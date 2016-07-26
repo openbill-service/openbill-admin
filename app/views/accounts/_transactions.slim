@@ -1,4 +1,5 @@
 - if transactions.any?
+  h2 Transactions (#{account.transactions_count})
 
   = render 'pagination', scope: transactions
   table.table.table-condensed.table-striped

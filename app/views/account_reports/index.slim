@@ -1,0 +1,26 @@
+= render 'accounts/header', account: account
+
+table.table.table-striped.table-hover.table-sm
+  thead
+    tr
+      td 
+      - report.months.sort.each do |date|
+        th
+          = link_to account_transactions_path(account.id, philtre: { month: date }) do
+            = l date
+
+  tbody
+    - report.opposite_accounts.each do |oa|
+      tr
+        th
+          div= link_to oa, account_reports_path(oa.id)
+          small.text-muted= oa.details
+        - report.months.sort.each do |month|
+          - key = { month: month,  opposite_account_id: oa.id }
+          - data = report.data[key]
+          td
+            - if data.is_a? Hash
+              = link_to account_transactions_path(account.id, philtre: { opposite_account_id: oa.id, month: month }) do
+                = humanized_amount data[:amount]
+            - else
+              div= '-'

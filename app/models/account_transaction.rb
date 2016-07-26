@@ -14,8 +14,16 @@ class AccountTransaction
     incoming? ? raw_transaction.amount : -raw_transaction.amount
   end
 
+  def period_date
+    date || created_at.to_date
+  end
+
   def opposite_account
     @opposite_account ||= get_opposite_account
+  end
+
+  def opposite_account_id
+    opposite_account.id
   end
 
   private
