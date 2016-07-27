@@ -3,24 +3,24 @@
 table.table.table-striped.table-hover.table-sm
   thead
     tr
-      td 
-      - report.months.sort.each do |date|
+      th Opposite accounts
+      - report.columns.each do |column|
         th
-          = link_to account_transactions_path(account.id, philtre: { month: date }) do
-            = l date
-
+          = report_column_title report, column
   tbody
+    tr
+      th 
+        = link_to 'Total', account_transactions_path(account.id)
+      - report.columns.each do |month|
+        td
+          = render 'record', report: report, key: { month: month, opposite_account_id: :total }
+
     - report.opposite_accounts.each do |oa|
       tr
         th
           div= link_to oa, account_reports_path(oa.id)
           small.text-muted= oa.details
-        - report.months.sort.each do |month|
-          - key = { month: month,  opposite_account_id: oa.id }
-          - data = report.data[key]
+
+        - report.columns.each do |month|
           td
-            - if data.is_a? Hash
-              = link_to account_transactions_path(account.id, philtre: { opposite_account_id: oa.id, month: month }) do
-                = humanized_amount data[:amount]
-            - else
-              div= '-'
+            = render 'record', report: report, key: { month: month, opposite_account_id: oa.id }

@@ -1,4 +1,6 @@
 class AccountReportsController < ApplicationController
+  helper_method :account
+
   def index
     render locals: {
       account: account,
@@ -24,14 +26,26 @@ class AccountReportsController < ApplicationController
       month = t.period_date.end_of_month
       months << month
 
-      key = { month: month, opposite_account_id: t.opposite_account_id }
       opposite_accounts << t.opposite_account
 
-      a = data[key] ||= { amount: 0 }
-      a[:amount] += t.amount
+      add_transaction data, t, month: month, opposite_account_id: t.opposite_account_id
+      add_transaction data, t, month: month, opposite_account_id: :total
+      add_transaction data, t, month: :total, opposite_account_id: t.opposite_account_id
+      add_transaction data, t, month: :total, opposite_account_id: :total
     end
 
-    return OpenStruct.new data: data, months: months, opposite_accounts: opposite_accounts
+    return OpenStruct.new data: data, months: months, columns: [*months.sort, :total], opposite_accounts: opposite_accounts
+  end
+
+
+  def add_transaction(data, t, key = {})
+    a = data[key] ||= { amount: 0, net_amount: 0, margin_amount: 0 }
+    a[:amount] += t.amount
+    if t.amount > 0
+      a[:margin_amount] += t.amount
+    else
+      a[:net_amount] += t.amount
+    end
   end
 
   def account

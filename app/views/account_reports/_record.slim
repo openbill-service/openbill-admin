@@ -1,0 +1,13 @@
+- record = report.data[key]
+- url = account_transactions_path(account.id, philtre: key)
+
+- if record.is_a? Hash
+
+  = link_to humanized_amount(record[:amount]), url
+  - unless record[:net_amount] == 0 || record[:margin_amount] == 0
+    div
+      small= humanized_amount record[:net_amount]
+      | &nbsp;
+      small= humanized_amount record[:margin_amount]
+- else
+  | -

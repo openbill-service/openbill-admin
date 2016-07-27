@@ -130,6 +130,7 @@ class AccountTransactionsController < ApplicationController
       end
 
       def month(date)
+        return true if date == 'total'
         (Sequel.expr(:date) >= Date.parse(date).beginning_of_month) & (Sequel.expr(:date) <= Date.parse(date).end_of_month)
       end
     end
