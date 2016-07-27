@@ -10,7 +10,8 @@ class LogsController < ApplicationController
   private
 
   def logs
-    filter.apply(Openbill.service.webhook_logs.reverse_order(:created_at)).paginate page, per_page
+    query = WebhooksQuery.new.call
+    filter.apply(query).paginate page, per_page
   rescue Sequel::DatabaseError => err
     @db_error = err.message
     Bugsnag.notify err
