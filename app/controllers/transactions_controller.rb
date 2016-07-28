@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   def index
     render locals: {
-      transactions: transactions.eager(*transaction_eager).paginate(page, per_page),
+      transactions: transactions.eager(*transaction_eager).paginate(page, per_page).all,
       transactions_count: transactions.count
     }
   end
@@ -87,9 +87,9 @@ class TransactionsController < ApplicationController
 
   def transaction_eager
     if Features.has_goods?
-      [:good, :from_account, :to_account]
+      [:good, :from_account, :to_account, :last_webhook_log]
     else
-      [:from_account, :to_account]
+      [:from_account, :to_account, :last_webhook_log]
     end
   end
 

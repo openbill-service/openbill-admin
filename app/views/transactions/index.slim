@@ -19,6 +19,7 @@ table.table.table-condensed.table-striped
         th Good amount
       th Details
       th Meta
+      th Webhook state
       th Actions
 
   tbody
@@ -49,6 +50,9 @@ table.table.table-condensed.table-striped
       td
         .text-muted= t.details
       td= humanized_meta t.meta
+      td
+        - if t.last_webhook_log.present?
+          = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
       td
         = show_button transaction_path(t.id)
         - if t.reverse_transaction_id.present?
