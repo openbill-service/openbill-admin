@@ -29,3 +29,5 @@ production:
   port: <%= ENV["OPENBILL_DATABASE_PORT"] %>
   username: <%= ENV["OPENBILL_DATABASE_USERNAME"] %>
   password: <%= ENV["OPENBILL_DATABASE_PASSWORD"] %>
+  reconnect: true
+  sslmode: 'disable'
