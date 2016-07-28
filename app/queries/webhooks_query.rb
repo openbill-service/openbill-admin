@@ -5,6 +5,7 @@ class WebhooksQuery
 
   def call
     scope = basic_scope
+    scope = filter_transaction_ids scope if filter.transaction_ids.present?
     scope = filter_by_account scope if filter.account.present?
     scope = order scope
     scope
@@ -20,6 +21,10 @@ class WebhooksQuery
         openbill_transactions__to_account_id: filter.account.id
       )
     )
+  end
+
+  def filter_transaction_ids(scope)
+    scope.where(transaction_id: filter.transaction_ids)
   end
 
   def order(scope)

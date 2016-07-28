@@ -9,8 +9,14 @@ class LogsController < ApplicationController
 
   private
 
+  def webhooks_filter
+    WebhooksFilter.new(
+      transaction_ids: [params[:transaction_id]]
+    )
+  end
+
   def logs
-    query = WebhooksQuery.new.call
+    query = WebhooksQuery.new(filter: webhooks_filter).call
     filter.apply(query).paginate page, per_page
   rescue Sequel::DatabaseError => err
     @db_error = err.message
