@@ -57,7 +57,30 @@ class AccountsController < ApplicationController
     render :edit, locals: { account_key: account.key, account: account_form }
   end
 
+  def webhook_logs
+    render locals: { logs: logs, db_error: @db_error }
+  end
+
   private
+
+  def logs
+    query = WebhooksQuery.new(filter: webhooks_filter).call
+    filter.apply(query).paginate page, per_page
+  rescue Sequel::DatabaseError => err
+    @db_error = err.message
+    Bugsnag.notify err
+    []
+  end
+
+  def webhooks_filter
+    WebhooksFilter.new(
+      account: account
+    )
+  end
+
+  def ids
+    account.transactions
+  end
 
   def transactions
     filter.apply(Openbill.service.account_transactions(account).reverse_order(:created_at)).paginate(page, per_page)
