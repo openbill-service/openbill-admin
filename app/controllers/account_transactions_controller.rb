@@ -126,6 +126,7 @@ class AccountTransactionsController < ApplicationController
   def filter
     Philtre.new filter_params do
       def opposite_account_id(id)
+        return true if id == 'total'
         Sequel.expr(from_account_id: id) | Sequel.expr(to_account_id: id)
       end
 
