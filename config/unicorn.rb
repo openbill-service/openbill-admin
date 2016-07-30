@@ -1,8 +1,10 @@
+require File.realpath(__FILE__ + '/../settings')
+
 rails_env = ENV['RACK_ENV'] || 'production'
 
 APP_ROOT = File.expand_path(File.dirname(File.dirname(__FILE__)))
 
-worker_processes 10
+worker_processes WORKER_PROCESS
 working_directory APP_ROOT
 listen APP_ROOT + '/tmp/sockets/unicorn.sock'
 listen '0.0.0.0:3031',  tcp_nopush: true
@@ -11,7 +13,7 @@ stderr_path APP_ROOT + '/log/unicorn.stderr.log'
 stdout_path APP_ROOT + '/log/unicorn.stdout.log'
 
 if rails_env == 'production'
-  worker_processes 10
+  worker_processes WORKER_PROCESS
 end
 
 # Helps ensure the correct unicorn binary is used when upgrading with USR2
@@ -37,6 +39,9 @@ before_fork do |_server, _worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
 
+  defined?(Sequel::DATABASES) and
+    Sequel::DATABASES.each(&:disconnect)
+
   # Throttle the master from forking too quickly (for incremental kill-off only)
   sleep 1
 end
@@ -44,6 +49,10 @@ end
 after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.establish_connection
+
+  defined?(Sequel::DATABASES) and
+    Sequel::DATABASES.each { |db| db.connect :default }
+
   $redis.client.reconnect if defined?($redis)
   child_pid = server.config[:pid].sub('.pid', ".#{worker.nr}.pid")
   system("echo #{Process.pid} > #{child_pid}")
