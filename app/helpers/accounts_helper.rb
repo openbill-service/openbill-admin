@@ -1,6 +1,6 @@
 module AccountsHelper
   def opposite_account_hint(account_id)
-    return unless account_id.present?
+    return unless account_id.present? || account_id.to_s == 'total'
 
     account = Openbill::Account[id: account_id]
 
