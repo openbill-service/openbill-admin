@@ -21,6 +21,7 @@ describe TransactionsController do
     allow(transactions).to receive(:reverse_order).and_return transactions
     allow(transactions).to receive(:eager).and_return transactions
     allow(transactions).to receive(:count).and_return 1
+    allow(Openbill.service).to receive(:get_pending_webhooks_transactions).and_return transactions
     allow(Openbill.service).to receive(:transactions).and_return transactions
     allow(Openbill.service).to receive(:notify_transaction)
     allow(Openbill.service).to receive(:get_transaction).and_return transaction
@@ -29,6 +30,11 @@ describe TransactionsController do
 
   it '#index' do
     get :index
+    assert_response :success
+  end
+
+  it '#pending_webhooks' do
+    get :pending_webhooks
     assert_response :success
   end
 

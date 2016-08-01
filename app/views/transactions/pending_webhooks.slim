@@ -1,9 +1,5 @@
 h1
-  | Transactions (#{transactions_count})
-  .btn-group.pull-xs-right.m-t-1
-    = link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
-    - if Features.has_webhooks?
-      = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'btn btn-sm btn-info'
+  | Pending webhooks transactions (#{transactions_count})
 
 = render 'filter'
 = render 'pagination', scope: transactions
@@ -22,8 +18,7 @@ table.table.table-condensed.table-striped
         th Good amount
       th Details
       th Meta
-      - if Features.has_webhooks?
-        th Webhook state
+      th Webhook state
       th Actions
 
   tbody
@@ -54,10 +49,9 @@ table.table.table-condensed.table-striped
       td
         .text-muted= t.details
       td= humanized_meta t.meta
-      - if Features.has_webhooks?
-        td
-          - if t.last_webhook_log.present?
-            = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
+      td
+        - if t.last_webhook_log.present?
+          = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
       td
         = show_button transaction_path(t.id)
         - if t.reverse_transaction_id.present?
