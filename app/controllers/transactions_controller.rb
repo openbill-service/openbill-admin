@@ -8,6 +8,13 @@ class TransactionsController < ApplicationController
     }
   end
 
+  def pending_webhooks
+    render locals: {
+      transactions: pending_webhooks_transactions.eager(*transaction_eager).paginate(page, per_page).all,
+      transactions_count: transactions.count
+    }
+  end
+
   def new
     if reverse_transaction.present?
       transaction_form.amount_cents = reverse_transaction.amount.to_f
@@ -104,6 +111,10 @@ class TransactionsController < ApplicationController
 
   def transactions
     filter.apply(Openbill.service.transactions.reverse_order(:created_at))
+  end
+
+  def pending_webhooks_transactions
+    filter.apply(Openbill.service.get_pending_webhooks_transactions)
   end
 
   def permitted_params
