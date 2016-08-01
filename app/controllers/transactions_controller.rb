@@ -23,7 +23,7 @@ class TransactionsController < ApplicationController
 
   def edit
     transaction_form = TransactionForm.new transaction
-    transaction_form.amount_cents = transaction_form.amount.to_f
+    transaction_form.amount_cents = transaction.amount.to_f
     render :new, locals: { transaction: transaction_form }
   end
 
@@ -74,7 +74,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_form
-    TransactionForm.new({
+    @_transaction_form ||= TransactionForm.new({
       **permitted_params.symbolize_keys,
       date: date
     })

@@ -35,10 +35,6 @@ class TransactionForm < FormBase
     }
   end
 
-  def amount
-    amount_cents.to_s.to_money(amount_currency)
-  end
-
   def meta_hstore
     Sequel::Postgres::HStore.new JSON.parse(meta)
   end
@@ -57,5 +53,11 @@ class TransactionForm < FormBase
 
   def model_name
     ActiveModel::Name.new(self, nil, 'Transaction')
+  end
+
+  private
+
+  def amount
+    amount_cents.to_s.to_money(amount_currency)
   end
 end
