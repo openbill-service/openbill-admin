@@ -66,9 +66,9 @@ class TransactionsController < ApplicationController
 
   def destroy
     transaction.delete
-    redirect_to :back
+    redirect_to transactions_path
   rescue => err
-    redirect_to :back, flash: { error: err.message }
+    redirect_to transactions_path, flash: { error: err.message }
   end
 
   private
