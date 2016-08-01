@@ -1,0 +1,1 @@
+ssh srv-2.kiiiosk.ru -l wwwkiiiosk /home/wwwkiiiosk/deploy.sh `semver`
