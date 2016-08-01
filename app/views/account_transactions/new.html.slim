@@ -27,7 +27,7 @@ h2= "Create #{account_transaction_form.direction} transaction"
         = f.input :good_unit, collection: good_units_collection, include_blank: false
   .row
     .col-md-3
-      = f.input :date, as: :date
+      = f.input :date, as: :date_picker, readonly: true
     .col-md-3
       = f.input :key
     .col-md-3

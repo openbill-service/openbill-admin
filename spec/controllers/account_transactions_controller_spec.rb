@@ -7,7 +7,8 @@ describe AccountTransactionsController do
       amount_cents: 100,
       amount_currency: 'RUB',
       key: :key,
-      details: :details
+      details: :details,
+      date: Date.new
     }
   end
 

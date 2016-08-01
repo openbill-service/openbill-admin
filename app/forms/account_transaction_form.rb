@@ -25,7 +25,7 @@ class AccountTransactionForm < FormBase
     validates :good_unit, presence: true, if: 'good_id.present?'
   end
 
-  validates :amount_cents, :amount_currency, :account_id, :opposite_account_id, :details, presence: true
+  validates :amount_cents, :amount_currency, :account_id, :opposite_account_id, :details, :date, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :direction, inclusion: { in: DIRECTIONS }
 

@@ -15,9 +15,12 @@
 //= require turbolinks
 //= require nprogress
 //= require nprogress-turbolinks
+//= require tether
 //= require bootstrap-sprockets
+//= require moment
+//= require bootstrap-datetimepicker
+//= require pickers
 //= require_tree .
-
 
 NProgress.configure({
   showSpinner: false,
