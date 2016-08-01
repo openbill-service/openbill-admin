@@ -23,7 +23,7 @@ class TransactionForm < FormBase
 
   validates :from_account_id, :to_account_id,
             :amount_cents, :amount_currency,
-            :key, :details, presence: true
+            :key, :details, :date, presence: true
   validates :amount, numericality: { greater_than: 0 }
 
   def to_hash
