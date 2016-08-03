@@ -91,15 +91,16 @@ class AccountsController < ApplicationController
   end
 
   def current_category
-    if session_category_id.present?
-      categories[id: session_category_id]
-    else
-      OpenStruct.new(id: nil)
-    end
+    @_current_category ||=
+      if session_category_id.present?
+        categories[id: session_category_id]
+      else
+        OpenStruct.new(id: nil)
+      end
   end
 
   def session_category_id
-    if filter_set?
+    if category_filter_set?
       session[:accounts_filter_category_id] = param_category_id
     else
       session[:accounts_filter_category_id]
@@ -107,11 +108,11 @@ class AccountsController < ApplicationController
   end
 
   def param_category_id
-    params[:philtre].try(:[], :category_id)
+    params[:philtre][:category_id]
   end
 
-  def filter_set?
-    params[:philtre].present?
+  def category_filter_set?
+    params[:philtre].try(:key?, :category_id)
   end
 
   def default_category
