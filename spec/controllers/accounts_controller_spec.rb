@@ -10,6 +10,7 @@ describe AccountsController do
 
     allow(accounts).to receive(:where).and_return(accounts)
     allow(accounts).to receive(:paginate).and_return(accounts)
+    allow(accounts).to receive(:first!).and_return(account)
     allow(Openbill.service).to receive(:categories).and_return categories
     allow(Openbill.service).to receive(:accounts).and_return accounts
     allow(Openbill.service).to receive(:get_account).and_return account

@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/openbill-service/openbill-ruby.git
-  revision: 060f14066f6e7c426d7f5afccbe41724bfaacee5
+  revision: ab48ed879558641a5c739fa3bf7fca20a884bf6d
   specs:
     openbill-ruby (0.1.19)
       money
@@ -317,7 +317,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     semver2 (3.4.2)
-    sequel (4.36.0)
+    sequel (4.37.0)
     sequel-rails (0.9.12)
       actionpack (>= 3.2.0)
       activemodel
