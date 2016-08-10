@@ -83,11 +83,21 @@ class AccountsController < ApplicationController
   end
 
   def transactions
-    filter.apply(Openbill.service.account_transactions(account).reverse_order(:created_at)).paginate(page, per_page)
+    transactions_philtre.apply(
+      Openbill.service.account_transactions(account).reverse_order(:date)
+    ).paginate(page, per_page)
+  end
+
+  def transactions_philtre
+    Philtre.new philtre_params do
+      def date(date)
+        Sequel.lit('openbill_transactions.date <= ?', date)
+      end
+    end
   end
 
   def account
-    @account ||= Openbill.service.get_account params[:id]
+    @_account ||= find_account
   end
 
   def current_category
@@ -120,9 +130,36 @@ class AccountsController < ApplicationController
   end
 
   def accounts
-    scope = filter.apply(Openbill.service.accounts)
-    scope = scope.where(category_id: current_category.id) if current_category.id.present?
-    scope.paginate page, per_page
+    @_accounts ||= AccountsQuery.new(filter: accounts_filter).call
+  end
+
+  def find_account
+    AccountsQuery.new(filter: account_filter).call.first!
+  end
+
+  def account_filter
+    AccountsFilter.new(
+      id: params[:id],
+      philtre: philtre_params
+    )
+  end
+
+  def accounts_filter
+    AccountsFilter.new(
+      category_id: current_category.id,
+      page: page,
+      per_page: per_page,
+      philtre: philtre_params
+    )
+  end
+
+  def date
+    @_date ||= TransactionDate.parse params[:philtre]
+  end
+
+  def philtre_params
+    params[:philtre][:date] = date if date.present?
+    params[:philtre] || ActionController::Parameters.new
   end
 
   def categories

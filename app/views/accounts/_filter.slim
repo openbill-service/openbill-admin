@@ -3,6 +3,7 @@
   = f.hidden_field :category_id
   .row
     .col-md-6
+      = f.input :date, as: :date_picker, readonly: true
       = f.input :key_like, required: false
       = f.input :details_like, required: false
     .col-md-6

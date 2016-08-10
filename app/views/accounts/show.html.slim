@@ -1,4 +1,12 @@
 = render 'header', account: account
+
+= simple_form_for filter.for_form, url: account_path(id: account.id), method: 'get' do |f|
+  .row
+    .col-md-6
+      = f.input :date, as: :date_picker, readonly: true
+  = f.button :submit
+br
+
 .row
   .col-md-6
     div style="padding: 1.5em"
