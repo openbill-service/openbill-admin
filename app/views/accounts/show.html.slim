@@ -11,6 +11,9 @@ br
   .col-md-6
     div style="padding: 1.5em"
       dl.dl-horizontal
+        - if account.date_amount_cents.present?
+          dt.col-sm-3 Amount for date
+          dd.col-sm-9= humanized_amount account.date_amount
         dt.col-sm-3 Amount
         dd.col-sm-9= humanized_amount account.amount
         dt.col-sm-3 Details
