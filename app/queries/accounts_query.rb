@@ -14,7 +14,7 @@ class AccountsQuery
 
   def basic_scope
     if filter.date.present?
-      Openbill.service.accounts_for_date filter.date
+      Openbill.service.accounts_at_date filter.date
     else
       Openbill.service.accounts
     end

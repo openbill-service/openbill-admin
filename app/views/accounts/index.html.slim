@@ -12,6 +12,8 @@ table.table.table-condensed.table-striped
     tr
       th= order_by filter, :key
       th= order_by filter, :amount_cents
+      - if accounts.any? { |a| a.date_amount_cents.present? }
+        th Amount for date
       th= order_by filter, :updated_at
       th= order_by filter, :transactions_count
       th= t :meta
@@ -26,6 +28,8 @@ table.table.table-condensed.table-striped
           small.text-muted
             = account.details
         td= humanized_amount account.amount
+        - if account.date_amount_cents.present?
+          td= humanized_amount account.date_amount
         td= l account.updated_at, format: :short
         td= link_to account.transactions_count, account_path(account.id)
         td.text-muted= humanized_meta account.meta
