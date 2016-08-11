@@ -1,0 +1,7 @@
+= simple_form_for filter.for_form, url: at_date_accounts_path, method: 'get' do |f|
+  .row
+    .col-md-6
+      = f.input :date, as: :date_picker, readonly: true, required: false
+  = f.button :submit
+  = link_to 'Reset', at_date_accounts_path, class: 'btn btn-default'
+br

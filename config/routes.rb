@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :accounts, except: [:destroy] do
+    collection do
+      get :at_date
+    end
     resources :transactions, controller: 'account_transactions', only: [:index, :new, :create, :show]
     resources :reports, controller: 'account_reports', only: [:index, :show]
     member do

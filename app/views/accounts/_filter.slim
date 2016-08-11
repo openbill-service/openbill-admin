@@ -1,13 +1,11 @@
 = simple_form_for filter.for_form, url: accounts_path, method: 'get' do |f|
-  = f.hidden_field :order
-  = f.hidden_field :category_id
   .row
     .col-md-6
-      = f.input :date, as: :date_picker, readonly: true
       = f.input :key_like, required: false
       = f.input :details_like, required: false
     .col-md-6
       = f.input :amount_cents_lte, required: false
       = f.input :amount_cents_gte, required: false
   = f.button :submit
+  = link_to 'Reset', accounts_path, class: 'btn btn-default'
 br
