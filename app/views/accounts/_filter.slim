@@ -1,4 +1,5 @@
 = simple_form_for filter.for_form, url: accounts_path, method: 'get' do |f|
+  = f.hidden_field :order
   .row
     .col-md-6
       = f.input :key_like, required: false

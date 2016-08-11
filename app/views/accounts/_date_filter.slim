@@ -1,4 +1,5 @@
 = simple_form_for filter.for_form, url: at_date_accounts_path, method: 'get' do |f|
+  = f.hidden_field :order
   .row
     .col-md-6
       = f.input :date, as: :date_picker, readonly: true, required: false
