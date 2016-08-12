@@ -10,6 +10,13 @@ class AccountsController < ApplicationController
     }
   end
 
+  def at_date
+    render locals: {
+      accounts: accounts,
+      categories: categories
+    }
+  end
+
   def new
     render locals: { account: AccountForm.new }
   end
