@@ -1,4 +1,4 @@
-require File.realpath(__FILE__ + '/../settings')
+require File.realpath(__FILE__ + '/../settings.rb')
 
 rails_env = ENV['RACK_ENV'] || 'production'
 
