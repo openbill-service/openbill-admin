@@ -26,7 +26,7 @@ RUN set -x && \
   apt-get -y install ruby-2.2.5 libpq-dev oracle-java8-installer nodejs
 
 WORKDIR /opt/openbill
-ADD openbill-admin/ /opt/openbill/openbill-admin
+ADD . /opt/openbill/openbill-admin
 RUN set -x && \
   cd /opt/openbill/openbill-admin && \
   echo "gem: --no-document" | tee /root/.gemrc && \
