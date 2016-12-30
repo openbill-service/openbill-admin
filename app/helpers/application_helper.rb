@@ -23,6 +23,7 @@ module ApplicationHelper
   end
 
   def humanized_meta(meta)
+    return unless meta.present?
     content_tag :code, meta
   end
 

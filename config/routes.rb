@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :accounts, except: [:destroy] do
     collection do
+      get :table
       get :at_date
     end
     resources :transactions, controller: 'account_transactions', only: [:index, :new, :create, :show]

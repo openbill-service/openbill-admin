@@ -1,0 +1,32 @@
+table.table.table-condensed.table-striped
+  thead.thead-default
+    tr
+      th
+        = order_by filter, :key
+        = ', '
+        = order_by filter, :updated_at
+        = ', '
+        = order_by filter, :transactions_count
+      - months.each do |month|
+        th
+          = l month, format: :short
+      th
+        = order_by filter, :amount_cents
+        br
+        = l Date.today, format: :long
+  tbody
+    - accounts.each do |account|
+      tr
+        td
+          = link_to account.details, account_path(account.id)
+          br
+          small
+            = l account.updated_at, format: :short
+            = " [#{account.key}], "
+            i.text-muted=" #{account.transactions_count} транз."
+            = humanized_meta account.meta
+        - months.each do |month|
+          td= humanized_amount amount_by_month(account, month)
+        td= humanized_amount account.amount
+
+hr

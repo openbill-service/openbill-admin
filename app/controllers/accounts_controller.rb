@@ -4,6 +4,18 @@ class AccountsController < ApplicationController
   helper_method :filter, :filter_params, :current_category
 
   def index
+    months = [Date.today.end_of_month]
+    5.times do
+      months.unshift (months.first.beginning_of_month - 1.day).end_of_month
+    end
+    render locals: {
+      months: months,
+      accounts: accounts,
+      categories: categories
+    }
+  end
+
+  def table
     render locals: {
       accounts: accounts,
       categories: categories
