@@ -1,1 +1,1 @@
-rails s -p 3007
+bundle exec puma -t 1:2 -p 3006
