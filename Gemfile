@@ -55,6 +55,8 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 
 gem 'rack_password'
 
+gem 'foreman'
+
 gem 'bugsnag'
 gem 'virtus'
 gem 'hashie'
