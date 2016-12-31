@@ -33,7 +33,6 @@ on_worker_boot do
     config.database = YAML.load(ERB.new(IO.read('./config/database.yml')).result)[Rails.env].symbolize_keys.merge(reconnect: true)
   end
   Openbill.service.db.extension :connection_validator
-  #require "active_record"
   #ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
   #ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
 end
