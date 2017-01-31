@@ -6,16 +6,6 @@ GIT
       activesupport (>= 2.3.2)
 
 GIT
-  remote: git://github.com/openbill-service/openbill-ruby.git
-  revision: 135351a71f0018d3a064540683a473b7e7ef5add
-  specs:
-    openbill-ruby (0.1.19)
-      money
-      pg
-      sequel
-      virtus
-
-GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: 6f537ed98e0fb7a50977a101d1da92dc0696031e
   specs:
@@ -40,6 +30,15 @@ GIT
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
       rails (>= 3.1)
+
+PATH
+  remote: ../openbill-ruby
+  specs:
+    openbill-ruby (0.1.19)
+      money
+      pg
+      sequel
+      virtus
 
 GEM
   remote: https://rubygems.org/
@@ -336,6 +335,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    wicked_pdf (1.1.0)
+    wkhtmltopdf-binary (0.12.3.1)
     yard (0.8.7.6)
 
 PLATFORMS
@@ -395,6 +396,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   virtus
   web-console (~> 2.0)
+  wicked_pdf
+  wkhtmltopdf-binary
 
 BUNDLED WITH
    1.12.5

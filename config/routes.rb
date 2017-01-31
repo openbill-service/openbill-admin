@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
   resources :categories
+  resources :invoices
   resources :policies
   resources :logs, only: [:index]
   resources :goods

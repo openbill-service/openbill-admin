@@ -1,0 +1,29 @@
+h1
+  | Invoices
+  .pull-xs-right= link_to 'New invoice', new_invoice_path, class: 'btn btn-sm btn-success'
+
+table.table.table-condensed.table-striped.m-t-3
+  thead.thead-default
+    tr
+      th UUID
+      th Date
+      th Number
+      th Amount
+      th Created at
+      th
+        .pull-xs-right= t :actions
+  tbody
+    - invoices.each do |invoice|
+      tr
+        td
+          = link_to invoice.id, edit_invoice_path(invoice.id)
+        td= humanized_date invoice.date
+        td= invoice.number
+        td= humanized_amount invoice.amount
+        td= humanized_date invoice.created_at
+
+        td.pull-xs-right
+          .btn-group
+            = destroy_button invoice_path(invoice.id)
+            = link_to t('show.html'), invoice_path(invoice.id, format: :html), target: '_blank', class: 'btn btn-sm btn-info'
+            = link_to t('show.pdf'), invoice_path(invoice.id, format: :pdf), target: '_blank', class: 'btn btn-sm btn-info'

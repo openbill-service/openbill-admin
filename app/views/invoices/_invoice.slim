@@ -1,0 +1,24 @@
+.row
+  .col-md-1
+    b Id
+  .col-md-6= invoice.id
+.row
+  .col-md-1
+    b Number
+  .col-md-6= invoice.number
+.row
+  .col-md-1
+    b Title
+  .col-md-6= invoice.title
+.row
+  .col-md-1
+    b Destination account id
+  .col-md-6= link_to invoice.destination_account_id, account_path(invoice.destination_account_id)
+.row
+  .col-md-1
+    b Date
+  .col-md-6= humanized_date invoice.date
+.row
+  .col-md-1
+    b Amount
+  .col-md-6= humanized_amount invoice.amount
