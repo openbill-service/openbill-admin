@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
   end
 
   def suggestions
-    accounts = OpenbillAccount.ordered.where("key like ?", "#{params[:q]}%")
+    accounts = OpenbillAccount.order(:key).where("key like ?", "#{params[:q]}%")
     render json: {
       total_count: accounts.count,
       items: accounts.map { |c| { id: c.id, text: "#{c.name} (#{c.details})" }}
