@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+semver inc patch
+git add .semver
+version=`semver`
+git commit -m "bump ${version}"
+git push
+bundle exec cap production deploy
