@@ -33,6 +33,7 @@ module OpenbillAdmin
       "#{Rails.root}/app/errors",
       "#{Rails.root}/app/forms",
       "#{Rails.root}/app/commands",
+      "#{Rails.root}/app/services",
       "#{Rails.root}/app/queries",
       "#{Rails.root}/app/utils",
       "#{Rails.root}/app/workers"
