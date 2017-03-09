@@ -1,13 +1,17 @@
-= search_form_for ransack, url: accounts_path, method: 'get' do |f|
-  /-# = f.hidden_field :order
-  .row
-    .col-md-6
-      - if OpenbillAccount.attribute_names.include? 'key'
-        = f.input :key_cont, required: false, as: :search
-      = f.input :details_cont, required: false, as: :search
-    .col-md-6
-      = f.input :amount_cents_lteq, required: false
-      = f.input :amount_cents_gteq, required: false
-  = f.button :submit
-  = link_to 'Reset', accounts_path, class: 'btn btn-default'
-br
+.mb-3
+  = link_to 'Показать фильтр', '#filter', class: 'btn btn-sm btn-outline-primary', data: { toggle: :collapse }, 'aria-expanded': false, 'aria-controls': 'collapseExample'
+
+  #filter.m-b-2.collapse.show class=(params[:q].blank? ? '' : 'show')
+    = search_form_for ransack, url: accounts_path, method: 'get' do |f|
+      /-# = f.hidden_field :order
+      .row
+        .col-md-6
+          = f.input :key_cont, required: false, as: :search
+          = f.input :details_cont, required: false, as: :search
+        .col-md-3
+          = f.input :amount_cents_lteq, as: :numeric, required: false
+        .col-md-3
+          = f.input :amount_cents_gteq, as: :numeric, required: false
+      = f.button :submit, 'Найти', class: 'btn btn-primary'
+      - if params[:q].present?
+        = link_to 'Сбросить фильтр', accounts_path, class: 'btn btn-default'

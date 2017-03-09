@@ -1,6 +1,13 @@
 module AccountsHelper
-  def select_account_field(form, key, include_blank: false)
-    form.input key, as: :select, collection: accounts_selected_collection(form.object.send(key)), include_blank: include_blank, input_html: { data: { accounts: true }}
+  def select_account_field(form, key, include_blank: false, required: false)
+    form.input(
+      key,
+      as: :select,
+      collection: accounts_selected_collection(form.object.send(key)),
+      include_blank: include_blank,
+      input_html: { data: { accounts: true }},
+      required: false
+    )
   end
 
   def accounts_selected_collection(account_id)

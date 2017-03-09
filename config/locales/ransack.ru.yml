@@ -1,0 +1,27 @@
+ru:
+  ransack:
+    asc: Вверх
+    desc: Вниз
+    predicates:
+      cont: contains
+      not_cont: not contains
+      start: starts with
+      end: ends with
+      gt: greater than
+      lt: less than
+    models:
+      person: Passanger
+    attributes:
+      q:
+        key: Имя
+        key_cont: Имя
+
+      openbill_account:
+        key: Имя
+        key_cont: Имя
+
+      person:
+        name: Full Name
+      article:
+        title: Article Title
+        body: Main Content

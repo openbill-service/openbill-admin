@@ -2,11 +2,24 @@ class TransactionsController < ApplicationController
   helper_method :filter
 
   def index
-    render locals: {
-      transactions: transactions.includes(:to_account, :from_account).page(page).per(per_page),
-      transactions_count: transactions.count,
-      ransack: ransack
-    }
+    respond_to do |format|
+      format.html {
+        render locals: {
+          transactions: transactions.page(page).per(per_page),
+          transactions_count: transactions.count,
+          ransack: ransack
+        }
+      }
+
+      format.csv {
+        content = TransactionsSpreadsheet.new(transactions).to_csv
+        send_data(
+            content,
+            disposition: 'attachment; filename=transactions.csv',
+            type: 'text/csv'
+        )
+      }
+    end
   end
 
   def pending_webhooks
@@ -69,15 +82,6 @@ class TransactionsController < ApplicationController
     redirect_to transactions_path, flash: { error: err.message }
   end
 
-  def export
-    content = TransactionsSpreadsheet.new(transactions).to_csv
-    send_data(
-        content,
-        disposition: 'attachment; filename=transactions.csv',
-        type: 'text/csv'
-    )
-  end
-
   private
 
   def transaction
@@ -103,7 +107,7 @@ class TransactionsController < ApplicationController
   end
 
   def transactions
-    ransack.result.order('created_at asc')
+    ransack.result.includes(:to_account, :from_account).order('created_at asc')
   end
 
   def pending_webhooks_transactions

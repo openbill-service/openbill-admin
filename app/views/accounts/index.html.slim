@@ -1,8 +1,7 @@
-h1
-  | Accounts
-  .pull-xs-right.btn-group.m-t-1
-    = link_to 'New account', new_account_path, class: 'btn btn-sm btn-success'
-    = link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-info'
+.pull-xs-right.m-t-1
+  = link_to t(:new_account, scope: :buttons), new_account_path, class: 'btn btn-sm btn-success'
+  | &nbsp;
+  = link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-info'
 
 = render 'categories', categories: categories, current_category: current_category
 

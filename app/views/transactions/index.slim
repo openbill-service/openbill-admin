@@ -1,9 +1,11 @@
 h1
   | Transactions (#{transactions_count})
-  .btn-group.pull-xs-right.m-t-1
+  .pull-xs-right.m-t-1
     = link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
+    | &nbsp;
     = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'btn btn-sm btn-info'
-    = link_to 'Export to CSV', url_for(format: :csv), class: 'btn btn-sm btn-success', target: '_blank'
+    | &nbsp;
+    = link_to 'Export to CSV', transactions_path(params.merge format: :csv), class: 'btn btn-sm btn-success', target: '_blank'
 
 = render 'filter', ransack: ransack
 = render 'pagination', scope: transactions

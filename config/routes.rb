@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   resources :transactions do
     collection do
       get :pending_webhooks
-      get :export
     end
     member do
       post :notify

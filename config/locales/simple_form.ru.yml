@@ -1,0 +1,45 @@
+ru:
+  simple_form:
+    "yes": 'да'
+    "no": 'нет'
+    required:
+      text: 'обязательное поле'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    include_blanks:
+      #hotel:
+        #hotel_kind_id: 'Любой'
+
+    error_notification:
+      default_message: "Обнаружены ошибки,<br /> пожалуйста, взгляните на&nbsp;них"
+      blank: "Не может быть пустым"
+    confirm: Вы уверены?
+    button:
+      disable_with:
+        sending: Отправляем...
+        saving: Сохраняем...
+        waiting: Подождите...
+        adding: Добавляем...
+    labels:
+      defaults:
+        key_cont: Наименование содержит
+      q:
+        key_cont: aaa
+      account:
+        key_cont: 123
+        mount: Баланс
+    hints:
+      defaults:
+        row_order_position: Позиция, начиная с 0
+    placeholders:
+      defaults:
+        title: Название
+    include_blanks:
+      user_goods_search_form:
+        category_id_eq: 'Любая категория'
+      q:
+        category_id_eq: 'Любая категория'
+
+

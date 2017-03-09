@@ -1,0 +1,18 @@
+ru:
+  helpers:
+    submit:
+      account:
+        create: 'Создать'
+        update: 'Сохранить'
+    goods_count:
+      zero: 'Нет торговых предложений'
+      one: '%{count} предложение'
+      few: '%{count} предложения'
+      many: '%{count} предложений'
+      other: '%{count} предложений'
+    companies_count:
+      zero: 'Нет компаний'
+      one: '%{count} компания'
+      few: '%{count} компании'
+      many: '%{count} компаний'
+      other: '%{count} компаний'

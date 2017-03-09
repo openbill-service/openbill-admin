@@ -1,0 +1,11 @@
+ru:
+  attributes:
+    model_name:
+      model_field1: field name1
+      model_field2: field name2
+  activerecord:
+    attributes:
+      namespace/article:
+        title: AR Namespaced Title
+      namespace_article:
+        title: Old Ransack Namespaced Title
