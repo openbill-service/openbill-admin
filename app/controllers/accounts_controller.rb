@@ -101,7 +101,7 @@ class AccountsController < ApplicationController
   end
 
   def accounts
-    ransack.result.ordered
+    ransack.result.ordered.page(page).per(per_page)
   end
 
   def account
