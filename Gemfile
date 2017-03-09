@@ -18,6 +18,7 @@ end
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
+  gem 'rails-assets-select2', source: 'https://rails-assets.org'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
