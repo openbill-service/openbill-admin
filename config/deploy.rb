@@ -5,7 +5,7 @@ set :application, 'billing.kiiiosk.ru'
 set :repo_url, 'https://github.com/openbill-service/openbill-admin'
 set :deploy_to, '/home/wwwkiiiosk/billing.kiiiosk.ru'
 
-set :rbenv_type, :user
+# set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -23,8 +23,8 @@ set :rbenv_ruby, File.read('.ruby-version').strip
 # set :pty, true
 
 append :linked_files, "config/database.yml", "config/secrets.yml"
-
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
@@ -36,7 +36,7 @@ namespace :deploy do
       execute :rake, 'bugsnag:deploy BUGSNAG_API_KEY=ec71d59dddaf657faa0073c322a8eff4'
     end
   end
-  after :finishing, 'notify_bugsnag'
+  # after :finishing, 'notify_bugsnag'
 end
 
 

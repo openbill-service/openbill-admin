@@ -1,5 +1,4 @@
 # Change to match your CPU core count
-require './config/settings'
 workers 2
 
 # Min and Max threads per worker
@@ -21,9 +20,11 @@ environment rails_env
 # Set master PID and state locations
 #pidfile "#{shared_dir}/pids/puma.pid"
 #state_path "#{shared_dir}/pids/puma.state"
+
+plugin :tmp_restart
+
 activate_control_app
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 end
-
