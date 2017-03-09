@@ -2,11 +2,11 @@ module AccountTransactionsHelper
   def amount_by_month(account, month)
     plus = Openbill.service.transactions
       .where(to_account_id: account.id)
-      .where('created_at >= ? and created_at <= ?', month.beginning_of_month, month.end_of_month)
+      .where('date >= ? and date <= ?', month.beginning_of_month, month.end_of_month)
       .sum(:amount_cents) || 0
     minus = Openbill.service.transactions
       .where(from_account_id: account.id)
-      .where('created_at >= ? and created_at <= ?', month.beginning_of_month, month.end_of_month)
+      .where('date >= ? and date <= ?', month.beginning_of_month, month.end_of_month)
       .sum(:amount_cents) || 0
 
 

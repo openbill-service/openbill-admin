@@ -4,6 +4,7 @@ h1
     = link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
     - if Features.has_webhooks?
       = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'btn btn-sm btn-info'
+    = link_to 'Export to CSV', export_transactions_path(params), class: 'btn btn-sm btn-success', target: '_blank'
 
 = render 'filter'
 = render 'pagination', scope: transactions

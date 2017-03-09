@@ -78,6 +78,15 @@ class TransactionsController < ApplicationController
     redirect_to transactions_path, flash: { error: err.message }
   end
 
+  def export
+    content = TransactionsSpreadsheet.new(transactions).to_csv
+    send_data(
+        content,
+        disposition: 'attachment; filename=transactions.csv',
+        type: 'text/csv'
+    )
+  end
+
   private
 
   def transaction_form
@@ -110,7 +119,11 @@ class TransactionsController < ApplicationController
   end
 
   def transactions
-    filter.apply(Openbill.service.transactions.reverse_order(:created_at))
+    scope = Openbill.service.transactions.reverse_order(:created_at)
+    if params.key?(:custom_filter) && params[:custom_filter].key?(:account_id)
+      scope = scope.where('from_account_id = ? OR to_account_id = ?', params[:custom_filter][:account_id], params[:custom_filter][:account_id])
+    end
+    filter.apply(scope)
   end
 
   def pending_webhooks_transactions
