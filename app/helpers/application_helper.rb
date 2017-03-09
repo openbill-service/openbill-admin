@@ -4,7 +4,9 @@ module ApplicationHelper
   end
 
   def webhook_presents?
-    OpenbillWebhookLog.table_exists?
+    # TODO
+    # OpenbillWebhookLog.table_exists?
+    false
   end
 
   def humanized_date(date)
