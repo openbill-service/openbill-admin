@@ -4,9 +4,9 @@
   = f.input :reverse_transaction_id, as: :hidden
   .row
     .col-md-6
-      = f.input :from_account_id, collection: accounts_collection, include_blank: false
+      = select_account_field f, :from_account_id
     .col-md-6
-      = f.input :to_account_id, collection: accounts_collection, include_blank: false
+      = select_account_field f, :to_account_id
   .row
     .col-md-6
       = f.input :amount_cents

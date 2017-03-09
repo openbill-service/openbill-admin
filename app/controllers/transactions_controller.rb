@@ -18,48 +18,38 @@ class TransactionsController < ApplicationController
 
   def new
     if reverse_transaction.present?
-      transaction_form.amount_cents = reverse_transaction.amount.to_f
-      transaction_form.amount_currency = reverse_transaction.amount_currency
-      transaction_form.from_account_id = reverse_transaction.to_account_id
-      transaction_form.to_account_id = reverse_transaction.from_account_id
-      transaction_form.key = reverse_transaction.key + '-reverse'
-      transaction_form.date = reverse_transaction.date
-      transaction_form.details = "Reverse of #{reverse_transaction.details}"
+      transaction.amount_cents = reverse_transaction.amount.to_f
+      transaction.amount_currency = reverse_transaction.amount_currency
+      transaction.from_account_id = reverse_transaction.to_account_id
+      transaction.to_account_id = reverse_transaction.from_account_id
+      transaction.key = reverse_transaction.key + '-reverse'
+      transaction.date = reverse_transaction.date
+      transaction.details = "Reverse of #{reverse_transaction.details}"
     end
-    render locals: { transaction: transaction_form }
+    render locals: { transaction: OpenbillTransaction.new(permitted_params) }
   end
 
   def edit
-    transaction_form = TransactionForm.new transaction
-    transaction_form.amount_cents = transaction.amount.to_f
-    render :new, locals: { transaction: transaction_form }
+    transaction.update permitted_params
+    render :new, locals: { transaction: transaction }
   end
 
   def create
-    if transaction_form.valid?
-      OpenbillTransaction.create! transaction_form.to_hash
+    transaction = OpenbillTransaction.new permitted_params
+    if transaction.save
       redirect_to transactions_path
     else
-      render :new, locals: { transaction: transaction_form }
+      render :new, locals: { transaction: transaction }
     end
-
-  rescue => err
-    flash.now[:error] = err.message
-    render :new, locals: { transaction: transaction_form }
   end
 
   def update
-    transaction_form = TransactionForm.new({ **permitted_params.symbolize_keys, id: transaction.id, date: date })
-    if transaction_form.valid?
-      transaction.update transaction_form.to_hash
+    transaction.update permitted_params
+    if transaction.valid?
       redirect_to transactions_path
     else
-      render :new, locals: { transaction: transaction_form }
+      render :new, locals: { transaction: transaction }
     end
-
-  rescue => err
-    flash.now[:error] = err.message
-    render :new, locals: { transaction: transaction_form }
   end
 
   def notify
@@ -73,7 +63,7 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    transaction.delete
+    transaction.destroy!
     redirect_to transactions_path
   rescue => err
     redirect_to transactions_path, flash: { error: err.message }
@@ -90,11 +80,8 @@ class TransactionsController < ApplicationController
 
   private
 
-  def transaction_form
-    @_transaction_form ||= TransactionForm.new({
-      **permitted_params.symbolize_keys,
-      date: date
-    })
+  def transaction
+    @transaction ||= Transaction.find params[:id]
   end
 
   def date

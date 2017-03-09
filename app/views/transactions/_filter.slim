@@ -2,15 +2,15 @@
   -# = f.hidden_field :order
   .row
     .col-md-12
-      = f.input :from_account_id_or_to_account_id_cont, required: false
+      = select_account_field f, :from_account_id_or_to_account_id_cont, include_blank: '*'
   .row
     .col-md-6
-      = f.input :from_account_id_eq, required: false
+      = select_account_field f, :from_account_id_eq, include_blank: '*'
       = f.input :date_gteq, as: :date_picker, readonly: true, required: false
       = f.input :key_cont, required: false
       = f.input :details_cont, required: false
     .col-md-6
-      = f.input :to_account_id_eq, required: false
+      = select_account_field f, :to_account_id_eq, include_blank: '*'
       = f.input :date_lteq, as: :date_picker, readonly: true, requierd: false
       = f.input :amount_cents_lteq, required: false
       = f.input :amount_cents_gteq, required: false
