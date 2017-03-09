@@ -56,7 +56,7 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 
 gem 'rack_password'
 
-gem 'pg_search'
+# gem 'pg_search'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'foreman'
 
