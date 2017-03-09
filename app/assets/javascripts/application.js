@@ -20,6 +20,7 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pickers
+//= require select2.full
 //= require_tree .
 
 NProgress.configure({
@@ -27,3 +28,7 @@ NProgress.configure({
   ease: 'ease',
   speed: 500
 });
+$(function() {
+  $("select[id$=from_account_id], select[id$=to_account_id]").select2();
+});
+
