@@ -1,12 +1,4 @@
 module AccountsHelper
-  def accounts_index_type_choicer
-    if action_name == 'index'
-      link_to 'Таблица', table_accounts_url
-    else
-      link_to 'Список', accounts_url
-    end
-  end
-
   def opposite_account_hint(account_id)
     return if account_id.blank? || account_id.to_s == 'total'
 

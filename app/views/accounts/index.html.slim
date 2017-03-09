@@ -9,8 +9,6 @@ h1
 = render 'filter', filter: filter, category: current_category
 = render 'pagination', scope: accounts
 
-= accounts_index_type_choicer
-
 - if action_name == 'index'
   = render 'list', filter: filter, accounts: accounts, months: months
 - elsif index_type.graph?

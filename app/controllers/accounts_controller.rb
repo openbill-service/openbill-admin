@@ -15,13 +15,6 @@ class AccountsController < ApplicationController
     }
   end
 
-  def table
-    render locals: {
-      accounts: accounts,
-      categories: categories
-    }
-  end
-
   def at_date
     render locals: {
       accounts: accounts,
