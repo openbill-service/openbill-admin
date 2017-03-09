@@ -3,6 +3,10 @@ module ApplicationHelper
     "Openbill Admin #{AppVersion}"
   end
 
+  def webhook_presents?
+    OpenbillWebhookLog.table_exists?
+  end
+
   def humanized_date(date)
     return '-' unless date.present?
     content_tag :div, class: 'text-nowrap' do
@@ -28,7 +32,7 @@ module ApplicationHelper
   end
 
   def categories_collection
-    Openbill.service.categories.all.map do |category|
+    OpenbillCategory.all.map do |category|
       [category.name, category.id]
     end
   end
@@ -36,18 +40,6 @@ module ApplicationHelper
   def currencies_collection
     [:rub, :usd, :eur].map do |currency|
       [currency.upcase, currency.upcase]
-    end
-  end
-
-  def goods_collection
-    Openbill.service.goods.where(group_id: nil).map do |good|
-      [good.title, good.id]
-    end
-  end
-
-  def good_units_collection
-    Openbill.service.good_units.map do |good|
-      [good.unit, good.unit]
     end
   end
 end

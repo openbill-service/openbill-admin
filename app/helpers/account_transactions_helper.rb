@@ -1,10 +1,10 @@
 module AccountTransactionsHelper
   def amount_by_month(account, month)
-    plus = Openbill.service.transactions
+    plus = OpenbillTransaction
       .where(to_account_id: account.id)
       .where('date >= ? and date <= ?', month.beginning_of_month, month.end_of_month)
       .sum(:amount_cents) || 0
-    minus = Openbill.service.transactions
+    minus = OpenbillTransaction
       .where(from_account_id: account.id)
       .where('date >= ? and date <= ?', month.beginning_of_month, month.end_of_month)
       .sum(:amount_cents) || 0
@@ -15,9 +15,9 @@ module AccountTransactionsHelper
 
   def accounts_count(cat = nil)
     if cat.present?
-      Openbill.service.accounts.where(category_id: cat.id).count
+      OpenbillAccount.where(category_id: cat.id).count
     else
-      Openbill.service.accounts.count
+      OpenbillAccount.count
     end
   end
 end

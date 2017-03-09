@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :accounts, except: [:destroy] do
     collection do
+      get :suggestions
       get :at_date
     end
     resources :transactions, controller: 'account_transactions', only: [:index, :new, :create, :show]
@@ -26,6 +27,4 @@ Rails.application.routes.draw do
   resources :invoices
   resources :policies
   resources :logs, only: [:index]
-  resources :goods
-  resources :goods_availabilities
 end

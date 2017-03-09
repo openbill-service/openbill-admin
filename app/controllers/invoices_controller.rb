@@ -63,7 +63,7 @@ class InvoicesController < ApplicationController
   private
 
   def invoice
-    invoices.first! id: params[:id]
+    OpenbillInvoice.find params[:id]
   end
 
   def permitted_params
@@ -71,6 +71,6 @@ class InvoicesController < ApplicationController
   end
 
   def invoices
-    @_invoices ||= Openbill.service.invoices
+    @_invoices ||= OpenbillInvoice.all
   end
 end

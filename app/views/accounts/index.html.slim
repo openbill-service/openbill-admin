@@ -4,15 +4,15 @@ h1
     = link_to 'New account', new_account_path, class: 'btn btn-sm btn-success'
     = link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-info'
 
-= render 'categories', categories: categories
+= render 'categories', categories: categories, current_category: current_category
 
-= render 'filter', filter: filter, category: current_category
+= render 'filter', ransack: ransack, category: current_category
 = render 'pagination', scope: accounts
 
 - if action_name == 'index'
-  = render 'list', filter: filter, accounts: accounts, months: months
+  = render 'list', ransack: ransack, accounts: accounts, months: months
 - elsif index_type.graph?
-  = render 'table', filter: filter, accounts: accounts
+  = render 'table', ransack: ransack, accounts: accounts
 - else
   p Unknown index type #{index_type}
 

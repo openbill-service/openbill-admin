@@ -1,7 +1,7 @@
 ul.nav.nav-pills
   li.nav-item
-    = link_to "All (#{accounts_count})", accounts_path(philtre: { category_id: nil }), class: current_category.id.blank? ? 'nav-link active' : 'nav-link'
+    = link_to "All (#{accounts_count})", accounts_path, class: current_category.blank? ? 'nav-link active' : 'nav-link'
   - categories.each do |cat|
     li.nav-item
-      = link_to "#{cat.name} (#{accounts_count(cat)})", accounts_path(philtre: { category_id: cat.id }), class: current_category.id == cat.id ? 'nav-link active' : 'nav-link'
+      = link_to "#{cat.name} (#{accounts_count(cat)})", accounts_path(q: { category_id_eq: cat.id }), class: current_category.try(:id) == cat.id ? 'nav-link active' : 'nav-link'
 br

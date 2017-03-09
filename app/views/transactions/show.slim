@@ -24,12 +24,10 @@ p
         dd.col-sm-9= transaction.key
         dt.col-sm-3 From account
         dd.col-sm-9
-          = link_to account_path(transaction.from_account_id) do
-             = Openbill.service.get_account transaction.from_account_id
+          = link_to transaction.from_account, account_path(transaction.from_account_id)
         dt.col-sm-3 To account
         dd.col-sm-9
-          = link_to account_path(transaction.to_account_id) do
-            = Openbill.service.get_account transaction.to_account_id
+          = link_to transaction.to_account, account_path(transaction.to_account_id)
 
   .col-md-6
     div style="padding: 1.5em"

@@ -4,50 +4,48 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    render locals: { category: CategoryForm.new }
+    render locals: { category: OpenbillCategory.new }
   end
 
   def show
-    redirect_to accounts_path(philtre: { category_id: params[:id] })
+    redirect_to accounts_path(q: { category_id_eq: params[:id] })
   end
 
   def edit
-    category_form = CategoryForm.new category
-    render :edit, locals: { category: category_form }
+    render :edit, locals: { category: category }
   end
 
   def create
-    category_form = CategoryForm.new permitted_params
+    category = OpenbillCategory.new permitted_params
 
-    if category_form.valid?
-      categories.insert category_form.to_hash
+    if category.valid?
+      category.save!
       redirect_to categories_path
     else
-      render :new, locals: { category: category_form }
+      render :new, locals: { category: category }
     end
 
   rescue => err
     flash.now[:error] = err.message
-    render :new, locals: { category: category_form }
+    render :new, locals: { category: category }
   end
 
   def update
-    category_form = CategoryForm.new({ **permitted_params.symbolize_keys, id: category.id })
+    category.update permitted_params
 
-    if category_form.valid?
-      category.update category_form.to_hash
+    if category.valid?
       redirect_to categories_path
     else
-      render :edit, locals: { category: category_form }
+      render :edit, locals: { category: category }
     end
 
   rescue => err
     flash.now[:error] = err.message
-    render :edit, locals: { category: category_form }
+    render :edit, locals: { category: category }
   end
 
   def destroy
-    category.delete
+    category.destroy!
     redirect_to :back
   rescue => err
     redirect_to :back, flash: { error: err.message }
@@ -56,7 +54,7 @@ class CategoriesController < ApplicationController
   private
 
   def category
-    categories.first! id: params[:id]
+    OpenbillCategory.find params[:id]
   end
 
   def permitted_params
@@ -64,6 +62,6 @@ class CategoriesController < ApplicationController
   end
 
   def categories
-    @_categories ||= Openbill.service.categories
+    @_categories ||= OpenbillCategory.all
   end
 end

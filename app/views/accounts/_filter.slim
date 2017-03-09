@@ -1,12 +1,13 @@
-= simple_form_for filter.for_form, url: accounts_path, method: 'get' do |f|
-  = f.hidden_field :order
+= search_form_for ransack, url: accounts_path, method: 'get' do |f|
+  /-# = f.hidden_field :order
   .row
     .col-md-6
-      = f.input :key_like, required: false
-      = f.input :details_like, required: false
+      - if OpenbillAccount.attribute_names.include? 'key'
+        = f.input :key_cont, required: false, as: :search
+      = f.input :details_cont, required: false, as: :search
     .col-md-6
-      = f.input :amount_cents_lte, required: false
-      = f.input :amount_cents_gte, required: false
+      = f.input :amount_cents_lteq, required: false
+      = f.input :amount_cents_gteq, required: false
   = f.button :submit
   = link_to 'Reset', accounts_path, class: 'btn btn-default'
 br

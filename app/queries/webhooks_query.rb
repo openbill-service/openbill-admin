@@ -32,6 +32,6 @@ class WebhooksQuery
   end
 
   def basic_scope
-    Openbill.service.webhook_logs
+    OpenbillWebhookLog.all
   end
 end

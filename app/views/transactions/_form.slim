@@ -4,22 +4,14 @@
   = f.input :reverse_transaction_id, as: :hidden
   .row
     .col-md-6
-      = f.input :from_account_id, collection: accounts_collection, include_blank: false
+      = select_account_field f, :from_account_id
     .col-md-6
-      = f.input :to_account_id, collection: accounts_collection, include_blank: false
+      = select_account_field f, :to_account_id
   .row
     .col-md-6
       = f.input :amount_cents
     .col-md-6
       = f.input :amount_currency, collection: currencies_collection, include_blank: false
-  - if Features.has_goods?
-    .row
-      .col-md-6
-        = f.input :good_id, collection: goods_collection
-      .col-md-6
-        = f.input :good_value
-      .col-md-6
-        = f.input :good_unit, collection: good_units_collection, include_blank: false
   .row
     .col-md-3
       = f.input :date, as: :date_picker, readonly: true

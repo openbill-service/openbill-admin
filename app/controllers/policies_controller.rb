@@ -1,25 +1,23 @@
 class PoliciesController < ApplicationController
   def index
-    render locals: { policies: policies.eager(:from_account,
+    render locals: { policies: policies.includes(:from_account,
                                               :to_account,
                                               :from_category,
                                               :to_category).all }
   end
 
   def new
-    render locals: { policy: PolicyForm.new }
+    render locals: { policy: OpenbillPolicy.new }
   end
 
   def edit
-    policy_form = PolicyForm.new policy
-    render :edit, locals: { policy: policy_form }
+    render :edit, locals: { policy: policy }
   end
 
   def create
-    policy_form = PolicyForm.new permitted_params
+    policy = OpenbillPolicy.new permitted_params
 
-    if policy_form.valid?
-      policies.insert policy_form.to_hash
+    if policy.save
       redirect_to policies_path
     else
       render :new, locals: { policy: policy_form }
@@ -31,22 +29,21 @@ class PoliciesController < ApplicationController
   end
 
   def update
-    policy_form = PolicyForm.new({ **permitted_params.symbolize_keys, id: policy.id })
+    policy.update permitted_params
 
-    if policy_form.valid?
-      policy.update policy_form.to_hash
+    if policy.valid?
       redirect_to policies_path
     else
-      render :edit, locals: { policy: policy_form }
+      render :edit, locals: { policy: policy }
     end
 
   rescue => err
     flash.now[:error] = err.message
-    render :edit, locals: { policy: policy_form }
+    render :edit, locals: { policy: policy }
   end
 
   def destroy
-    policy.delete
+    policy.destroy!
     redirect_to :back
   rescue => err
     redirect_to :back, flash: { error: err.message }
@@ -55,7 +52,7 @@ class PoliciesController < ApplicationController
   private
 
   def policy
-    policies.first! id: params[:id]
+    OpenbillPolicy.find params[:id]
   end
 
   def permitted_params
@@ -64,6 +61,6 @@ class PoliciesController < ApplicationController
   end
 
   def policies
-    @_policies ||= Openbill.service.policies
+    @_policies ||= OpenbillPolicy.all
   end
 end

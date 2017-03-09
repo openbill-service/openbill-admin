@@ -21,7 +21,7 @@ class AccountTransactionsController < ApplicationController
     account_transaction_form = account_transaction_form(permitted_params)
 
     if account_transaction_form.valid?
-      Openbill.service.transactions.insert account_transaction_form.to_hash
+      OpenbillTransaction.create! account_transaction_form.to_hash
       redirect_to account_path(account.id)
     else
       render :new, locals: {
@@ -48,7 +48,7 @@ class AccountTransactionsController < ApplicationController
     case direction
     when AccountTransactionForm::INCOME_DIRECTION
       # Ищем все аккаунты с которых можно перечислять на данный
-      policies = Openbill.service.policies.where('(to_account_id = ? or to_account_id is null) and (to_category_id = ? or to_category_id is null)', account.id, account.category_id);
+      policies = OpenbillPolicy.where('(to_account_id = ? or to_account_id is null) and (to_category_id = ? or to_category_id is null)', account.id, account.category_id);
       where = policies.map do |policy|
         account_id = policy.from_account_id
         category_id = policy.from_category_id
@@ -60,11 +60,11 @@ class AccountTransactionsController < ApplicationController
       end.join(' or ')
 
       return [] if where.blank?
-      Openbill.service.accounts.where(where).all.map do |acc|
+      OpenbillAccount.where(where).all.map do |acc|
         account_select_item acc
       end
     when AccountTransactionForm::OUTCOME_DIRECTION
-      policies = Openbill.service.policies.where('(from_account_id = ? or from_account_id is null) and (from_category_id = ? or from_category_id is null)', account.id, account.category_id);
+      policies = OpenbillPolicy.where('(from_account_id = ? or from_account_id is null) and (from_category_id = ? or from_category_id is null)', account.id, account.category_id);
       where = policies.map do |policy|
         account_id = policy.to_account_id
         category_id = policy.to_category_id
@@ -76,7 +76,7 @@ class AccountTransactionsController < ApplicationController
       end.join(' or ')
 
       return [] if where.blank?
-      Openbill.service.accounts.where(where).all.map do |acc|
+      OpenbillAccount.where(where).all.map do |acc|
         account_select_item acc
       end
     else
@@ -101,7 +101,7 @@ class AccountTransactionsController < ApplicationController
 
   def transactions
     res = filter
-      .apply( Openbill.service.account_transactions(account).reverse_order(:created_at) )
+      .apply( account.all_transactions.reverse_order(:created_at) )
 
     res
       .paginate(page, per_page)
@@ -115,12 +115,11 @@ class AccountTransactionsController < ApplicationController
   def permitted_params
     params.require(:account_transaction_form).permit(
       :opposite_account_id,
-      :good_id, :good_value, :good_unit,
       :amount_cents, :amount_currency, :key, :details, :meta, :date)
   end
 
   def account
-    @_account ||= Openbill.service.get_account_by_id params[:account_id]
+    @_account ||= OpenbillAccount.find params[:account_id]
   end
 
   def filter
