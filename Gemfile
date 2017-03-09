@@ -19,6 +19,10 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
   gem 'rails-assets-select2', source: 'https://rails-assets.org'
+  gem 'rails-assets-better-dom'
+  gem 'rails-assets-better-i18n-plugin'
+  gem 'rails-assets-better-popover-plugin'
+  gem 'rails-assets-better-form-validation'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -41,13 +45,10 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
-gem 'bootstrap-kaminari-views', git: 'https://github.com/klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
-gem 'sequel'
+gem 'bootstrap-kaminari-views', github: 'klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
 gem 'pg'
 gem 'money'
 gem 'money-rails'
-gem 'openbill-ruby', github: 'openbill-service/openbill-ruby'
-# gem 'openbill-ruby', path: '../openbill-ruby'
 gem 'slim-rails'
 gem 'nprogress-rails'
 gem 'semver2'
@@ -55,22 +56,21 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 
 gem 'rack_password'
 
+gem 'pg_search'
+gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'foreman'
 
 gem 'bugsnag'
 gem 'virtus'
 gem 'hashie'
 
-gem 'simple-navigation', git: 'git://github.com/andi/simple-navigation.git'
+gem 'simple-navigation', github: 'andi/simple-navigation'
 gem 'simple-navigation-bootstrap'
 
 gem 'font-awesome-rails'
-gem 'simple_form', git: 'git://github.com/plataformatec/simple_form.git'
+gem 'simple_form', github: 'plataformatec/simple_form'
 
 gem 'active_link_to'
-
-gem 'philtre'
-gem 'philtre-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

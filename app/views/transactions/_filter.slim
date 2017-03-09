@@ -1,15 +1,18 @@
-= simple_form_for filter.for_form, url: transactions_path, method: 'get' do |f|
-  = f.hidden_field :order
+= search_form_for ransack, url: transactions_path, method: 'get' do |f|
+  -# = f.hidden_field :order
+  .row
+    .col-md-12
+      = f.input :from_account_id_or_to_account_id_cont, required: false
   .row
     .col-md-6
-      = f.input :from_account_id, required: false
-      = f.input :date_gte, as: :date_picker, readonly: true
-      = f.input :key_like, required: false
-      = f.input :details_like, required: false
+      = f.input :from_account_id_eq, required: false
+      = f.input :date_gteq, as: :date_picker, readonly: true, required: false
+      = f.input :key_cont, required: false
+      = f.input :details_cont, required: false
     .col-md-6
-      = f.input :to_account_id, required: false
-      = f.input :date_lte, as: :date_picker, readonly: true
-      = f.input :amount_cents_lte, required: false
-      = f.input :amount_cents_gte, required: false
+      = f.input :to_account_id_eq, required: false
+      = f.input :date_lteq, as: :date_picker, readonly: true, requierd: false
+      = f.input :amount_cents_lteq, required: false
+      = f.input :amount_cents_gteq, required: false
   = f.button :submit
 br

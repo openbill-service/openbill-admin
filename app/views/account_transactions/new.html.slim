@@ -17,14 +17,6 @@ h2= "Create #{account_transaction_form.direction} transaction"
             .input-group-addon= money_symbol_from_string account_transaction_form.amount_currency
             = f.input_field :amount_cents, class: 'form-control', autofocus: true
           = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
-  - if Features.has_goods?
-    .row
-      .col-md-4
-        = f.input :good_id, collection: goods_collection
-      .col-md-4
-        = f.input :good_value
-      .col-md-4
-        = f.input :good_unit, collection: good_units_collection, include_blank: false
   .row
     .col-md-3
       = f.input :date, as: :date_picker, readonly: true

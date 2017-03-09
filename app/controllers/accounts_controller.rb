@@ -11,7 +11,9 @@ class AccountsController < ApplicationController
     render locals: {
       months: months,
       accounts: accounts,
-      categories: categories
+      categories: categories,
+      ransack: ransack,
+      current_category: current_category,
     }
   end
 
@@ -23,50 +25,50 @@ class AccountsController < ApplicationController
   end
 
   def new
-    render locals: { account: AccountForm.new }
+    render locals: { account: OpenbillAccount.new }
   end
 
   def show
+    transactions_ransack = account.all_transactions.ransack params[:q]
+
+    transactions = transactions_ransack.result.ordered.page(page).per(per_page)
     render locals: {
       account: account,
+      transactions_ransack: transactions_ransack,
       transactions: transactions
     }
   end
 
   def edit
-    account_form = AccountForm.new account
-    render locals: { account: account_form, account_key: account.key }
+    render locals: { account: account, account_key: account.key }
   end
 
   def create
-    account_form = AccountForm.new permitted_params
+    account = OpenbillAccount.new permitted_params
 
-    if account_form.valid?
-      accounts.insert account_form.to_hash
+    if account.save
       redirect_to accounts_path
     else
-      render :new, locals: { account: account_form }
+      render :new, locals: { account: account }
     end
 
   rescue => err
     flash.now[:error] = err.message
-    render :new, locals: { account: account_form }
+    render :new, locals: { account: account }
   end
 
   def update
-    account_form = AccountForm.new({ **permitted_params.symbolize_keys,
-                                     id: account.id })
+    account.update permitted_params
 
-    if account_form.valid?
-      account.update account_form.to_hash
+    if account.valid?
       redirect_to accounts_path
     else
-      render :edit, locals: { account_key: account.key, account: account_form }
+      render :edit, locals: { account_key: account.key, account: account }
     end
 
   rescue => err
     flash.now[:error] = err.message
-    render :edit, locals: { account_key: account.key, account: account_form }
+    render :edit, locals: { account_key: account.key, account: account }
   end
 
   def webhook_logs
@@ -78,10 +80,6 @@ class AccountsController < ApplicationController
   def logs
     query = WebhooksQuery.new(filter: webhooks_filter).call
     filter.apply(query).paginate page, per_page
-  rescue Sequel::DatabaseError => err
-    @db_error = err.message
-    Bugsnag.notify err
-    []
   end
 
   def webhooks_filter
@@ -90,92 +88,26 @@ class AccountsController < ApplicationController
     )
   end
 
-  def ids
-    account.transactions
-  end
-
-  def transactions
-    transactions_philtre.apply(
-      Openbill.service.account_transactions(account).reverse_order(:date)
-    ).paginate(page, per_page)
-  end
-
-  def transactions_philtre
-    Philtre.new philtre_params do
-      def date(date)
-        Sequel.lit('openbill_transactions.date <= ?', date)
-      end
-    end
-  end
-
-  def account
-    @_account ||= find_account
-  end
-
-  def current_category
-    @_current_category ||=
-      if session_category_id.present?
-        categories[id: session_category_id]
-      else
-        OpenStruct.new(id: nil)
-      end
-  end
-
-  def session_category_id
-    if category_filter_set?
-      session[:accounts_filter_category_id] = param_category_id
-    else
-      session[:accounts_filter_category_id]
-    end
-  end
-
-  def param_category_id
-    params[:philtre][:category_id]
-  end
-
-  def category_filter_set?
-    params[:philtre].try(:key?, :category_id)
-  end
-
-  def default_category
-    categories[id: DEFAULT_CATEGORY_ID]
+  def ransack
+    OpenbillAccount.ransack params[:q]
   end
 
   def accounts
-    @_accounts ||= AccountsQuery.new(filter: accounts_filter).call
+    ransack.result.ordered
   end
 
-  def find_account
-    AccountsQuery.new(filter: account_filter).call.first!
+  def account
+    @_account ||= OpenbillAccount.find params[:id]
   end
 
-  def account_filter
-    AccountsFilter.new(
-      id: params[:id],
-      philtre: philtre_params
-    )
-  end
-
-  def accounts_filter
-    AccountsFilter.new(
-      category_id: current_category.id,
-      page: page,
-      per_page: per_page,
-      philtre: philtre_params
-    )
-  end
-
-  def date
-    @_date ||= TransactionDate.parse params[:philtre]
-  end
-
-  def philtre_params
-    params[:philtre][:date] = date if date.present?
-    params[:philtre] || ActionController::Parameters.new
+  def current_category
+    id  =params.fetch(:q, {})[:category_id_eq]
+    return unless  id
+    OpenbillCategory.find id
   end
 
   def categories
-    @_categories ||= Openbill.service.categories
+    @_categories ||= OpenbillCategory.all
   end
 
   def permitted_params

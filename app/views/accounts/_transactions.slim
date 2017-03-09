@@ -5,11 +5,11 @@
   table.table.table-condensed.table-striped
     thead
       tr
-        th= order_by filter, :created_at, label: 'Time'
-        th= order_by filter, :date, label: 'Record date'
+        th= sort_link ransack, :created_at, label: 'Time'
+        th= sort_link ransack, :date, label: 'Record date'
         th Opposite account
-        th= order_by filter, :amount_cents, label: 'Amount'
-        th= order_by filter, :key
+        th= sort_link ransack, :amount_cents, label: 'Amount'
+        th= sort_link ransack, :key
         th Details
         th Meta
         th Actions

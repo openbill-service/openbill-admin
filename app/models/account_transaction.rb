@@ -32,9 +32,9 @@ class AccountTransaction
 
   def get_opposite_account
     if incoming?
-      Openbill.service.get_account raw_transaction.from_account_id
+      raw_transaction.from_account
     else
-      Openbill.service.get_account raw_transaction.to_account_id
+      raw_transaction.to_account
     end
   end
 end

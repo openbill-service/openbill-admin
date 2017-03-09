@@ -13,9 +13,6 @@ table.table.table-condensed.table-striped
       th= order_by filter, :to_account_id, label: 'Destination account'
       th= order_by filter, :amount_cents, label: 'Amount'
       th= order_by filter, :key
-      - if Features.has_goods?
-        th Good
-        th Good amount
       th Details
       th Meta
       th Webhook state
@@ -39,13 +36,6 @@ table.table.table-condensed.table-striped
       td= humanized_amount t.amount
       td
         code = t.key
-      - if Features.has_goods?
-        - if t.good.present?
-          td= link_to t.good.title, edit_good_path(t.good.id)
-          td= "#{t.good_value} #{t.good_unit}"
-        - else
-          td
-          td
       td
         .text-muted= t.details
       td= humanized_meta t.meta

@@ -26,6 +26,4 @@ Rails.application.routes.draw do
   resources :invoices
   resources :policies
   resources :logs, only: [:index]
-  resources :goods
-  resources :goods_availabilities
 end

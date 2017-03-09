@@ -16,9 +16,7 @@ class AccountReportsController < ApplicationController
 
     data = {}
 
-    Openbill
-      .service
-      .account_transactions(account)
+    account.all_transactions
       .each do |t|
 
       t = AccountTransaction.new account, t
@@ -49,7 +47,7 @@ class AccountReportsController < ApplicationController
   end
 
   def account
-    @_account ||= Openbill.service.get_account_by_id params[:account_id]
+    @_account ||= OpenbillAccount params[:account_id]
   end
 end
 

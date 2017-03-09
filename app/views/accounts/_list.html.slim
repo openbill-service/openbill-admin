@@ -2,27 +2,27 @@ table.table.table-condensed.table-striped
   thead.thead-default
     tr
       th
-        = order_by filter, :key
+        = sort_link ransack, :key
         = ', '
-        = order_by filter, :updated_at
+        = sort_link ransack, :updated_at
         = ', '
-        = order_by filter, :transactions_count
+        = sort_link ransack, :transactions_count
       - months.each do |month|
         th
           = l month, format: :short
       th
-        = order_by filter, :amount_cents
+        = sort_link ransack, :amount_cents
         br
         = l Date.today, format: :long
   tbody
     - accounts.each do |account|
       tr
         td
-          = link_to account.details, account_path(account.id)
+          = link_to account.details.presence || account.name, account_path(account.id)
           br
           small
             = l account.updated_at, format: :short
-            = " [#{account.key}], "
+            = " [#{account}], "
             i.text-muted=" #{account.transactions_count} транз."
             = humanized_meta account.meta
         - months.each do |month|

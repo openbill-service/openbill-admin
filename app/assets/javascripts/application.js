@@ -17,11 +17,18 @@
 //= require nprogress-turbolinks
 //= require tether
 //= require bootstrap-sprockets
+//= require better-dom
+//= require better-i18n-plugin
+//= require better-popover-plugin
+//= require better-form-validation
+//= require better-form-validation/i18n/better-form-validation.ru
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pickers
 //= require select2
 //= require_tree .
+
+DOM.set("lang", "ru")
 
 NProgress.configure({
   showSpinner: false,

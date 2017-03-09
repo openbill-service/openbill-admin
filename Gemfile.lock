@@ -1,4 +1,15 @@
 GIT
+  remote: git://github.com/activerecord-hackery/ransack.git
+  revision: 8ca8c95c6543c5da9b98a4e2747a0a4023d60bfc
+  specs:
+    ransack (1.8.2)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.3)
+
+GIT
   remote: git://github.com/andi/simple-navigation.git
   revision: 33f2f24280fa18c8827d63f2f48d12320a8e5d7c
   specs:
@@ -6,14 +17,13 @@ GIT
       activesupport (>= 2.3.2)
 
 GIT
-  remote: git://github.com/openbill-service/openbill-ruby.git
-  revision: 49bde9bdf79b539f1413a6c810a16fe4136a6fe0
+  remote: git://github.com/klacointe/bootstrap-kaminari-views.git
+  revision: 674a32f34f537b5e92bffa0cef3d0cd1c4e499b5
+  branch: bootstrap4
   specs:
-    openbill-ruby (0.1.19)
-      money
-      pg
-      sequel
-      virtus
+    bootstrap-kaminari-views (0.0.5)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
@@ -31,15 +41,6 @@ GIT
   specs:
     datetimepicker-rails (4.7.16)
       momentjs-rails (>= 2.9.0)
-
-GIT
-  remote: https://github.com/klacointe/bootstrap-kaminari-views
-  revision: 674a32f34f537b5e92bffa0cef3d0cd1c4e499b5
-  branch: bootstrap4
-  specs:
-    bootstrap-kaminari-views (0.0.5)
-      kaminari (>= 0.13)
-      rails (>= 3.1)
 
 GEM
   remote: https://rubygems.org/
@@ -141,7 +142,6 @@ GEM
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.6.0)
-    fastandand (1.0.1)
     ffi (1.9.10)
     font-awesome-rails (4.6.2.0)
       railties (>= 3.2, < 5.1)
@@ -222,14 +222,13 @@ GEM
       shellany (~> 0.0)
     nprogress-rails (0.1.6.7)
     pg (0.19.0)
-    philtre (0.1.0)
-      fastandand
-      ripar (~> 0.0.3)
-      sequel
-    philtre-rails (0.1.0)
-      activemodel
-      philtre
+    pg_search (2.0.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
     pkg-config (1.1.7)
+    polyamorous (1.3.1)
+      activerecord (>= 3.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -268,6 +267,15 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.6)
       sprockets-rails
+    rails-assets-better-dom (2.1.4)
+    rails-assets-better-form-validation (1.5.0)
+      rails-assets-better-dom (~> 2.1.0)
+      rails-assets-better-i18n-plugin (~> 2.0.0)
+      rails-assets-better-popover-plugin (~> 0.5.1)
+    rails-assets-better-i18n-plugin (2.0.0)
+      rails-assets-better-dom (>= 2.0.0)
+    rails-assets-better-popover-plugin (0.5.2)
+      rails-assets-better-dom (>= 2.1.0, < 3)
     rails-assets-select2 (4.0.3)
     rails-assets-tether (1.1.1)
     rails-deprecated_sanitizer (1.0.3)
@@ -289,7 +297,6 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
-    ripar (0.0.3)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -322,7 +329,6 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     semver2 (3.4.2)
-    sequel (4.41.0)
     shellany (0.0.1)
     simple-navigation-bootstrap (1.0.0)
       railties (>= 3.1)
@@ -404,10 +410,8 @@ DEPENDENCIES
   money
   money-rails
   nprogress-rails
-  openbill-ruby!
   pg
-  philtre
-  philtre-rails
+  pg_search
   pry-doc
   pry-docmore
   pry-nav
@@ -418,14 +422,18 @@ DEPENDENCIES
   puma
   rack_password
   rails (= 4.2.6)
+  rails-assets-better-dom!
+  rails-assets-better-form-validation!
+  rails-assets-better-i18n-plugin!
+  rails-assets-better-popover-plugin!
   rails-assets-select2!
   rails-assets-tether (>= 1.1.0)!
+  ransack!
   rspec
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   semver2
-  sequel
   simple-navigation!
   simple-navigation-bootstrap
   simple_form!
@@ -440,4 +448,4 @@ DEPENDENCIES
   wkhtmltopdf-binary
 
 BUNDLED WITH
-   1.12.5
+   1.14.6

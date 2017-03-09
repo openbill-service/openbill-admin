@@ -2,7 +2,7 @@ module AccountsHelper
   def opposite_account_hint(account_id)
     return if account_id.blank? || account_id.to_s == 'total'
 
-    account = Openbill::Account[id: account_id]
+    account = OpenbillAccount.find account_id
 
     link_to "#{account.key} (#{account.details})", account_path(account_id)
   end
@@ -20,7 +20,7 @@ module AccountsHelper
   end
 
   def accounts_collection
-    Openbill.service.accounts.all.map do |acc|
+    OpenbillAccount.find_each.map do |acc|
       account_select_item acc
     end
   end

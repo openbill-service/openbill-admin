@@ -3,7 +3,7 @@ module ReportHelper
     if column == :total
       t :total
     else
-      link_to l(column), account_transactions_path(account.id, philtre: { month: column })
+      link_to l(column), account_transactions_path(account.id, q: { month: column })
     end
   end
 end

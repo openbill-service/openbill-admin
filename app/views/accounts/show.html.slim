@@ -1,6 +1,6 @@
 = render 'header', account: account
 
-= simple_form_for filter.for_form, url: account_path(id: account.id), method: 'get' do |f|
+= simple_form_for transactions_ransack, url: account_path(id: account.id), method: 'get' do |f|
   .row
     .col-md-6
       = f.input :date, as: :date_picker, readonly: true
@@ -11,9 +11,9 @@ br
   .col-md-6
     div style="padding: 1.5em"
       dl.dl-horizontal
-        - if account.date_amount_cents.present?
-          dt.col-sm-3 Amount for date
-          dd.col-sm-9= humanized_amount account.date_amount
+        /- if account.date_amount_cents.present?
+          /dt.col-sm-3 Amount for date
+          /dd.col-sm-9= humanized_amount account.date_amount
         dt.col-sm-3 Amount
         dd.col-sm-9= humanized_amount account.amount
         dt.col-sm-3 Details
@@ -33,4 +33,4 @@ br
   .col-md-12
 
     = link_to 'all transactions', account_transactions_path(account.id)
-    = render 'transactions', transactions: transactions, account: account
+    = render 'transactions', transactions: transactions, account: account, ransack: transactions_ransack
