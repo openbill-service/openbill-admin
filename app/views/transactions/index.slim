@@ -10,51 +10,54 @@ h1
 = render 'filter', ransack: ransack
 = render 'pagination', scope: transactions
 
-table.table.table-condensed.table-striped
-  thead
-    tr
-      th= sort_link ransack, :created_at, label: 'Create time'
-      th= sort_link ransack, :date, label: 'Record date'
-      th= sort_link ransack, :from_account_id, label: 'Source account'
-      th= sort_link ransack, :to_account_id, label: 'Destination account'
-      th= sort_link ransack, :amount_cents, label: 'Amount'
-      th= sort_link ransack, :key
-      th Details
-      th Meta
-      th Webhook state
-      th Actions
+- if transactions.any?
+  table.table.table-condensed.table-striped
+    thead
+      tr
+        th= sort_link ransack, :created_at, label: 'Create time'
+        th= sort_link ransack, :date, label: 'Record date'
+        th= sort_link ransack, :from_account_id, label: 'Source account'
+        th= sort_link ransack, :to_account_id, label: 'Destination account'
+        th= sort_link ransack, :amount_cents, label: 'Amount'
+        th= sort_link ransack, :key
+        th Details
+        th Meta
+        th Webhook state
+        th Actions
 
-  tbody
-  - transactions.each do |t|
-    tr
-      td
-        = link_to transaction_path t.id do
-          .text-nowrap= I18n.l t.created_at, format: :short
-      td= humanized_date t.date
-      td
-        = link_to t.from_account, account_path(t.from_account_id)
-        div
-          small.text-muted= t.from_account.details
-      td
-        = link_to t.to_account, account_path(t.to_account_id)
-        div
-          small.text-muted= t.to_account.details
-      td= humanized_amount t.amount
-      td
-        code = t.key
-      td
-        .text-muted= t.details
-      td= humanized_meta t.meta
-      td
-        - if webhook_presents?
-          - if t.last_webhook_log.present?
-            = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
-      td
-        = show_button transaction_path(t.id)
-        - if t.reverse_transaction_id.present?
-          br
-          = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
+    tbody
+    - transactions.each do |t|
+      tr
+        td
+          = link_to transaction_path t.id do
+            .text-nowrap= I18n.l t.created_at, format: :short
+        td= humanized_date t.date
+        td
+          = link_to t.from_account, account_path(t.from_account_id)
+          div
+            small.text-muted= t.from_account.details
+        td
+          = link_to t.to_account, account_path(t.to_account_id)
+          div
+            small.text-muted= t.to_account.details
+        td= humanized_amount t.amount
+        td
+          code = t.key
+        td
+          .text-muted= t.details
+        td= humanized_meta t.meta
+        td
+          - if webhook_presents?
+            - if t.last_webhook_log.present?
+              = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
+        td
+          = show_button transaction_path(t.id)
+          - if t.reverse_transaction_id.present?
+            br
+            = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
 
+- else
+  .mt-4.alert.alert-info Нет транзакций по такому запросу
 hr
 
 = render 'pagination', scope: transactions
