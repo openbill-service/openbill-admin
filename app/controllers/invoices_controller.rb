@@ -71,6 +71,6 @@ class InvoicesController < ApplicationController
   end
 
   def invoices
-    @_invoices ||= OpenbillInvoice.all
+    @_invoices ||= OpenbillInvoice.order('id desc')
   end
 end
