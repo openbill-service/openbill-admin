@@ -1,6 +1,6 @@
-nav.navbar.navbar-light.bg-faded
+nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top
   = link_to application_title, root_url, class: 'navbar-brand'
-  ul.nav.navbar-nav
+  ul.navbar-nav
     = navbar_link_to t(:accounts), accounts_path
     = navbar_link_to t(:transactions), transactions_path
     = navbar_link_to t(:categories), categories_path

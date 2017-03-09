@@ -25,10 +25,21 @@ ru:
     labels:
       defaults:
         key_cont: Наименование содержит
-      q:
-        key_cont: aaa
+        details_cont: Детали содержат
+        amount_cents_lteq: Сумма меньше или равна
+        amount_cents_gteq: Сумма больше или равна
+        date_gteq: Дата больше или равна
+        date_lteq: Дата меньше или равна
+        from_account_id_eq: Счет источник
+        to_account_id_eq: Счет назначения
+        from_account_id_or_to_account_id_cont: Любой счет
       account:
-        key_cont: 123
+        key_cont: key_cont
+        category: Категория счета
+        category_id: Категория счета
+        meta: Мета-данные
+        details: Комментарий
+        key: Ключ
         mount: Баланс
     hints:
       defaults:

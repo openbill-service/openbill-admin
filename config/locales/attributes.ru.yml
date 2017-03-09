@@ -5,6 +5,10 @@ ru:
       model_field2: field name2
   activerecord:
     attributes:
+      account:
+        key: Key1
+      openbill_account:
+        key: Key2
       namespace/article:
         title: AR Namespaced Title
       namespace_article:

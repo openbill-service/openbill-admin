@@ -86,7 +86,7 @@ GEM
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.3)
-    autoprefixer-rails (6.3.6)
+    autoprefixer-rails (6.7.0)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -94,7 +94,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.0.0.alpha3)
+    bootstrap (4.0.0.alpha6)
       autoprefixer-rails (>= 6.0.3)
       sass (>= 3.4.19)
     bugsnag (4.1.0)
@@ -381,7 +381,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to
-  bootstrap (~> 4.0.0.alpha3)
+  bootstrap (~> 4.0.0.alpha6)
   bootstrap-kaminari-views!
   bugsnag
   byebug

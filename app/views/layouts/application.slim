@@ -8,5 +8,5 @@ html
   body
     = render 'layouts/topmenu'
     = render 'layouts/messages'
-    .container-fluid
-      .m-t-2= yield
+    main#content.container-fluid
+      = yield

@@ -9,19 +9,16 @@ ru:
       end: ends with
       gt: greater than
       lt: less than
+      lteq: Меньше или равно
     models:
-      person: Passanger
+      OpenbillAccount: Счет
     attributes:
-      q:
-        key: Имя
-        key_cont: Имя
-
+      default:
+        date: Дата
+      transaction:
+        date: Дата
+      openbill_transaction:
+        date: Дата
       openbill_account:
         key: Имя
         key_cont: Имя
-
-      person:
-        name: Full Name
-      article:
-        title: Article Title
-        body: Main Content

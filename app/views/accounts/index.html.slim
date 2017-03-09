@@ -1,7 +1,7 @@
-.pull-xs-right.m-t-1
-  = link_to t(:new_account, scope: :buttons), new_account_path, class: 'btn btn-sm btn-success'
+.pull-right
+  = link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-default'
   | &nbsp;
-  = link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-info'
+  = link_to t(:new_account, scope: :buttons), new_account_path, class: 'btn btn-sm btn-success'
 
 = render 'categories', categories: categories, current_category: current_category
 

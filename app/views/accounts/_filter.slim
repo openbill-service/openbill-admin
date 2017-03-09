@@ -1,7 +1,7 @@
-.mb-3
+.mb-4.mt-2
   = link_to 'Показать фильтр', '#filter', class: 'btn btn-sm btn-outline-primary', data: { toggle: :collapse }, 'aria-expanded': false, 'aria-controls': 'collapseExample'
 
-  #filter.m-b-2.collapse.show class=(params[:q].blank? ? '' : 'show')
+  #filter.mt-3.mb-2.collapse class=(params[:q].blank? ? '' : 'show')
     = search_form_for ransack, url: accounts_path, method: 'get' do |f|
       /-# = f.hidden_field :order
       .row
@@ -12,6 +12,7 @@
           = f.input :amount_cents_lteq, as: :numeric, required: false
         .col-md-3
           = f.input :amount_cents_gteq, as: :numeric, required: false
-      = f.button :submit, 'Найти', class: 'btn btn-primary'
-      - if params[:q].present?
-        = link_to 'Сбросить фильтр', accounts_path, class: 'btn btn-default'
+      .mt-2
+        = f.button :submit, 'Найти', class: 'btn btn-primary'
+        - if params[:q].present?
+          = link_to 'Сбросить фильтр', accounts_path, class: 'btn btn-default'

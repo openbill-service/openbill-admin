@@ -28,7 +28,7 @@ table.table.table-condensed.table-striped
         - months.each do |month|
           td
             = link_to humanized_amount(amount_by_month(account, month)),
-                    transactions_url(philtre: {date_gte: month.beginning_of_month, date_lte: month.end_of_month}, custom_filter: { account_id: account.id })
+              transactions_url(q: {date_gteq: month.beginning_of_month, date_lteq: month.end_of_month, from_account_id_or_to_account_id_eq: account.id })
         td= humanized_amount account.amount
 
 hr
