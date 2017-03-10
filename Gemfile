@@ -17,8 +17,10 @@ def darwin_only(require_as)
 end
 
 source 'https://rails-assets.org' do
+  # Не получилось его запустить
+  # gem 'rails-assets-eonasdan-bootstrap-datetimepicker'
   gem 'rails-assets-tether', '>= 1.1.0'
-  gem 'rails-assets-select2', source: 'https://rails-assets.org'
+  gem 'rails-assets-select2'
   gem 'rails-assets-better-dom'
   gem 'rails-assets-better-i18n-plugin'
   gem 'rails-assets-better-popover-plugin'
@@ -78,7 +80,9 @@ gem 'active_link_to'
 gem 'puma'
 
 gem 'momentjs-rails'
-gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+# Nerian/bootstrap-datepicker-rails
+# gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+#gem 'bootstrap-datepicker-rails', github: 'Nerian/bootstrap-datepicker-rails'
 
 # PDF
 gem 'wicked_pdf'
