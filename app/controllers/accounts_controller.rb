@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
         }
       }
       format.csv {
-        content = AccountsSpreadsheet.new(all_accounts, build_periods).to_csv
+        content = AccountsSpreadsheet.new(accounts, build_periods).to_csv
         send_data(
             content,
             disposition: 'attachment; filename=accounts.csv',

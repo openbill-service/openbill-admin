@@ -11,7 +11,7 @@ class Spreadsheet
   def to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << fields
-      collection.find_each do |t|
+      collection.each do |t|
         csv << row(t)
       end
     end

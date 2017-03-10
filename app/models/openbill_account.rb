@@ -1,6 +1,9 @@
 class OpenbillAccount < ApplicationRecord
   belongs_to :category, class_name: 'OpenbillCategory'
 
+  has_many :income_transactions, class_name: 'OpenbillTransaction', foreign_key: :to_account_id
+  has_many :outcome_transactions, class_name: 'OpenbillTransaction', foreign_key: :from_account_id
+
   scope :ordered, -> { order :id }
 
   monetize :amount_cents

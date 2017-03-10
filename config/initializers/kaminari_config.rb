@@ -1,5 +1,6 @@
 Kaminari.configure do |config|
-  config.default_per_page = 50
+  # 100 штук показывать особенно полезно при выгрузке
+  config.default_per_page = 100
   # config.max_per_page = nil
   # config.window = 4
   # config.outer_window = 0
