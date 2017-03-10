@@ -17,7 +17,7 @@ class AccountTransactionForm < FormBase
   attribute :meta, VirtusHstore
   attribute :date, Date
 
-  validates :amount_cents, :amount_currency, :account_id, :opposite_account_id, :details, :date, presence: true
+  validates :amount_cents, :amount_currency, :account_id, :opposite_account_id, :details, :key, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :direction, inclusion: { in: DIRECTIONS }
 

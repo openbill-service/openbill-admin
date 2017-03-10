@@ -12,13 +12,13 @@ class AccountTransactionsController < ApplicationController
   def new
     render locals: {
       account: account,
-      account_transaction_form: account_transaction_form,
+      account_transaction_form: build_account_transaction_form,
       opposite_accounts_collection: opposite_accounts(account, direction)
     }
   end
 
   def create
-    account_transaction_form = account_transaction_form(permitted_params)
+    account_transaction_form = build_account_transaction_form(permitted_params)
 
     if account_transaction_form.valid?
       OpenbillTransaction.create! account_transaction_form.to_hash
@@ -32,6 +32,7 @@ class AccountTransactionsController < ApplicationController
     end
 
   rescue => err
+    binding.pry
     flash.now[:error] = err.message
     render :new, locals: {
       account: account,
@@ -84,20 +85,19 @@ class AccountTransactionsController < ApplicationController
     end
   end
 
-  def account_transaction_form(attrs = {})
+  def build_account_transaction_form(attrs = {})
     AccountTransactionForm.new({
       **attrs.symbolize_keys,
       account_id: account.id,
       amount_currency: account.amount_currency,
-      direction: direction,
-      date: date
+      direction: direction
     })
   end
 
-  def date
-    return unless params.key?(:account_transaction_form)
-    TransactionDate.parse permitted_params
-  end
+  #def date
+    #return unless params.key?(:account_transaction_form)
+    #TransactionDate.parse permitted_params
+  #end
 
   def transactions
     res = filter

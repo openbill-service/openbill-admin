@@ -4,6 +4,8 @@ ru:
       account:
         create: 'Создать'
         update: 'Сохранить'
+      account_transaction_form:
+        create: Создать 
     goods_count:
       zero: 'Нет торговых предложений'
       one: '%{count} предложение'

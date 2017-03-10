@@ -41,9 +41,17 @@ ru:
         details: Комментарий
         key: Ключ
         mount: Баланс
+      account_transaction_form:
+        opposite_account_id: Противоположный счет
+        amount_cents: Сумма
+        key: Уникальный ключ
+        details: Подробности
+        date: Дата банковской операции
     hints:
       defaults:
         row_order_position: Позиция, начиная с 0
+      account_transaction_form:
+        date: Не обязательно
     placeholders:
       defaults:
         title: Название
