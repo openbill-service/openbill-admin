@@ -23,10 +23,6 @@ class OpenbillTransaction < ApplicationRecord
 
   monetize :amount_cents
 
-  before_create do
-    self.user_id = 1
-  end
-
   def notify!
     connection.execute "notify #{self.class.table_name}", id
   end

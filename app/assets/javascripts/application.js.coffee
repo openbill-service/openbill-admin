@@ -11,6 +11,7 @@
 #= require better-form-validation
 #= require better-form-validation/i18n/better-form-validation.ru
 #= require moment
+#= require moment/ru
 #= require bootstrap-datetimepicker
 #= require pickers
 #= require select2
@@ -23,9 +24,9 @@ NProgress.configure
   ease: 'ease'
   speed: 500
 
-
 document.addEventListener "turbolinks:load", ->
   console.log "turbolinks:load"
+
   $("select[data-accounts]").select2
     ajax:
       url: '/accounts/suggestions'

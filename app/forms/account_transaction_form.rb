@@ -45,6 +45,6 @@ class AccountTransactionForm < FormBase
   end
 
   def meta_hstore
-    Sequel::Postgres::HStore.new JSON.parse(meta)
+    JSON.parse(meta)
   end
 end

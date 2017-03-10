@@ -54,7 +54,7 @@ class DatePickerInput < SimpleForm::Inputs::StringInput
 
   def date_options_base
     {
-        locale: :en,
+        locale: I18n.locale,
         format: picker_pattern,
         dayViewHeaderFormat: date_view_header_format
     }
