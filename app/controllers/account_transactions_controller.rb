@@ -32,7 +32,6 @@ class AccountTransactionsController < ApplicationController
     end
 
   rescue => err
-    binding.pry
     flash.now[:error] = err.message
     render :new, locals: {
       account: account,

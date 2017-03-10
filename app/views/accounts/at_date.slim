@@ -4,18 +4,18 @@ h1
 
 = render 'date_categories', categories: categories
 
-= render 'date_filter', filter: filter, category: current_category
+-# = render 'date_filter', ransack: ransack, category: current_category
 = render 'pagination', scope: accounts
 
 table.table.table-condensed.table-striped
   thead.thead-default
     tr
-      th= order_by filter, :key
-      th= order_by filter, :amount_cents
+      th= sort_link ransack, :key
+      th= sort_link ransack, :amount_cents
       - if accounts.any? { |a| a.date_amount_cents.present? }
         th Amount at date
-      th= order_by filter, :updated_at
-      th= order_by filter, :transactions_count
+      th= sort_link ransack, :updated_at
+      th= sort_link ransack, :transactions_count
       th= t :meta
       th
         .pull-xs-right= t :actions

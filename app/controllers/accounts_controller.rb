@@ -38,6 +38,8 @@ class AccountsController < ApplicationController
   def at_date
     render locals: {
       accounts: accounts,
+      ransack: ransack,
+      current_category: current_category,
       categories: categories
     }
   end

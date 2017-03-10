@@ -1,11 +1,9 @@
+.pull-right
+  = render 'pagination', scope: logs
 h1 Webhook logs
 
-- if db_error.present?
-  .alert.alert-danger= db_error
+= render 'table', logs: logs, ransack: ransack
 
-- else
-  = render 'table', logs: logs
-
-  hr
-
+hr
+.pull-right
   = render 'pagination', scope: logs

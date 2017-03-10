@@ -1,3 +1,3 @@
 class OpenbillWebhookLog < ApplicationRecord
-  scope :ordered, -> { order 'id desc' }
+  scope :ordered, -> { order 'created_at desc' }
 end
