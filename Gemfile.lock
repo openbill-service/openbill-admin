@@ -6,16 +6,6 @@ GIT
       activesupport (>= 2.3.2)
 
 GIT
-  remote: git://github.com/openbill-service/openbill-ruby.git
-  revision: 49bde9bdf79b539f1413a6c810a16fe4136a6fe0
-  specs:
-    openbill-ruby (0.1.19)
-      money
-      pg
-      sequel
-      virtus
-
-GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: 6f537ed98e0fb7a50977a101d1da92dc0696031e
   specs:
@@ -403,7 +393,6 @@ DEPENDENCIES
   money
   money-rails
   nprogress-rails
-  openbill-ruby!
   pg
   philtre
   philtre-rails
@@ -423,7 +412,6 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   semver2
-  sequel
   simple-navigation!
   simple-navigation-bootstrap
   simple_form!
