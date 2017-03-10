@@ -3,6 +3,22 @@ module ApplicationHelper
     "Openbill Admin #{AppVersion}"
   end
 
+  def humanized_period(period)
+
+    if period.month?
+      l period.first, format: :month_and_year
+    else
+      if period.first.present?
+        first = l period.first, format: :long
+        last = l period.last, format: :long
+        "#{content_tag(:span, first, class: 'text-nowrap')} - #{content_tag(:span, last, class: 'text-nowrap')}".html_safe
+      else
+        last = l period.last, format: :long
+        "до #{content_tag(:span, last, class: 'text-nowrap')}".html_safe
+      end
+    end
+  end
+
   def webhook_presents?
     # TODO
     # OpenbillWebhookLog.table_exists?

@@ -1,18 +1,23 @@
 .pull-right
   = link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-default'
   | &nbsp;
+  = link_to 'Export to CSV', accounts_path(params.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
+  | &nbsp;
   = link_to t(:new_account, scope: :buttons), new_account_path, class: 'btn btn-sm btn-success'
 
+h2.mb-4 Счета (#{accounts.count} из #{OpenbillAccount.count})
 = render 'categories', categories: categories, current_category: current_category
 
-= render 'filter', ransack: ransack, category: current_category
-= render 'pagination', scope: accounts
+.pull-right
+  = render 'pagination', scope: accounts
 
+= render 'filter', ransack: ransack, category: current_category
 - if action_name == 'index'
-  = render 'list', ransack: ransack, accounts: accounts, months: months
+  = render 'list', ransack: ransack, accounts: accounts, periods: periods
 - elsif index_type.graph?
   = render 'table', ransack: ransack, accounts: accounts
 - else
   p Unknown index type #{index_type}
 
-= render 'pagination', scope: accounts
+.pull-right
+  = render 'pagination', scope: accounts

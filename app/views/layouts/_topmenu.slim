@@ -1,9 +1,9 @@
 nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top
   = link_to application_title, root_url, class: 'navbar-brand'
   ul.navbar-nav
-    = navbar_link_to t(:accounts), accounts_path
-    = navbar_link_to t(:transactions), transactions_path
-    = navbar_link_to t(:categories), categories_path
-    = navbar_link_to t(:policies), policies_path
-    = navbar_link_to t(:invoices), invoices_path
-    = navbar_link_to t(:webhook_logs), logs_path
+    = navbar_link_to OpenbillAccount.model_name.human(count: 2), accounts_path
+    = navbar_link_to OpenbillTransaction.model_name.human(count: 2), transactions_path
+    = navbar_link_to OpenbillCategory.model_name.human(count: 2), categories_path
+    = navbar_link_to OpenbillPolicy.model_name.human(count: 2), policies_path
+    = navbar_link_to OpenbillInvoice.model_name.human(count: 2), invoices_path
+    = navbar_link_to OpenbillWebhookLog.model_name.human(count: 2), logs_path

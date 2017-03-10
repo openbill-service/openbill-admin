@@ -6,9 +6,9 @@ ru:
   activerecord:
     attributes:
       account:
-        key: Key1
-      openbill_account:
-        key: Key2
+        key: Ключ
+        transactions_count: Количество транзакций
+        updated_at: Последнее изменение
       namespace/article:
         title: AR Namespaced Title
       namespace_article:

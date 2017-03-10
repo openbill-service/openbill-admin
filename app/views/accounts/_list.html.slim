@@ -5,30 +5,32 @@ table.table.table-condensed.table-striped
         = sort_link ransack, :key
         = ', '
         = sort_link ransack, :updated_at
-        = ', '
-        = sort_link ransack, :transactions_count
-      - months.each do |month|
-        th
-          = l month, format: :short
       th
-        = sort_link ransack, :amount_cents
-        br
-        = l Date.today, format: :long
+        = sort_link ransack, :transactions_count
+      - periods.each do |period|
+        th
+          = humanized_period period
+      th
+        = sort_link ransack, :amount_cents, "Всего на #{l(Date.today, format: :long)}"
   tbody
     - accounts.each do |account|
       tr
         td
-          = link_to account.details.presence || account.name, account_path(account.id)
+          = link_to account_path(account.id) do
+            = account.details.presence || account.name
+            small.text-muted= " [#{account}]"
           br
-          small
-            = l account.updated_at, format: :short
-            = " [#{account}], "
-            i.text-muted=" #{account.transactions_count} транз."
-            = humanized_meta account.meta
-        - months.each do |month|
+          .text-muted
+            small= l account.updated_at, format: :short
+            br
+            small= humanized_meta account.meta
+        td.text-muted
+          = account.transactions_count
+
+        - periods.each do |period|
           td
-            = link_to humanized_amount(amount_by_month(account, month)),
-              transactions_url(q: {date_gteq: month.beginning_of_month, date_lteq: month.end_of_month, from_account_id_or_to_account_id_eq: account.id })
+            = link_to humanized_amount(account.amount_by_period(period)),
+              transactions_url(q: {date_gteq: period.first, date_lteq: period.last, from_account_id_or_to_account_id_eq: account.id })
         td= humanized_amount account.amount
 
 hr

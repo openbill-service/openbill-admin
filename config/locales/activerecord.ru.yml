@@ -1,6 +1,22 @@
 ---
 ru:
   activerecord:
+    models:
+      account: 
+        one: Счет
+        other: Счета
+      transaction: 
+        one: Транзакция
+        other: Транзакции
+      policy: 
+        one: Правило
+        other: Правила
+      category:
+        one: Категория
+        other: Категории
+      invoice:
+        one: Счет
+        other: Счета
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'

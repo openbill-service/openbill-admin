@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: trade_development
+  database: kiiiosk_development
   pool: 5
 
 test:

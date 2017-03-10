@@ -1,20 +1,30 @@
 class AccountsController < ApplicationController
   DEFAULT_CATEGORY_ID = '12832d8d-43f5-499b-82a1-3466cadcd809'
 
+  MONTHS_TO_SHOW_COUNT = 5
+
   helper_method :filter, :filter_params, :current_category
 
   def index
-    months = [Date.today.end_of_month]
-    5.times do
-      months.unshift (months.first.beginning_of_month - 1.day).end_of_month
+    respond_to do |format|
+      format.html {
+        render locals: {
+          periods: build_periods,
+          accounts: accounts,
+          categories: categories,
+          ransack: ransack,
+          current_category: current_category,
+        }
+      }
+      format.csv {
+        content = AccountsSpreadsheet.new(all_accounts, build_periods).to_csv
+        send_data(
+            content,
+            disposition: 'attachment; filename=accounts.csv',
+            type: 'text/csv'
+        )
+      }
     end
-    render locals: {
-      months: months,
-      accounts: accounts,
-      categories: categories,
-      ransack: ransack,
-      current_category: current_category,
-    }
   end
 
   def suggestions
@@ -101,7 +111,11 @@ class AccountsController < ApplicationController
   end
 
   def accounts
-    ransack.result.ordered.page(page).per(per_page)
+    all_accounts.page(page).per(per_page)
+  end
+
+  def all_accounts
+    ransack.result.ordered
   end
 
   def account
@@ -120,5 +134,25 @@ class AccountsController < ApplicationController
 
   def permitted_params
     params.require(:account).permit(:key, :category_id, :amount_currency, :details, :meta)
+  end
+
+  def start_date
+    OpenbillTransaction.order('created_at asc').first.try(:created_at).try(:date) || Date.today
+  end
+
+  def build_periods
+    today = Date.today
+    periods = [Period.new(today.beginning_of_month, today.end_of_month)]
+    MONTHS_TO_SHOW_COUNT.times do
+      period = periods.last
+      first = (period.first - 1.day).beginning_of_month
+      last = first.end_of_month
+      periods.push Period.new(first, last)
+    end
+
+    period = periods.last.last
+    periods.push Period.new(nil, (period.beginning_of_month - 1.day).end_of_month)
+
+    periods.reverse
   end
 end
