@@ -9,17 +9,10 @@ class OpenbillAccount < ApplicationRecord
   monetize :amount_cents
 
   def amount_by_period(period)
-    plus = OpenbillTransaction
-      .where(to_account_id: id)
-      .by_period(period)
-      .sum(:amount_cents) || 0
-
-    minus = OpenbillTransaction
-      .where(from_account_id: id)
-      .by_period(period)
-      .sum(:amount_cents) || 0
-
-    Money.new plus - minus, amount_currency
+    sql =  ActiveRecord::Base.send(:sanitize_sql_array, ["SELECT openbill_period_amount(?, ?, ?) FROM openbill_accounts WHERE id=?", id, period.first, period.last, id])
+    value = OpenbillAccount.connection.select_value sql
+    return unless value
+    Money.new value, amount_currency
   end
 
   def all_transactions

@@ -25,7 +25,9 @@ NProgress.configure
   speed: 500
 
 document.addEventListener "turbolinks:load", ->
-  console.log "turbolinks:load"
+
+  $("[data-toggle='tooltip']").tooltip()
+  $("[data-toggle='popover']").popover()
 
   $("select[data-accounts]").select2
     ajax:

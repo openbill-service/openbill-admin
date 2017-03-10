@@ -1,4 +1,4 @@
-table.table.table-condensed.table-striped
+table.table.table-condensed.table-striped.table-sm
   thead.thead-default
     tr
       th
@@ -16,14 +16,12 @@ table.table.table-condensed.table-striped
     - accounts.each do |account|
       tr
         td
-          = link_to account_path(account.id) do
+          = link_to account_path(account.id), data: { toggle: :tooltip }, title: account.meta.to_s do
             = account.details.presence || account.name
             small.text-muted= " [#{account}]"
           br
           .text-muted
             small= l account.updated_at, format: :short
-            br
-            small= humanized_meta account.meta
         td.text-muted
           = account.transactions_count
 
