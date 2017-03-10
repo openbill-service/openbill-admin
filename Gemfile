@@ -17,7 +17,8 @@ def darwin_only(require_as)
 end
 
 source 'https://rails-assets.org' do
-  # Не получилось его запустить
+  # Не получилось его запустить, поэтому пользуемся тем, что
+  # лежит в vendor/assets
   # gem 'rails-assets-eonasdan-bootstrap-datetimepicker'
   gem 'rails-assets-tether', '>= 1.1.0'
   gem 'rails-assets-select2'
@@ -80,9 +81,6 @@ gem 'active_link_to'
 gem 'puma'
 
 gem 'momentjs-rails'
-# Nerian/bootstrap-datepicker-rails
-# gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
-#gem 'bootstrap-datepicker-rails', github: 'Nerian/bootstrap-datepicker-rails'
 
 # PDF
 gem 'wicked_pdf'
