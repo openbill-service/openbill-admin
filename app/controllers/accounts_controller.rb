@@ -32,8 +32,16 @@ class AccountsController < ApplicationController
 
     accounts = {}
 
+    opposite_account_type = account.amount < 0 ? :to_account : :from_account
+    opposite_account_id = "#{opposite_account_type}_id"
     periods.each do |period|
-      account.all_transactions.by_month(period.last).includes(:from_account).group(:from_account_id).sum(:amount_cents).each do |account_id, amount_cents|
+      account.
+        all_transactions.
+        by_month(period.last).
+        includes(opposite_account_type).
+        group(opposite_account_id).
+        sum(:amount_cents).
+        each do |account_id, amount_cents|
         a = accounts[account_id] ||= OpenStruct.new(
           account: OpenbillAccount.find(account_id),
           periods: {}
