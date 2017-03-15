@@ -1,6 +1,10 @@
 class Period
   attr_reader :first, :last
 
+  def self.month(date)
+    new date.beginning_of_month, date.end_of_month
+  end
+
   def initialize(first, last)
     @first = first
     @last = last

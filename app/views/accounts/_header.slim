@@ -1,7 +1,9 @@
-.btn-group.pull-xs-right.m-t-1
+.mt-1
   = edit_button edit_account_path(account.id)
-  = link_to t(:webhooks), webhook_logs_account_path(account.id), class: 'btn btn-sm btn-info'
+  -#= link_to t(:webhooks), webhook_logs_account_path(account.id), class: 'btn btn-sm btn-info'
   = link_to t(:reports), account_reports_path(account.id), class: 'btn btn-sm btn-info'
+  = link_to 'months', months_account_path(account.id), class: 'btn btn-default'
+  = export_csv_link
   = render 'account_actions', account: account
 h1
   | Account

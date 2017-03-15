@@ -32,5 +32,4 @@ br
 .row
   .col-md-12
 
-    = link_to 'all transactions', account_transactions_path(account.id)
     = render 'transactions', transactions: transactions, account: account, ransack: transactions_ransack

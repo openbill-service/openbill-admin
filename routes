@@ -1,7 +1,8 @@
                        Prefix Verb   URI Pattern                                      Controller#Action
                          root GET    /                                                welcome#index
-               table_accounts GET    /accounts/table(.:format)                        accounts#table
+         suggestions_accounts GET    /accounts/suggestions(.:format)                  accounts#suggestions
              at_date_accounts GET    /accounts/at_date(.:format)                      accounts#at_date
+               months_account GET    /accounts/:id/months(.:format)                   accounts#months
          account_transactions GET    /accounts/:account_id/transactions(.:format)     account_transactions#index
                               POST   /accounts/:account_id/transactions(.:format)     account_transactions#create
       new_account_transaction GET    /accounts/:account_id/transactions/new(.:format) account_transactions#new
@@ -34,6 +35,14 @@ pending_webhooks_transactions GET    /transactions/pending_webhooks(.:format)   
                               PATCH  /categories/:id(.:format)                        categories#update
                               PUT    /categories/:id(.:format)                        categories#update
                               DELETE /categories/:id(.:format)                        categories#destroy
+                     invoices GET    /invoices(.:format)                              invoices#index
+                              POST   /invoices(.:format)                              invoices#create
+                  new_invoice GET    /invoices/new(.:format)                          invoices#new
+                 edit_invoice GET    /invoices/:id/edit(.:format)                     invoices#edit
+                      invoice GET    /invoices/:id(.:format)                          invoices#show
+                              PATCH  /invoices/:id(.:format)                          invoices#update
+                              PUT    /invoices/:id(.:format)                          invoices#update
+                              DELETE /invoices/:id(.:format)                          invoices#destroy
                      policies GET    /policies(.:format)                              policies#index
                               POST   /policies(.:format)                              policies#create
                    new_policy GET    /policies/new(.:format)                          policies#new
@@ -43,19 +52,3 @@ pending_webhooks_transactions GET    /transactions/pending_webhooks(.:format)   
                               PUT    /policies/:id(.:format)                          policies#update
                               DELETE /policies/:id(.:format)                          policies#destroy
                          logs GET    /logs(.:format)                                  logs#index
-                        goods GET    /goods(.:format)                                 goods#index
-                              POST   /goods(.:format)                                 goods#create
-                     new_good GET    /goods/new(.:format)                             goods#new
-                    edit_good GET    /goods/:id/edit(.:format)                        goods#edit
-                         good GET    /goods/:id(.:format)                             goods#show
-                              PATCH  /goods/:id(.:format)                             goods#update
-                              PUT    /goods/:id(.:format)                             goods#update
-                              DELETE /goods/:id(.:format)                             goods#destroy
-         goods_availabilities GET    /goods_availabilities(.:format)                  goods_availabilities#index
-                              POST   /goods_availabilities(.:format)                  goods_availabilities#create
-       new_goods_availability GET    /goods_availabilities/new(.:format)              goods_availabilities#new
-      edit_goods_availability GET    /goods_availabilities/:id/edit(.:format)         goods_availabilities#edit
-           goods_availability GET    /goods_availabilities/:id(.:format)              goods_availabilities#show
-                              PATCH  /goods_availabilities/:id(.:format)              goods_availabilities#update
-                              PUT    /goods_availabilities/:id(.:format)              goods_availabilities#update
-                              DELETE /goods_availabilities/:id(.:format)              goods_availabilities#destroy

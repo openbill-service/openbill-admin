@@ -1,29 +1,65 @@
 class AccountsController < ApplicationController
   DEFAULT_CATEGORY_ID = '12832d8d-43f5-499b-82a1-3466cadcd809'
 
-  MONTHS_TO_SHOW_COUNT = 5
-
   helper_method :filter, :filter_params, :current_category
 
   def index
+    periods = build_periods
+
     respond_to do |format|
-      format.html {
+      format.html do
         render locals: {
-          periods: build_periods,
+          periods: periods,
           accounts: accounts,
           categories: categories,
           ransack: ransack,
           current_category: current_category,
         }
-      }
-      format.csv {
-        content = AccountsSpreadsheet.new(accounts, build_periods).to_csv
+      end
+      format.csv do
+        content = AccountsSpreadsheet.new(accounts, periods).to_csv
         send_data(
             content,
             disposition: 'attachment; filename=accounts.csv',
             type: 'text/csv'
         )
-      }
+      end
+    end
+  end
+
+  def months
+    periods = build_periods use_previous: false
+
+    accounts = {}
+
+    periods.each do |period|
+      account.all_transactions.by_month(period.last).includes(:from_account).group(:from_account_id).sum(:amount_cents).each do |account_id, amount_cents|
+        a = accounts[account_id] ||= OpenStruct.new(
+          account: OpenbillAccount.find(account_id),
+          periods: {}
+        )
+        a.periods[period] = Money.new amount_cents, account.amount_currency
+      end
+    end
+
+    accounts = accounts.each_value
+
+    respond_to do |format|
+      format.html do
+        render locals: {
+          periods: periods,
+          account: account,
+          accounts: accounts
+        }
+      end
+      format.csv do
+        content = AccountReportSpreadsheet.new(accounts, periods).to_csv
+        send_data(
+            content,
+            disposition: "attachment; filename=account_#{account.id}_report.csv",
+            type: 'text/csv'
+        )
+      end
     end
   end
 
@@ -142,10 +178,10 @@ class AccountsController < ApplicationController
     OpenbillTransaction.order('created_at asc').first.try(:created_at).try(:date) || Date.today
   end
 
-  def build_periods
+  def build_periods(count: 5, use_previous: true)
     today = Date.today
     periods = [Period.new(today.beginning_of_month, today.end_of_month)]
-    MONTHS_TO_SHOW_COUNT.times do
+    count.times do
       period = periods.last
       first = (period.first - 1.day).beginning_of_month
       last = first.end_of_month
@@ -153,7 +189,7 @@ class AccountsController < ApplicationController
     end
 
     period = periods.last.last
-    periods.push Period.new(nil, (period.beginning_of_month - 1.day).end_of_month)
+    periods.push Period.new(nil, (period.beginning_of_month - 1.day).end_of_month) if use_previous
 
     periods.reverse
   end

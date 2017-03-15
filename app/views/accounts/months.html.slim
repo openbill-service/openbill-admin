@@ -1,0 +1,15 @@
+= render 'header', account: account
+
+table.table.table-condensed.table-stripped
+  thead
+    tr
+      th Аккаунт
+      - periods.each do |m|
+        th= humanized_period m
+  tbody
+    - accounts.each do |a|
+      tr
+        td
+          = render 'account_link', account: a.account
+        - periods.each do |period|
+          td= humanized_amount a[:periods][period]
