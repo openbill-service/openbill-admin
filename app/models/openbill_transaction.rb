@@ -11,7 +11,7 @@ class OpenbillTransaction < ApplicationRecord
   # Original trbansaction
   has_one :reverse_transaction, class_name: 'OpenbillTransaction', primary_key: :reverse_transaction_id, foreign_key: :id
 
-  scope :ordered, -> { order 'date desc' }
+  scope :ordered, -> { order 'created_at desc' }
   scope :by_any_account_id, -> (id) { where('from_account_id = ? or to_account_id = ?', id, id) }
   scope :by_period, -> (period) {
     scope = all
