@@ -28,7 +28,8 @@ class AccountTransactionsController < ApplicationController
       render :new, locals: {
         account: account,
         account_transaction_form: account_transaction_form,
-        opposite_accounts_collection: opposite_accounts(account, direction)
+        opposite_accounts_collection: opposite_accounts(account, direction),
+        example_transactions: example_transactions
       }
     end
 
@@ -37,7 +38,8 @@ class AccountTransactionsController < ApplicationController
     render :new, locals: {
       account: account,
       account_transaction_form: account_transaction_form,
-      opposite_accounts_collection: opposite_accounts(account, direction)
+      opposite_accounts_collection: opposite_accounts(account, direction),
+      example_transactions: example_transactions
     }
   end
 
