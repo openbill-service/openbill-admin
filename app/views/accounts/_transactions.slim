@@ -14,7 +14,7 @@
         th Meta
         th Actions
 
-    = render 'transactions_table_body', transactions: transactions
+    = render 'transactions_table_body', transactions: transactions, account: account
   hr
   = render 'pagination', scope: transactions
 
