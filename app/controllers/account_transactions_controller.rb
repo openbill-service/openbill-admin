@@ -12,7 +12,7 @@ class AccountTransactionsController < ApplicationController
   def new
     render locals: {
       account: account,
-      account_transaction_form: build_account_transaction_form,
+      account_transaction_form: build_account_transaction_form(permitted_params),
       opposite_accounts_collection: opposite_accounts(account, direction),
       example_transactions: example_transactions
     }
