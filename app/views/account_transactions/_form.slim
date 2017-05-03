@@ -1,6 +1,6 @@
 = simple_form_for account_transaction_form, url: account_transactions_path, method: :create do |f|
   = f.error_notification
-  = f.full_error_messages
+  = full_error_messages f
   = hidden_field_tag :direction, f.object.direction
   = f.input :amount_currency, as: :hidden
   .row

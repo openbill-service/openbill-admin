@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def full_error_messages(f)
+    f.object.errors.full_messages.to_sentence
+  end
+
   def application_title
     "Openbill Admin #{AppVersion}"
   end
