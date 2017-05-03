@@ -1,0 +1,17 @@
+- if example_transactions.any?
+  h3 Примеры транзакций
+  table.table.table-condensed.table-striped
+    thead
+      tr
+        th Время создания
+        th Дата
+        th Противоположный счет
+        th Сумма
+        th Ключ
+        th Details
+        th Meta
+        th Actions
+
+      = render 'accounts/transactions_table_body', account: account, transactions: example_transactions, ransack: nil
+- else
+  h3 Нет примеров транзакций

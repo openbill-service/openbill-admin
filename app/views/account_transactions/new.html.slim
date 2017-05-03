@@ -1,30 +1,9 @@
-h1= "Account: #{account_title account}"
-h2= "Create #{account_transaction_form.direction} transaction"
+h1 Зачисление на счет
+= account_title account
 
-= simple_form_for account_transaction_form, url: account_transactions_path, method: :create do |f|
-  = f.error_notification
-  = hidden_field_tag :direction, f.object.direction
-  = f.input :amount_currency, as: :hidden
-  .row
-    .col-md-6
-      = f.input :opposite_account_id, collection: opposite_accounts_collection, include_blank: false
-    .col-md-2
-      .p-m
-        .form-group
-          = f.label :amount_cents, class: 'form-control-label'
-          .input-group
-            .input-group-addon= money_symbol_from_string account_transaction_form.amount_currency
-            = f.input_field :amount_cents, class: 'form-control', autofocus: true
-          = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
-    .col-md-4
-      = f.input :date, as: :date_picker, readonly: true, required: false
-  .row
-    .col-md-6
-      = f.input :key
-    .col-md-6
-      = f.input :meta
-  .row
-    .col-md-12
-      = f.input :details, as: :text
+em= "Создаем #{account_transaction_form.direction} транзакцию"
 
-  = f.button :submit, class: 'btn btn-success'
+= render 'form', account_transaction_form: account_transaction_form, opposite_accounts_collection: opposite_accounts_collection
+
+.mt-4
+  = render 'example_transactions', example_transactions: example_transactions, account: account

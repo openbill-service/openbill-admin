@@ -14,29 +14,7 @@
         th Meta
         th Actions
 
-    tbody
-      - transactions.each do |transaction|
-        - t = AccountTransaction.new account, transaction
-        tr
-          td
-            = link_to transaction_path t.id do
-              .text-nowrap= I18n.l t.created_at, format: :short
-          td.text-nowrap= humanized_date t.date
-          td
-            = link_to t.opposite_account, account_path(t.opposite_account.id)
-            div
-              small.text-muted= t.opposite_account.details
-          td= humanized_amount t.amount
-          td
-            code = t.key
-          td
-            .text-muted= t.details
-          td= humanized_meta t.meta
-          td
-            = link_to 'Show', transaction_path(t.id)
-            - if t.reverse_transaction_id.present?
-              br
-              = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
+    = render 'transactions_table_body', transactions: transactions
   hr
   = render 'pagination', scope: transactions
 

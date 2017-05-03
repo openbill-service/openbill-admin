@@ -13,7 +13,8 @@ class AccountTransactionsController < ApplicationController
     render locals: {
       account: account,
       account_transaction_form: build_account_transaction_form,
-      opposite_accounts_collection: opposite_accounts(account, direction)
+      opposite_accounts_collection: opposite_accounts(account, direction),
+      example_transactions: example_transactions
     }
   end
 
@@ -91,6 +92,20 @@ class AccountTransactionsController < ApplicationController
       amount_currency: account.amount_currency,
       direction: direction
     })
+  end
+
+  def example_transactions
+    case params[:direction]
+    when AccountTransactionForm::INCOME_DIRECTION
+      scope = account.income_transactions
+    when AccountTransactionForm::OUTCOME_DIRECTION
+      scope = account.outcome_transactions
+    else
+      scope = account.all_transactions
+    end
+    scope = account.all_transactions
+
+    scope.ordered.last(5)
   end
 
   #def date
