@@ -107,7 +107,7 @@ class AccountTransactionsController < ApplicationController
     end
     scope = account.all_transactions
 
-    scope.ordered.last(5)
+    scope.ordered.first(5)
   end
 
   #def date

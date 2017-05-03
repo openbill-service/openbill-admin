@@ -4,7 +4,7 @@ class OpenbillAccount < ApplicationRecord
   has_many :income_transactions, class_name: 'OpenbillTransaction', foreign_key: :to_account_id
   has_many :outcome_transactions, class_name: 'OpenbillTransaction', foreign_key: :from_account_id
 
-  scope :ordered, -> { order :id }
+  scope :ordered, -> { order :key }
 
   monetize :amount_cents
 
