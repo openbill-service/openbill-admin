@@ -54,7 +54,7 @@ module ApplicationHelper
 
   def humanized_meta(meta)
     return unless meta.present?
-    content_tag :code, meta
+    content_tag :code, meta.to_json
   end
 
   def categories_collection
