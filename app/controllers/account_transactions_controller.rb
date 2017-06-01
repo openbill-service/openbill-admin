@@ -129,7 +129,7 @@ class AccountTransactionsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:account_transaction_form).permit(
+    params.fetch(:account_transaction_form, {}).permit(
       :opposite_account_id,
       :amount_cents, :amount_currency, :key, :details, :meta, :date)
   end

@@ -1,4 +1,4 @@
-= link_to account_path(account.id), data: { toggle: :tooltip }, title: account.meta.to_s do
+= link_to account_path(account.id), data: { toggle: :tooltip }, title: account.meta.to_json do
   = account.details.presence || account.name
   small.text-muted= " [#{account}]"
 br
