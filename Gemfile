@@ -56,7 +56,7 @@ gem 'money-rails'
 gem 'slim-rails'
 gem 'nprogress-rails'
 gem 'semver2'
-gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'bootstrap', '~> 4.4.1'
 
 gem 'rack_password'
 
