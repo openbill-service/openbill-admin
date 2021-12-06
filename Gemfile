@@ -136,3 +136,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+# Added at 2021-12-06 17:54:46 +0300 by danil:
+gem "dotenv-rails", "~> 2.7"
