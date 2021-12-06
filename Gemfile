@@ -130,6 +130,8 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-secrets-yml', require: false
   gem 'capistrano-faster-assets', require: false
+  gem 'capistrano-shell', require: false
+  gem 'capistrano-rails-console', require: false
   # gem 'capistrano-sidekiq', require: false
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
