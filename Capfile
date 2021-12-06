@@ -40,6 +40,8 @@ require 'capistrano/puma/nginx'
 require 'capistrano/secrets_yml'
 require 'capistrano/faster_assets'
 # require 'capistrano/sidekiq'
+require 'capistrano/shell'
+require 'capistrano/rails/console'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
