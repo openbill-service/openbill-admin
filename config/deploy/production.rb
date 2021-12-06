@@ -1,1 +1,1 @@
-server 'db2.kiiiosk.ru', user: 'wwwkiiiosk', roles: %w{app web}
+server 'srv2.kiiiosk.store', user: 'wwwkiiiosk', roles: %w{app web}
