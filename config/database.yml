@@ -21,13 +21,11 @@ staging:
   password:
 
 production:
-  adapter: <%= ENV["OPENBILL_DATABASE_ADAPTER"] %>
+  adapter: postgresql
   encoding: unicode
-  database: <%= ENV["OPENBILL_DATABASE_NAME"] %>
-  pool: <%= ENV["OPENBILL_DATABASE_POOL"] %>
-  host: <%= ENV["OPENBILL_DATABASE_HOST"] %>
-  port: <%= ENV["OPENBILL_DATABASE_PORT"] %>
-  username: <%= ENV["OPENBILL_DATABASE_USERNAME"] %>
-  password: <%= ENV["OPENBILL_DATABASE_PASSWORD"] %>
   reconnect: true
-  sslmode: 'disable'
+  host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
+  database: <%= ENV.fetch('DATABASE_NAME', 'merchantly_production' ) %>
+  pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASS'] %>

@@ -22,7 +22,6 @@ set :rbenv_ruby, File.read('.ruby-version').strip
 # Default value for :pty is false
 # set :pty, true
 
-append :linked_files, "config/database.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 set :puma_preload_app, true

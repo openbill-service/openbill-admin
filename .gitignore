@@ -15,6 +15,3 @@ public/assets
 
 tags
 gems.tags
-
-config/database.yml
-config/secrets.yml
