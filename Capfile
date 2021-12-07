@@ -28,6 +28,7 @@ install_plugin Capistrano::SCM::Git
 #
 # require "capistrano/rvm"
 require "capistrano/rbenv"
+require 'capistrano/dotenv'
 require 'capistrano/rbenv_install'
 # require "capistrano/chruby"
 require "capistrano/bundler"

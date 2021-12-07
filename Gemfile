@@ -129,6 +129,7 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-secrets-yml', require: false
   gem 'capistrano-faster-assets', require: false
+  gem 'capistrano-dotenv', require: false
   gem 'capistrano-shell', require: false
   gem 'capistrano-rails-console', require: false
   # gem 'capistrano-sidekiq', require: false
