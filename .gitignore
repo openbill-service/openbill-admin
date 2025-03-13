@@ -19,3 +19,11 @@ gems.tags
 .env.production
 
 /config/master.key
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+/config/*.local.yml
+/config/credentials/local.*
+.
