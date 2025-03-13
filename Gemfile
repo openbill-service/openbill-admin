@@ -119,6 +119,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'kamal'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
@@ -136,3 +137,5 @@ end
 gem "dotenv-rails", "~> 2.7"
 
 gem "csv", "~> 3.3"
+
+gem "bootsnap", "~> 1.18"
