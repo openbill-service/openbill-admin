@@ -81,18 +81,15 @@ RUN rm -rf node_modules
 # Final stage for app image
 FROM base
 
+# Copy built artifacts: gems, application
+COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash
 
-# Copy built artifacts: gems, application
-COPY --chown=rails:rails --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --chown=rails:rails --from=build /rails /rails
-
-# TODO Убрать выше chown=rails:rails но сделать chmod чтобы все файлы читались рельсами
-
-# Run and own only the runtime files as a non-root user for security
 RUN chown -R rails:rails db log storage tmp
-
 USER 1000:1000
 
 # Entrypoint prepares the database.
