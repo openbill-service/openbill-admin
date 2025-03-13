@@ -30,6 +30,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
+gem "propshaft"
 # Use SCSS for stylesheets
 # gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
