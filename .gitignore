@@ -16,4 +16,6 @@ public/assets
 tags
 gems.tags
 
+.env.production
+
 /config/master.key

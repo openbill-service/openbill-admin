@@ -30,17 +30,12 @@ install_plugin Capistrano::SCM::Git
 require "capistrano/rbenv"
 require 'capistrano/dotenv'
 require 'capistrano/rbenv_install'
-# require "capistrano/chruby"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
-# require "capistrano/passenger"
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
-# require 'capistrano/puma/jungle'  # if you need the jungle tasks
-require 'capistrano/secrets_yml'
 require 'capistrano/faster_assets'
-# require 'capistrano/sidekiq'
 require 'capistrano/shell'
 require 'capistrano/rails/console'
 

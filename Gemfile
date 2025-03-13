@@ -86,6 +86,8 @@ gem 'wkhtmltopdf-binary'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'bcrypt_pbkdf'
+  gem 'ed25519'
 
   gem 'pry-rails'
   gem 'pry-theme'
