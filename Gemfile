@@ -86,33 +86,12 @@ gem "bootsnap", "~> 1.18"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'bcrypt_pbkdf'
-  gem 'ed25519'
-
-  gem 'pry-rails'
-  gem 'pry-theme'
-
-  gem 'pry-pretty-numeric'
-  # gem 'pry-highlight'
-  # step, next, finish, continue, break
-  gem 'pry-nav'
-
-  gem 'pry-doc'
-  gem 'pry-docmore'
-
-  # Добавляет show-stack
-  gem 'pry-stack_explorer'
-
   gem 'listen', '~> 3.0'
   gem 'guard', '> 2.12'
   gem 'terminal-notifier-guard', '~> 1.6.1', require: darwin_only('terminal-notifier-guard')
 
-  # gem 'guard-rspec'
-  gem 'guard-rails'
-  # gem 'guard-shell'
   gem 'guard-bundler'
   gem 'guard-ctags-bundler'
-  # gem 'guard-rubocop'
 
   gem 'rspec'
   gem 'rspec-rails'
