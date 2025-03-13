@@ -1,9 +1,14 @@
-nav.navbar.navbar-toggleable-md.navbar-light.bg-faded.fixed-top
-  = link_to application_title, root_url, class: 'navbar-brand'
-  ul.navbar-nav
-    = navbar_link_to OpenbillAccount.model_name.human(count: 2), accounts_path
-    = navbar_link_to OpenbillTransaction.model_name.human(count: 2), transactions_path
-    = navbar_link_to OpenbillCategory.model_name.human(count: 2), categories_path
-    = navbar_link_to OpenbillPolicy.model_name.human(count: 2), policies_path
-    = navbar_link_to OpenbillInvoice.model_name.human(count: 2), invoices_path
-    -#= navbar_link_to OpenbillWebhookLog.model_name.human(count: 2), logs_path
+nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top.border-bottom
+  = content_tag :div, class: "#{defined?(container_class) ? container_class : 'container-fluid'} px-3" do
+    span.navbar-brand.mb-0.h1
+      = link_to root_url, class: 'text-dark text-decoration-none' do
+        = render 'logo'
+    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0.d-flex
+        = navbar_link_to OpenbillAccount.model_name.human(count: 2), accounts_path
+        = navbar_link_to OpenbillTransaction.model_name.human(count: 2), transactions_path
+        = navbar_link_to OpenbillCategory.model_name.human(count: 2), categories_path
+        = navbar_link_to OpenbillPolicy.model_name.human(count: 2), policies_path
+        = navbar_link_to OpenbillInvoice.model_name.human(count: 2), invoices_path

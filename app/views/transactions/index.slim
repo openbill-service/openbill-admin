@@ -1,7 +1,7 @@
 .pull-right
   = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'btn btn-sm btn-default'
   | &nbsp;
-  = link_to 'Export to CSV', transactions_path(params.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
+  = link_to 'Export to CSV', transactions_path(request.query_parameters.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
   | &nbsp;
   = link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
 h1

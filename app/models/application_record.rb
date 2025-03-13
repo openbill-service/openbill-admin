@@ -6,6 +6,10 @@ class ApplicationRecord < ActiveRecord::Base
     attribute_names
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    reflections.keys
+  end
+
   def self.model_name
     ActiveModel::Name.new(self, nil, name.gsub('Openbill', ''))
   end

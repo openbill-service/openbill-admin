@@ -3,7 +3,7 @@ module ApplicationHelper
     f.object.errors.full_messages.to_sentence
   end
 
-  def application_title
+  def app_title
     "Openbill Admin #{AppVersion}"
   end
 

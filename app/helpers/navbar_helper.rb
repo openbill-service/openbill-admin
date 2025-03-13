@@ -3,7 +3,7 @@ module NavbarHelper
     active = is_active_link? href, :inclusive if active.nil?
     active_class = active ? 'active' : ''
     content_tag :li, class: "nav-item #{active_class}" do
-      link_to title, href, class: 'nav-link'
+      active_link_to title, href, class: 'nav-link'
     end
   end
 end
