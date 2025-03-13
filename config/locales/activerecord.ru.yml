@@ -3,8 +3,8 @@ ru:
   activerecord:
     models:
       account: 
-        one: Счет
-        other: Счета
+        one: Баланс
+        other: Балансы
       transaction: 
         one: Транзакция
         other: Транзакции
