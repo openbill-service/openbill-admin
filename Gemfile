@@ -100,3 +100,5 @@ end
 group :development do
   gem 'kamal', '~> 2.5'
 end
+
+gem "thruster", "~> 0.1.12"

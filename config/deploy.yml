@@ -1,5 +1,5 @@
 # Name of your application. Used to uniquely configure containers.
-service: openbill-admin
+service: <%= File.basename(`git rev-parse --show-toplevel`).chomp %>
 
 # Name of the container image.
 image: openbill-service/openbill-admin
@@ -7,7 +7,7 @@ image: openbill-service/openbill-admin
 # Deploy to these servers.
 servers:
   web:
-    - fynman.srv.kiiiosk.store
+    - <%= ENV['DEPLOY_HOST'] %>
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -43,11 +43,16 @@ builder:
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+env:
+  clear:
+    DATABASE_HOST: <%= ENV['DATABASE_HOST'] %>
+    DATABASE_USER: <%= ENV['DATABASE_USER'] %>
+    DATABASE_NAME: <%= ENV['DATABASE_NAME'] %>
+  secret:
+    # - RAILS_MASTER_KEY
+    - SECRET_KEY_BASE
+    - RACK_PASSWORD
+    - DATABASE_PASS
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal app logs -r job" will tail logs from the first server in the job section.
