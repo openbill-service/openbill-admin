@@ -1,1 +1,1 @@
-server 'srv2.kiiiosk.store', user: 'wwwkiiiosk', roles: %w{app web}
+server 'fynman.srv.kiiiosk.store', user: 'app', roles: %w{app web}
