@@ -31,11 +31,11 @@ require "capistrano/rbenv"
 require 'capistrano/dotenv'
 require 'capistrano/rbenv_install'
 require "capistrano/bundler"
-require "capistrano/rails/assets"
+# require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
-require 'capistrano/faster_assets'
+# require 'capistrano/faster_assets'
 require 'capistrano/shell'
 require 'capistrano/rails/console'
 

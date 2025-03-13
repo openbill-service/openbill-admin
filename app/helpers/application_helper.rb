@@ -11,6 +11,34 @@ module ApplicationHelper
     link_to 'Export to CSV', url_for(request.query_parameters.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
   end
 
+  def back_link(url = nil)
+    link_to "&larr; #{t('helpers.back')}".html_safe, url || root_path
+  end
+
+  def back_url
+    params[:back_url] || @back_url || request.referer.presence || root_url # rubocop:disable Rails/HelperInstanceVariable
+  end
+
+  def current_url
+    request.url
+  end
+
+  def spinner
+    content_tag :div, class: "spinner-border", role: "status" do
+      content_tag :span, class: "visually-hidden" do
+        "Loading..."
+      end
+    end
+  end
+
+  def full_error_messages(form)
+    return if form.object.errors.empty?
+
+    content_tag :div, class: "alert alert-danger" do
+      form.object.errors.full_messages.to_sentence
+    end
+  end
+
   def humanized_period(period)
 
     if period.month?

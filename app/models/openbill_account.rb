@@ -10,6 +10,7 @@ class OpenbillAccount < ApplicationRecord
   monetize :amount_cents
 
   def amount_by_period(period)
+    return 0 if Rails.env.development?
     sql =  ActiveRecord::Base.send(:sanitize_sql_array, ["SELECT openbill_period_amount(?, ?, ?) FROM openbill_accounts WHERE id=?", id, period.first, period.last, id])
     value = OpenbillAccount.connection.select_value sql
     return unless value

@@ -16,6 +16,7 @@ public/assets
 tags
 gems.tags
 
+.env*
 .env.production
 
 /config/master.key
@@ -26,4 +27,4 @@ gems.tags
 !/tmp/storage/.keep
 /config/*.local.yml
 /config/credentials/local.*
-.
+/node_modules

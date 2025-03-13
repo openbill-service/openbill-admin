@@ -31,25 +31,19 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 gem "propshaft"
-# Use SCSS for stylesheets
-# gem 'sass-rails'
-# Use Uglifier as compressor for JavaScript assets
-# gem 'uglifier'
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
-# gem 'mini_racer'
 #
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem "importmap-rails"
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'kaminari'
 gem 'bootstrap-kaminari-views', github: 'klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
+gem "bootstrap-icons-helper", "~> 2.0"
 gem 'pg'
 gem 'money'
 gem 'money-rails'
