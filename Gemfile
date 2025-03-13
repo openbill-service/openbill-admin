@@ -31,9 +31,9 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use SCSS for stylesheets
-gem 'sass-rails'
+# gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
+# gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -45,9 +45,8 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+# gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'kaminari'
 gem 'bootstrap-kaminari-views', github: 'klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
 gem 'pg'
@@ -55,9 +54,7 @@ gem 'money'
 gem 'money-rails'
 gem 'slim-rails'
 gem 'nprogress-rails'
-gem 'semver2'
-gem 'bootstrap', '~> 4.0.0.alpha6'
-
+gem "semver2", github: "haf/semver"
 gem 'rack_password'
 
 gem 'ransack'
@@ -121,8 +118,6 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-rbenv-install', require: false
@@ -133,10 +128,9 @@ group :development do
   gem 'capistrano-shell', require: false
   gem 'capistrano-rails-console', require: false
   # gem 'capistrano-sidekiq', require: false
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 end
 
 # Added at 2021-12-06 17:54:46 +0300 by danil:
 gem "dotenv-rails", "~> 2.7"
+
+gem "csv", "~> 3.3"

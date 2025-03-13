@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def export_csv_link
-    link_to 'Export to CSV', url_for(params.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
+    link_to 'Export to CSV', url_for(request.query_parameters.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
   end
 
   def humanized_period(period)

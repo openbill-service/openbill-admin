@@ -15,3 +15,5 @@ public/assets
 
 tags
 gems.tags
+
+/config/master.key

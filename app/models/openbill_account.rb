@@ -1,4 +1,5 @@
 class OpenbillAccount < ApplicationRecord
+  self.table_name = :openbill_accounts
   belongs_to :category, class_name: 'OpenbillCategory'
 
   has_many :income_transactions, class_name: 'OpenbillTransaction', foreign_key: :to_account_id
