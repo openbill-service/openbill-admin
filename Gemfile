@@ -78,6 +78,11 @@ gem 'momentjs-rails'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+
+# Added at 2021-12-06 17:54:46 +0300 by danil:
+gem "csv", "~> 3.3"
+
+gem "bootsnap", "~> 1.18"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -114,23 +119,5 @@ group :development, :test do
 end
 
 group :development do
-  gem 'kamal'
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rbenv', require: false
-  gem 'capistrano-rbenv-install', require: false
-  gem 'capistrano3-puma', require: false
-  gem 'capistrano-secrets-yml', require: false
-  gem 'capistrano-faster-assets', require: false
-  gem 'capistrano-dotenv', require: false
-  gem 'capistrano-shell', require: false
-  gem 'capistrano-rails-console', require: false
-  # gem 'capistrano-sidekiq', require: false
+  gem 'kamal', '~> 2.5'
 end
-
-# Added at 2021-12-06 17:54:46 +0300 by danil:
-gem "dotenv-rails", "~> 2.7"
-
-gem "csv", "~> 3.3"
-
-gem "bootsnap", "~> 1.18"
