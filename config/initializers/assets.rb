@@ -1,0 +1,1 @@
+Rails.application.config.assets.precompile << "bootstrap.bundle.min.js"

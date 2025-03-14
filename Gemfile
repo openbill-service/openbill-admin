@@ -102,3 +102,5 @@ group :development do
 end
 
 gem "thruster", "~> 0.1.12"
+
+gem "cssbundling-rails", "~> 1.4"
