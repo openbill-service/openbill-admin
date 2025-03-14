@@ -2,7 +2,9 @@ development:
   adapter: postgresql
   encoding: unicode
   pool: 5
+  <% if ENV.key?('DATABASE_HOST') %>
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
+  <% end %>
   database: <%= ENV.fetch('DATABASE_NAME', 'kiiiosk_production' ) %>
   pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
   username: <%= ENV['DATABASE_USER'] %>
@@ -28,7 +30,9 @@ production:
   adapter: postgresql
   encoding: unicode
   reconnect: true
+    <% if ENV.key?('DATABASE_HOST') %>
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
+  <% end %>
   database: <%= ENV.fetch('DATABASE_NAME', 'merchantly_production' ) %>
   pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
   username: <%= ENV['DATABASE_USER'] %>

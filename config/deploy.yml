@@ -48,7 +48,10 @@ env:
     DATABASE_HOST: <%= ENV['DATABASE_HOST'] %>
     DATABASE_USER: <%= ENV['DATABASE_USER'] %>
     DATABASE_NAME: <%= ENV['DATABASE_NAME'] %>
+    BUGSNAG_API_KEY: <%= ENV['BUGSNAG_API_KEY'] %>
+    RAILS_LOG_TO_STDOUT: true
   secret:
+    # Don't use in this project
     # - RAILS_MASTER_KEY
     - SECRET_KEY_BASE
     - RACK_PASSWORD

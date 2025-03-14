@@ -4,3 +4,4 @@ git commit -m `./bin/semver`
 git push
 gh release create `./bin/semver` --generate-notes
 git pull --tags
+./bin/kamal deploy
