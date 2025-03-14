@@ -7,7 +7,11 @@ image: openbill-service/openbill-admin
 # Deploy to these servers.
 servers:
   web:
-    - <%= ENV['DEPLOY_HOST'] %>
+    hosts:
+      - <%= ENV['DEPLOY_HOST'] %>
+    <%#volumes:%>
+      <%#- /var/run/postgresql/.s.PGSQL.5432:/var/run/postgresql/.s.PGSQL.5432%>
+      <%#- /var/log/kiiiosk:/rails/log%>
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -45,7 +49,7 @@ builder:
 #
 env:
   clear:
-    # DATABASE_HOST: <%= ENV['DATABASE_HOST'] %>
+    DATABASE_HOST: <%= ENV['DATABASE_HOST'] %>
     DATABASE_USER: <%= ENV['DATABASE_USER'] %>
     DATABASE_NAME: <%= ENV['DATABASE_NAME'] %>
     BUGSNAG_API_KEY: <%= ENV['BUGSNAG_API_KEY'] %>
