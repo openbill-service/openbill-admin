@@ -2,6 +2,20 @@
 
 OpenBill Admin is a Ruby on Rails application that provides an administrative interface for the OpenBill billing system. It allows you to manage accounts, transactions, categories, policies, and invoices.
 
+## Как деплоить
+
+Для деплоя используется `kamal`:
+
+```sh
+./bin/kamal deploy
+```
+
+Деплоить изменения (инкремент версии + деплой):
+
+```sh
+./release
+```
+
 ## Requirements
 
 - Ruby 3.x
@@ -9,13 +23,6 @@ OpenBill Admin is a Ruby on Rails application that provides an administrative in
 - Node.js and Yarn (for asset compilation)
 
 ## How to Install
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/openbill-service/openbill-admin.git
-cd openbill-admin
-```
 
 ### Install Dependencies
 
