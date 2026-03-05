@@ -1,0 +1,81 @@
+version: "8.0"
+
+environment:
+  RAILS_ENV: development
+  BUNDLE_DEPLOYMENT: "false"
+  BUNDLE_WITHOUT: ""
+
+compose:
+  files:
+    - docker-compose.dev.yml
+
+interaction:
+  shell:
+    description: Open a Bash shell in app container
+    service: app
+    command: bash
+    compose:
+      run_options: [no-deps]
+
+  bundle:
+    description: Run Bundler commands
+    service: app
+    command: bundle
+
+  yarn:
+    description: Run Yarn commands
+    service: app
+    command: yarn
+
+  rails:
+    description: Run Rails commands
+    service: app
+    command: bundle exec rails
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_USER: postgres
+      DATABASE_PASS: postgres
+      DATABASE_NAME: kiiiosk_production
+      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_POOL: 5
+
+  rake:
+    description: Run Rake commands
+    service: app
+    command: bundle exec rake
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_USER: postgres
+      DATABASE_PASS: postgres
+      DATABASE_NAME: kiiiosk_production
+      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_POOL: 5
+
+  rspec:
+    description: Run RSpec tests
+    service: app
+    command: bundle exec rspec
+    environment:
+      RAILS_ENV: test
+      DATABASE_HOST: postgres
+      DATABASE_USER: postgres
+      DATABASE_PASS: postgres
+      DATABASE_NAME: kiiiosk_production
+      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_POOL: 5
+    compose:
+      run_options:
+        - -e RAILS_ENV=test
+
+  server:
+    description: Start the application in Docker
+    service: app
+    compose:
+      method: up
+
+provision:
+  - dip compose up -d postgres
+  - dip bundle install
+  - dip yarn install
+  - dip rake db:create db:migrate
+  - dip RAILS_ENV=test rake db:create db:migrate

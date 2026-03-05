@@ -82,6 +82,7 @@ end
 
 group :development do
   gem 'kamal', '~> 2.5'
+  gem 'dip', '~> 8.1', require: false
   gem 'brakeman', require: false
 end
 
