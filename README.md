@@ -144,6 +144,17 @@ OpenBill Admin works with the following main entities:
 - **Policies**: Rules defining permitted transactions between accounts/categories
 - **Invoices**: For billing and payment tracking
 
+## Openbill-core Integration Contract
+
+Openbill Admin is integrated with `openbill-core` through PostgreSQL (no API/client layer).
+
+- Integration contract and compatibility rules: [`docs/openbill-core-integration.md`](docs/openbill-core-integration.md)
+- Contract check command:
+
+```bash
+bundle exec rake openbill_core:verify_contract
+```
+
 ## License
 
 This project is licensed under the MIT License.
