@@ -37,7 +37,7 @@ jobs:
           bundler-cache: true
 
       - name: Validate importmap pins
-        run: bundle exec rails runner "Rails.application.importmap.to_json(resolver: ActionController::Base.helpers)"
+        run: 'bundle exec rails runner "Rails.application.importmap.to_json(resolver: ActionController::Base.helpers)"'
 
   test:
     runs-on: ubuntu-latest
