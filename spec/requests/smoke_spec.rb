@@ -1,13 +1,21 @@
 require "rails_helper"
 
 RSpec.describe "Smoke routes", type: :request do
+  before do
+    OpenbillTransaction.delete_all
+    OpenbillInvoice.delete_all
+    OpenbillPolicy.delete_all
+    OpenbillAccount.delete_all
+    OpenbillCategory.delete_all
+  end
+
   it "responds on core pages without server errors" do
     get "/"
     expect(response).to have_http_status(:found)
 
     %w[/accounts /transactions /categories /policies /invoices /logs].each do |path|
       get path
-      expect(response).to have_http_status(:ok), "Expected #{path} to return 200, got #{response.status}"
+      expect(response).to have_http_status(:ok), "Expected #{path} to return 200, got #{response.status}. Body: #{response.body.to_s[0, 500]}"
     end
   end
 end
