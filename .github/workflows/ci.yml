@@ -81,5 +81,6 @@ jobs:
           # REDIS_URL: redis://localhost:6379/0
         run: |
           bundle exec rails db:prepare
+          bundle exec rake openbill_core:verify_contract
           bundle exec rails zeitwerk:check
           bundle exec rspec

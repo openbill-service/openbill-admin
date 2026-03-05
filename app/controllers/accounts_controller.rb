@@ -72,10 +72,10 @@ class AccountsController < ApplicationController
   end
 
   def suggestions
-    accounts = OpenbillAccount.order(:key).where("key like ?", "#{params[:q]}%")
+    suggested_accounts = openbill_accounts.suggestions(prefix: params[:q])
     render json: {
-      total_count: accounts.count,
-      items: accounts.map { |c| { id: c.id, text: "#{c.name} (#{c.details})" }}
+      total_count: suggested_accounts.count,
+      items: suggested_accounts.map { |account| { id: account.id, text: "#{account.name} (#{account.details})" } }
     }
   end
 
@@ -176,6 +176,10 @@ class AccountsController < ApplicationController
 
   def categories
     @_categories ||= OpenbillCategory.all
+  end
+
+  def openbill_accounts
+    @_openbill_accounts ||= OpenbillCore::AccountsRepository.new
   end
 
   def permitted_params
