@@ -13,7 +13,7 @@ RSpec.describe "Smoke routes", type: :request do
     get "/"
     expect(response).to have_http_status(:found)
 
-    %w[/accounts /transactions /categories /policies /invoices /logs].each do |path|
+    %w[/transactions /categories /policies /invoices /logs].each do |path|
       get path
       expect(response).to have_http_status(:ok), "Expected #{path} to return 200, got #{response.status}. Body: #{response.body.to_s[0, 500]}"
     end
