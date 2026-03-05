@@ -10,9 +10,8 @@ meta name="view-transition" content="same-origin"
 
 = content_for :head
 
-// To prevent the page from flickering as it scrolls from the top to the desired position, add the no-preview cache directive in the page's head:
-// Useful for board page
-meta name="turbolinks-cache-control" content="no-preview"
+// To prevent preview flicker on pages that should always render fresh.
+meta name="turbo-cache-control" content="no-preview"
 = turbo_refreshes_with method: :morph, scroll: :preserve
 
 meta name='appear' data-appearing-on=current_url

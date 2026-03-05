@@ -19,8 +19,6 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 gem "propshaft"
-#
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
