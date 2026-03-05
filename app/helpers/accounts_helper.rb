@@ -34,8 +34,8 @@ module AccountsHelper
   end
 
   def accounts_collection
-    OpenbillAccount.ordered.map do |acc|
-      account_select_item acc
+    @accounts_collection ||= OpenbillAccount.ordered.pluck(:key, :details, :id).map do |key, details, id|
+      ["#{key} [#{details}]", id]
     end
   end
 
