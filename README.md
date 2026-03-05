@@ -11,6 +11,32 @@ OpenBill Admin is a Ruby on Rails application that provides an administrative in
 
 - Developer notes and architecture decisions: [DEVELOPERS.md](DEVELOPERS.md)
 
+## Build, CI, and GHCR
+
+Standard local commands:
+
+```bash
+make setup
+make lint
+make test
+make build
+make image IMAGE_TAG=local
+```
+
+CI runs on every PR and on pushes to `master`/`main`:
+
+- `make lint`
+- `make test`
+- `make image` (build-only check, without push)
+
+Docker image publication to GHCR is handled by `.github/workflows/release.yml` and runs only for git tags matching `v*`.
+Published image tags are predictable and include:
+
+- `vX.Y.Z`
+- `vX.Y`
+- `vX`
+- `latest` (updated only on release tags)
+
 ## Docker Development (Dip)
 
 `openbill-admin` supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).
