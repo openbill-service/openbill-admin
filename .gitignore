@@ -13,6 +13,8 @@ public/assets
 !/log/.keep
 /tmp
 
+/output
+
 tags
 gems.tags
 
