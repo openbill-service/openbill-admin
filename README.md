@@ -13,6 +13,32 @@ Administrative interface for the OpenBill billing system. Manage accounts, trans
 - PostgreSQL 14+
 - Node.js and Yarn (for CSS compilation only)
 
+## Build, CI, and GHCR
+
+Standard local commands:
+
+```bash
+make setup
+make lint
+make test
+make build
+make image IMAGE_TAG=local
+```
+
+CI runs on every PR and on pushes to `master`/`main`:
+
+- `make lint`
+- `make test`
+- `make image` (build-only check, without push)
+
+Docker image publication to GHCR is handled by `.github/workflows/release.yml` and runs only for git tags matching `v*`.
+Published image tags are predictable and include:
+
+- `vX.Y.Z`
+- `vX.Y`
+- `vX`
+- `latest` (updated only on release tags)
+
 ## Quick Start (Docker, recommended)
 
 The project supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).

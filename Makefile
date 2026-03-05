@@ -5,14 +5,46 @@ DOCKER_TAG=`git describe --abbrev=0 --tags | sed -e 's/v//'`
 STAGE=default
 SEMVER_BIN=./bin/semver
 SEMVER=`${SEMVER_BIN}`
+GITHUB_REPO=$(shell git config --get remote.origin.url | sed -E 's#^.*github.com[:/]##; s#\.git$$##')
+IMAGE_NAME ?= ghcr.io/$(GITHUB_REPO)
+IMAGE_TAG ?= $(SEMVER)
+DOCKERFILE ?= Dockerfile
 SLEEP=5
 GH=gh
 INFRA_GH=gh --repo ${INFRA_REPO}
 LATEST_INFRA_RUN_ID=`${INFRA_GH} run list --workflow=${WORKFLOW}  -L 3 -e workflow_dispatch --json databaseId -q.[0].databaseId`
-LATEST_RUN_ID=`${GH} run list --workflow=release.yml -L 3 -e workflow_dispatch --json databaseId -q.[0].databaseId`
+LATEST_RUN_ID=`${GH} run list --workflow=release.yml -L 3 --json databaseId -q.[0].databaseId`
+
+.PHONY: release patch-release-and-deploy patch-release minor patch bump-patch bump-minor push-semver \
+	patch-release minor-release push-release sleep deploy-capistrano deploy-infra watch infra-watch \
+	infra-view list setup lint test build image image-push recreate-db all openbill rspec rake rubocop \
+	dev-provision dev-up dev-test dev-down lsp sql
 
 # Default target
 release: patch-release deploy-capistrano
+
+setup:
+	bundle install
+	yarn install --frozen-lockfile
+
+lint:
+	bundle exec brakeman --no-pager
+	bundle exec rails runner "Rails.application.importmap.to_json(resolver: ActionController::Base.helpers)"
+
+test:
+	bundle exec rails db:prepare
+	bundle exec rake openbill_core:verify_contract
+	bundle exec rails zeitwerk:check
+	bundle exec rspec
+
+build:
+	RAILS_ENV=production SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+
+image:
+	docker build -f $(DOCKERFILE) -t $(IMAGE_NAME):$(IMAGE_TAG) .
+
+image-push:
+	docker push $(IMAGE_NAME):$(IMAGE_TAG)
 
 patch-release-and-deploy: patch-release watch deploy sleep infra-watch
 
@@ -66,7 +98,8 @@ recreate-db:
 	dropdb vilna_development || echo
 	rm -f db/schema.rb
 	rake db:create:primary db:migrate:primary
-	all: openbill rspec rubocop
+
+all: openbill rspec rubocop
 
 .PHONY: openbill
 openbill:
@@ -80,9 +113,6 @@ rake:
 
 rubocop:
 	bundle exec rubocop -A
-
-build:
-	docker build .
 
 dev-provision:
 	./bin/dip provision
