@@ -1,21 +1,21 @@
 # OpenBill Admin
 
-OpenBill Admin is a Ruby on Rails application that provides an administrative interface for the OpenBill billing system. It allows you to manage accounts, transactions, categories, policies, and invoices.
+Administrative interface for the OpenBill billing system. Manage accounts, transactions, categories, policies, and invoices.
 
 ## Why OpenBill
 
-- **🦸 Proven in Production**: Battle-tested in production for 10+ years, with tens of billions of dollars processed through this accounting core.
-- **💰 Financial Architecture**: Categories model a chart of accounts (including hierarchical taxonomy at domain level), and policies enforce strict transfer routes between categories and accounts.
+- **Proven in Production**: Battle-tested for 10+ years, with tens of billions of dollars processed through this accounting core.
+- **Financial Architecture**: Categories model a chart of accounts (including hierarchical taxonomy at domain level), and policies enforce strict transfer routes between categories and accounts.
 
-## For Developers
+## Requirements
 
-- Developer notes and architecture decisions: [DEVELOPERS.md](DEVELOPERS.md)
+- Ruby 3.4+
+- PostgreSQL 14+
+- Node.js and Yarn (for CSS compilation only)
 
-## Docker Development (Dip)
+## Quick Start (Docker, recommended)
 
-`openbill-admin` supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).
-
-### Quick start
+The project supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).
 
 ```bash
 bundle install
@@ -25,172 +25,102 @@ bundle install
 
 App will be available at `http://localhost:3000` (or `http://localhost:${PORT}` when `PORT` is set).
 
-### Common commands
+### Common dip commands
 
 ```bash
-./bin/dip shell
-./bin/dip rails db:migrate
-./bin/dip rake openbill_core:verify_contract
-./bin/dip rspec
-./bin/dip down
+./bin/dip shell                              # open shell in container
+./bin/dip rails db:migrate                   # run migrations
+./bin/dip rake openbill_core:verify_contract # check integration contract
+./bin/dip rspec                              # run tests
+./bin/dip down                               # stop containers
 ```
 
-### Troubleshooting
+### Docker troubleshooting
 
 ```bash
-# validate compose syntax
-docker compose -f docker-compose.dev.yml config -q
-
-# rebuild app image from scratch
-docker compose -f docker-compose.dev.yml build --no-cache app
-
-# reset local postgres volume
-docker compose -f docker-compose.dev.yml down -v
+docker compose -f docker-compose.dev.yml config -q       # validate compose syntax
+docker compose -f docker-compose.dev.yml build --no-cache app  # rebuild from scratch
+docker compose -f docker-compose.dev.yml down -v          # reset postgres volume
 ```
 
-## Как деплоить
+## Native Setup (alternative)
 
-Для деплоя используется `kamal`:
-
-```sh
-./bin/kamal deploy
-```
-
-Деплоить изменения (инкремент версии + деплой):
-
-```sh
-./release
-```
-
-## Requirements
-
-- Ruby 3.x
-- PostgreSQL 9.6+
-- Node.js and Yarn (for asset compilation)
-
-## How to Install
-
-### Install Dependencies
-
-Install the required Ruby gems:
+### Install dependencies
 
 ```bash
 bundle install
-```
-
-Install JavaScript dependencies:
-
-```bash
 yarn install
 ```
 
-### Configure Database Connection
+### Configure environment
 
-OpenBill Admin uses PostgreSQL. You need to configure your database connection in the `.env` file. Create a copy of the `.env.example` file (if it exists) or create a new `.env` file:
-
-```bash
-cp .env.example .env
-```
-
-Edit the `.env` file to set the following environment variables:
+Create a `.env` file with the following variables:
 
 ```
 DATABASE_HOST=localhost
-DATABASE_NAME=openbill_production
+DATABASE_NAME=openbill_development
 DATABASE_USER=your_database_user
 DATABASE_PASS=your_database_password
 RACK_PASSWORD=your_admin_password
 SECRET_KEY_BASE=your_secret_key_base
 ```
 
-Generate a secret key base if you don't have one:
+Generate a secret key base:
 
 ```bash
 bundle exec rails secret
 ```
 
-### Set Up the Database
-
-Create and migrate the database:
+### Set up the database
 
 ```bash
 bundle exec rails db:create db:migrate
 ```
 
-## How to Run
-
-### Development Mode
-
-To run the application in development mode:
+### Run the server
 
 ```bash
 bundle exec rails server
 ```
 
-This will start the application on http://localhost:3000 by default.
-
-### Production Mode
-
-For production environments, we recommend using Puma as the application server.
-
-1. Precompile assets:
-
-```bash
-bundle exec rails assets:precompile
-```
-
-2. Start the server:
-
-```bash
-RAILS_ENV=production bundle exec puma -C config/puma.rb
-```
-
-Alternatively, you can use the provided Foreman configuration:
-
-```bash
-bundle exec foreman start
-```
-
-### Using Docker (Optional)
-
-The project includes configuration for deployment with Kamal, which uses Docker:
-
-1. Build the Docker image:
-
-```bash
-bin/kamal setup
-```
-
-2. Deploy the application:
-
-```bash
-bin/kamal deploy
-```
-
-### Authentication
-
-By default, the application is protected with Rack::Password middleware in production. Use the password you set in the `RACK_PASSWORD` environment variable to access the application.
+The app will be available at http://localhost:3000.
 
 ## Database Structure
 
 OpenBill Admin works with the following main entities:
 
-- **Accounts**: Financial accounts that track balances
-- **Categories**: For organizing accounts
-- **Transactions**: Money movement between accounts
-- **Policies**: Rules defining permitted transactions between accounts/categories
-- **Invoices**: For billing and payment tracking
+- **Accounts** — financial accounts that track balances
+- **Categories** — chart of accounts for organizing accounts
+- **Transactions** — money movement between accounts
+- **Policies** — rules defining permitted transactions between accounts/categories
+- **Invoices** — billing and payment tracking
 
-## Openbill-core Integration Contract
+## Openbill-core Integration
 
-Openbill Admin is integrated with `openbill-core` through PostgreSQL (no API/client layer).
+OpenBill Admin integrates with [`openbill-core`](https://github.com/openbill-service/openbill-core) directly through PostgreSQL (no API/client layer).
 
 - Integration contract and compatibility rules: [`docs/openbill-core-integration.md`](docs/openbill-core-integration.md)
-- Contract check command:
+- Verify the contract:
 
 ```bash
 bundle exec rake openbill_core:verify_contract
 ```
+
+## Authentication
+
+The application is protected with `rack_password` middleware in production. Use the password from the `RACK_PASSWORD` environment variable to access the app.
+
+## Deploy
+
+Deployment uses [Kamal](https://kamal-deploy.org/):
+
+```bash
+bin/kamal deploy
+```
+
+## For Developers
+
+Architecture decisions and developer notes: [DEVELOPERS.md](DEVELOPERS.md)
 
 ## License
 
