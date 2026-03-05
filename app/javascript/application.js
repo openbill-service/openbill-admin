@@ -1,6 +1,5 @@
 import "@hotwired/turbo-rails"
 import * as bootstrap from "bootstrap"
-import "legacy/ui"
-import "legacy/pickers"
+import "bootstrap_ui"
 
 window.bootstrap = bootstrap

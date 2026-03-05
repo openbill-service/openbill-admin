@@ -15,7 +15,7 @@
             = f.input_field :amount_cents, class: 'form-control', autofocus: true
           = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
     .col-md-4
-      = f.input :date, as: :date_picker, readonly: true, required: false
+      = f.input :date, as: :date_picker, required: false
   .row
     .col-md-6
       = f.input :key
@@ -26,4 +26,3 @@
       = f.input :details, as: :text
 
   = f.button :submit, class: 'btn btn-success'
-
