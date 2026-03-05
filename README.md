@@ -2,6 +2,15 @@
 
 OpenBill Admin is a Ruby on Rails application that provides an administrative interface for the OpenBill billing system. It allows you to manage accounts, transactions, categories, policies, and invoices.
 
+## Why OpenBill
+
+- **🦸 Proven in Production**: Battle-tested in production for 10+ years, with tens of billions of dollars processed through this accounting core.
+- **💰 Financial Architecture**: Categories model a chart of accounts (including hierarchical taxonomy at domain level), and policies enforce strict transfer routes between categories and accounts.
+
+## For Developers
+
+- Developer notes and architecture decisions: [DEVELOPERS.md](DEVELOPERS.md)
+
 ## Как деплоить
 
 Для деплоя используется `kamal`:
