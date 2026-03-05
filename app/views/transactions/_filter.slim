@@ -8,9 +8,9 @@
         = select_account_field f, :to_account_id_eq, include_blank: '*', required: false
         .row
           .col-md-6
-            = f.input :date_gteq, as: :date_picker, readonly: true, required: false
+            = f.input :date_gteq, as: :date_picker, required: false
           .col-md-6
-            = f.input :date_lteq, as: :date_picker, readonly: true, required: false
+            = f.input :date_lteq, as: :date_picker, required: false
       .col-md-6
         .row
           .col-md-6

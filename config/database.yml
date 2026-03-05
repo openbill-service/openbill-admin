@@ -13,10 +13,11 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: kormilica_test
-  pool: 5
-  username:
-  password:
+  host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
+  database: <%= ENV.fetch('DATABASE_NAME_TEST', 'kormilica_test') %>
+  pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
+  username: <%= ENV.fetch('DATABASE_USER', '') %>
+  password: <%= ENV.fetch('DATABASE_PASS', '') %>
 
 staging:
   adapter: postgresql

@@ -42,8 +42,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.include(OpenbillMock)
-  config.before :each do
-    stub_openbill
-  end
 end

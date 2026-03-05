@@ -1,7 +1,8 @@
 class WebhooksQuery
-  include Virtus.model
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attribute :filter, WebhooksFilter, default: WebhooksFilter.new
+  attribute :filter, default: -> { WebhooksFilter.new }
 
   def call
     scope = basic_scope

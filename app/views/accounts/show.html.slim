@@ -3,7 +3,7 @@
 = simple_form_for transactions_ransack, url: account_path(id: account.id), method: 'get' do |f|
   .row
     .col-md-6
-      = f.input :date, as: :date_picker, readonly: true
+      = f.input :date, as: :date_picker
   = f.button :submit
 br
 

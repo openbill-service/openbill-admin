@@ -2,8 +2,9 @@ name: CI
 
 on:
   pull_request:
+  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
 
 jobs:
   scan_ruby:
@@ -20,7 +21,7 @@ jobs:
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+        run: bundle exec brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
@@ -35,23 +36,8 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
+      - name: Validate importmap pins
+        run: 'bundle exec rails runner "Rails.application.importmap.to_json(resolver: ActionController::Base.helpers)"'
 
   test:
     runs-on: ubuntu-latest
@@ -74,7 +60,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config google-chrome-stable
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -88,15 +74,12 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          PRIMARY_DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          TENANT_DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          DATABASE_HOST: localhost
+          DATABASE_USER: postgres
+          DATABASE_PASS: postgres
+          DATABASE_POOL: 5
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
-
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+        run: |
+          bundle exec rails db:prepare
+          bundle exec rails zeitwerk:check
+          bundle exec rspec

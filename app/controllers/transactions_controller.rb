@@ -118,7 +118,18 @@ class TransactionsController < ApplicationController
 
   def permitted_params
     return {} unless params[:transaction].present?
-    # Allow any parameters
-    params.require(:transaction).permit!
+    params.require(:transaction).permit(
+      :id,
+      :from_account_id,
+      :to_account_id,
+      :amount_cents,
+      :amount_currency,
+      :reverse_transaction_id,
+      :key,
+      :details,
+      :date,
+      :meta,
+      meta: {}
+    )
   end
 end

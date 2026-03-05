@@ -2,67 +2,36 @@ class DatePickerInput < SimpleForm::Inputs::StringInput
   def input(wrapper_options)
     set_html_options
     set_value_html_option
-
-    template.content_tag :div, class: 'input-group date datetimepicker' do
-      input = super(wrapper_options) # leave StringInput do the real rendering
-      input + input_button
-    end
+    super(wrapper_options)
   end
 
   def input_html_classes
-    super.push ''   # 'form-control'
+    super
   end
 
   private
 
-  def input_button
-    template.content_tag :span, class: 'input-group-btn' do
-      template.content_tag :button, class: 'btn btn-default', type: 'button' do
-        template.content_tag :span, '', class: 'fa fa-calendar'
-      end
-    end
-  end
-
   def set_html_options
-    input_html_options[:type] = 'text'
-    input_html_options[:data] ||= {}
-    input_html_options[:data].merge!(date_options: date_options)
+    input_html_options[:type] = 'date'
+    input_html_options.delete(:readonly)
+    input_html_options.delete(:data)
   end
 
   def set_value_html_option
     return unless value.present?
-    val = value.is_a?(String) ? Date.parse(value) : value
-
-    input_html_options[:value] ||= I18n.localize(val, format: display_pattern)
+    date = normalize_date(value)
+    input_html_options[:value] ||= date&.strftime("%Y-%m-%d") || value.to_s
   end
 
   def value
     object.send(attribute_name) if object.respond_to? attribute_name
   end
 
-  def display_pattern
-    I18n.t('datepicker.dformat', default: '%Y-%m-%d')
-  end
-
-  def picker_pattern
-    I18n.t('datepicker.pformat', default: 'YYYY-MM-DD')
-  end
-
-  def date_view_header_format
-    I18n.t('dayViewHeaderFormat', default: 'MMMM YYYY')
-  end
-
-  def date_options_base
-    {
-        locale: I18n.locale,
-        format: picker_pattern,
-        dayViewHeaderFormat: date_view_header_format
-    }
-  end
-
-  def date_options
-    custom_options = input_html_options[:data][:date_options] || {}
-    date_options_base.merge!(custom_options)
+  def normalize_date(raw_value)
+    return raw_value.to_date if raw_value.respond_to?(:to_date)
+    Date.parse(raw_value.to_s)
+  rescue ArgumentError, TypeError
+    nil
   end
 
 end

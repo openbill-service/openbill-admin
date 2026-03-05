@@ -1,17 +1,15 @@
 class TransactionForm < FormBase
-  include Virtus.model
+  attribute :id, :string
+  attribute :from_account_id, :string
+  attribute :to_account_id, :string
+  attribute :amount_cents, :string
+  attribute :amount_currency, :string, default: "RUB"
+  attribute :reverse_transaction_id, :string
 
-  attribute :id, String
-  attribute :from_account_id, String
-  attribute :to_account_id, String
-  attribute :amount_cents, String
-  attribute :amount_currency, String, default: 'RUB'
-  attribute :reverse_transaction_id, String
-
-  attribute :key, String
-  attribute :details, String
-  attribute :meta, VirtusHstore
-  attribute :date, Date
+  attribute :key, :string
+  attribute :details, :string
+  attribute :meta, :string
+  attribute :date, :date
 
   validates :from_account_id, :to_account_id,
             :amount_cents, :amount_currency,
@@ -19,16 +17,18 @@ class TransactionForm < FormBase
   validates :amount, numericality: { greater_than: 0 }
 
   def to_hash
+    attrs = attributes.symbolize_keys
+
     {
-      **attributes.except(:id, :amount_cents, :meta, :reverse_transaction_id),
-      **attributes.slice(:reverse_transaction_id).select { |k, v| v.present? },
+      **attrs.except(:id, :amount_cents, :meta, :reverse_transaction_id),
+      **attrs.slice(:reverse_transaction_id).select { |_, value| value.present? },
       amount_cents: amount.cents,
       meta: meta_hstore
     }
   end
 
   def meta_hstore
-    JSON.parse(meta)
+    parse_json_object(meta, field_name: "meta")
   end
 
   def to_model

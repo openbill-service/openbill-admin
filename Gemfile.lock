@@ -21,21 +21,6 @@ GIT
       rails (>= 3.1)
 
 GEM
-  remote: https://rails-assets.org/
-  specs:
-    rails-assets-better-dom (2.1.4)
-    rails-assets-better-form-validation (1.5.0)
-      rails-assets-better-dom (~> 2.1.0)
-      rails-assets-better-i18n-plugin (~> 2.0.0)
-      rails-assets-better-popover-plugin (~> 0.5.1)
-    rails-assets-better-i18n-plugin (2.0.1)
-      rails-assets-better-dom (>= 2.0.0)
-    rails-assets-better-popover-plugin (0.5.2)
-      rails-assets-better-dom (>= 2.1.0, < 3)
-    rails-assets-select2 (4.0.13)
-    rails-assets-tether (2.0.0)
-
-GEM
   remote: https://rubygems.org/
   specs:
     actioncable (8.0.2)
@@ -114,10 +99,6 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    axiom-types (0.1.1)
-      descendants_tracker (~> 0.0.4)
-      ice_nine (~> 0.11.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
     benchmark (0.4.0)
@@ -129,13 +110,13 @@ GEM
     bootstrap-icons-helper (2.0.2)
       bootstrap-icons (~> 1)
       rails (>= 7.0)
+    brakeman (8.0.4)
+      racc
     bugsnag (6.27.1)
       concurrent-ruby (~> 1.0)
     builder (3.3.0)
     byebug (11.1.3)
     coderay (1.1.3)
-    coercible (1.0.0)
-      descendants_tracker (~> 0.0.1)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     crass (1.0.6)
@@ -143,8 +124,6 @@ GEM
       railties (>= 6.0.0)
     csv (3.3.2)
     date (3.4.1)
-    descendants_tracker (0.0.4)
-      thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.6.0)
     dotenv (3.1.7)
     drb (2.2.1)
@@ -186,7 +165,6 @@ GEM
     hashie (5.0.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    ice_nine (0.11.2)
     importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -236,8 +214,6 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.25.5)
-    momentjs-rails (2.29.4.1)
-      railties (>= 3.1)
     monetize (1.13.0)
       money (~> 6.12)
     money (6.19.0)
@@ -403,7 +379,6 @@ GEM
     temple (0.10.3)
     terminal-notifier-guard (1.6.4)
     thor (1.3.2)
-    thread_safe (0.3.6)
     thruster (0.1.12)
     thruster (0.1.12-aarch64-linux)
     thruster (0.1.12-arm64-darwin)
@@ -418,10 +393,6 @@ GEM
       concurrent-ruby (~> 1.0)
     uri (1.0.3)
     useragent (0.16.11)
-    virtus (2.0.0)
-      axiom-types (~> 0.1)
-      coercible (~> 1.0)
-      descendants_tracker (~> 0.0, >= 0.0.3)
     websocket-driver (0.7.7)
       base64
       websocket-extensions (>= 0.1.0)
@@ -450,6 +421,7 @@ DEPENDENCIES
   bootsnap (~> 1.18)
   bootstrap-icons-helper (~> 2.0)
   bootstrap-kaminari-views!
+  brakeman
   bugsnag
   byebug
   cssbundling-rails (~> 1.4)
@@ -464,7 +436,6 @@ DEPENDENCIES
   kamal (~> 2.5)
   kaminari
   listen (~> 3.0)
-  momentjs-rails
   money
   money-rails
   nprogress-rails
@@ -473,12 +444,6 @@ DEPENDENCIES
   puma
   rack_password
   rails
-  rails-assets-better-dom!
-  rails-assets-better-form-validation!
-  rails-assets-better-i18n-plugin!
-  rails-assets-better-popover-plugin!
-  rails-assets-select2!
-  rails-assets-tether (>= 1.1.0)!
   ransack
   rspec
   rspec-rails
@@ -491,7 +456,6 @@ DEPENDENCIES
   terminal-notifier-guard (~> 1.6.1)
   thruster (~> 0.1.12)
   turbo-rails
-  virtus
   wicked_pdf
   wkhtmltopdf-binary
 

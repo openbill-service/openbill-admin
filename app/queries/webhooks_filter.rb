@@ -1,10 +1,11 @@
 class WebhooksFilter
-  include Virtus.model
+  include ActiveModel::Model
+  include ActiveModel::Attributes
 
-  attribute :account, OpenbillAccount
-  attribute :transaction_ids, Array[String]
+  attribute :account
+  attribute :transaction_ids, default: -> { [] }
 
   def transaction_ids
-    super.compact
+    Array(super).compact
   end
 end
