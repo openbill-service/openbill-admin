@@ -35,14 +35,6 @@ App will be available at `http://localhost:3000` (or `http://localhost:${PORT}` 
 ./bin/dip down                               # stop containers
 ```
 
-### Docker troubleshooting
-
-```bash
-docker compose -f docker-compose.dev.yml config -q       # validate compose syntax
-docker compose -f docker-compose.dev.yml build --no-cache app  # rebuild from scratch
-docker compose -f docker-compose.dev.yml down -v          # reset postgres volume
-```
-
 ## Native Setup (alternative)
 
 ### Install dependencies
