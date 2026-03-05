@@ -4,27 +4,29 @@ class AccountTransactionForm < FormBase
 
   DIRECTIONS = [INCOME_DIRECTION, OUTCOME_DIRECTION]
 
-  attribute :amount_cents, String
-  attribute :amount_currency, String
+  attribute :amount_cents, :string
+  attribute :amount_currency, :string
 
-  attribute :direction, String # income, outcome
+  attribute :direction, :string # income, outcome
 
-  attribute :account_id, Integer
-  attribute :opposite_account_id, Integer
+  attribute :account_id, :integer
+  attribute :opposite_account_id, :integer
 
-  attribute :details, String
-  attribute :key, String
-  attribute :meta, VirtusHstore
-  attribute :date, Date
+  attribute :details, :string
+  attribute :key, :string
+  attribute :meta, :string
+  attribute :date, :date
 
   validates :amount_cents, :amount_currency, :account_id, :opposite_account_id, :details, :key, presence: true
   validates :amount, numericality: { greater_than: 0 }
   validates :direction, inclusion: { in: DIRECTIONS }
 
   def to_hash
+    attrs = attributes.symbolize_keys
+
     {
-      **attributes.slice(:amount_currency, :details, :key ),
-      **attributes.slice(:date).select { |k, v| v.present? },
+      **attrs.slice(:amount_currency, :details, :key),
+      **attrs.slice(:date).select { |_, value| value.present? },
       from_account_id: from_account_id,
       to_account_id: to_account_id,
       amount_cents: amount.cents,
@@ -45,6 +47,6 @@ class AccountTransactionForm < FormBase
   end
 
   def meta_hstore
-    JSON.parse(meta)
+    parse_json_object(meta, field_name: "meta")
   end
 end

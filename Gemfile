@@ -16,18 +16,6 @@ def darwin_only(require_as)
   RbConfig::CONFIG['host_os'] =~ /darwin/ ? require_as : false
 end
 
-source 'https://rails-assets.org' do
-  # Не получилось его запустить, поэтому пользуемся тем, что
-  # лежит в vendor/assets
-  # gem 'rails-assets-eonasdan-bootstrap-datetimepicker'
-  gem 'rails-assets-tether', '>= 1.1.0'
-  gem 'rails-assets-select2'
-  gem 'rails-assets-better-dom'
-  gem 'rails-assets-better-i18n-plugin'
-  gem 'rails-assets-better-popover-plugin'
-  gem 'rails-assets-better-form-validation'
-end
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 gem "propshaft"
@@ -56,7 +44,6 @@ gem 'ransack'
 gem 'foreman'
 
 gem 'bugsnag'
-gem 'virtus'
 gem 'hashie'
 
 gem 'simple-navigation', github: 'andi/simple-navigation'
@@ -71,8 +58,6 @@ gem 'active_link_to'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'puma'
-
-gem 'momentjs-rails'
 
 # PDF
 gem 'wicked_pdf'
@@ -99,6 +84,7 @@ end
 
 group :development do
   gem 'kamal', '~> 2.5'
+  gem 'brakeman', require: false
 end
 
 gem "thruster", "~> 0.1.12"
