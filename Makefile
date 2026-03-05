@@ -84,6 +84,18 @@ rubocop:
 build:
 	docker build .
 
+dev-provision:
+	./bin/dip provision
+
+dev-up:
+	./bin/dip server
+
+dev-test:
+	./bin/dip rspec
+
+dev-down:
+	./bin/dip down
+
 lsp:
 	gem install --user-install ruby-lsp
 	gem install --user-install solargraph

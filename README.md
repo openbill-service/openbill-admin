@@ -11,6 +11,43 @@ OpenBill Admin is a Ruby on Rails application that provides an administrative in
 
 - Developer notes and architecture decisions: [DEVELOPERS.md](DEVELOPERS.md)
 
+## Docker Development (Dip)
+
+`openbill-admin` supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).
+
+### Quick start
+
+```bash
+bundle install
+./bin/dip provision
+./bin/dip server
+```
+
+App will be available at `http://localhost:3000` (or `http://localhost:${PORT}` when `PORT` is set).
+
+### Common commands
+
+```bash
+./bin/dip shell
+./bin/dip rails db:migrate
+./bin/dip rake openbill_core:verify_contract
+./bin/dip rspec
+./bin/dip down
+```
+
+### Troubleshooting
+
+```bash
+# validate compose syntax
+docker compose -f docker-compose.dev.yml config -q
+
+# rebuild app image from scratch
+docker compose -f docker-compose.dev.yml build --no-cache app
+
+# reset local postgres volume
+docker compose -f docker-compose.dev.yml down -v
+```
+
 ## Как деплоить
 
 Для деплоя используется `kamal`:

@@ -12,3 +12,13 @@ Reasons:
 - safe integrations with external APIs that exchange integer minor units.
 
 At the domain layer we still use the `Money` gem (`money-rails`) for calculations and presentation.
+
+## Local Docker workflow
+
+For containerized development use `dip` commands from this repository:
+
+- `./bin/dip provision`
+- `./bin/dip server`
+- `./bin/dip rspec`
+
+Avoid mixing direct `docker compose` calls into daily flow except troubleshooting.
