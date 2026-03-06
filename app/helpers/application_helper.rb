@@ -13,6 +13,7 @@ module ApplicationHelper
 
   FLASH_DEFAULT_COLOR = 'bg-blue-50 border-blue-200 text-blue-800'.freeze
 
+
   def app_title
     "Openbill Admin #{AppVersion}"
   end
