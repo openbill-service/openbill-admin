@@ -4,7 +4,7 @@ module ButtonsHelper
     success: 'bg-emerald-600 text-white hover:bg-emerald-700',
     danger: 'bg-red-600 text-white hover:bg-red-700',
     warning: 'bg-amber-700 text-white hover:bg-amber-800',
-    info: 'bg-blue-500 text-white hover:bg-blue-600',
+    info: 'bg-sky-500 text-white hover:bg-sky-600',
     outline: 'border border-blue-600 text-blue-600 hover:bg-blue-50',
     default: 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
   }.freeze

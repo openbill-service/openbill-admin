@@ -42,7 +42,6 @@ gem 'foreman'
 gem 'bugsnag'
 gem 'hashie'
 
-gem 'simple-navigation', github: 'andi/simple-navigation'
 gem 'simple_form'
 
 gem 'active_link_to'

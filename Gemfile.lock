@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/andi/simple-navigation.git
-  revision: cbac5478991292c9ce237e408990c63c4677680c
-  specs:
-    simple-navigation (4.4.0)
-      activesupport (>= 2.3.2)
-
-GIT
   remote: https://github.com/haf/semver.git
   revision: 515fc5c6ccec6eee1bdd7b7e94e7ff505cecf935
   specs:
@@ -433,7 +426,6 @@ DEPENDENCIES
   rspec
   rspec-rails
   semver2!
-  simple-navigation!
   simple_form
   slim-rails
   stimulus-rails
