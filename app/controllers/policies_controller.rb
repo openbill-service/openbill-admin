@@ -23,7 +23,7 @@ class PoliciesController < ApplicationController
       render :new, locals: { policy: policy }
     end
 
-  rescue ActiveRecord::RecordInvalid, ActiveRecord::StatementInvalid => err
+  rescue => err
     flash.now[:error] = err.message
     render :new, locals: { policy: policy || OpenbillPolicy.new }
   end
