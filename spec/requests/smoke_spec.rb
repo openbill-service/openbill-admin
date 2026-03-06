@@ -3,7 +3,6 @@ require "rails_helper"
 RSpec.describe "Smoke routes", type: :request do
   before do
     OpenbillTransaction.delete_all
-    OpenbillInvoice.delete_all
     OpenbillPolicy.delete_all
     OpenbillAccount.delete_all
     OpenbillCategory.delete_all
@@ -22,7 +21,6 @@ RSpec.describe "Smoke routing", type: :routing do
     expect(get: "/transactions").to route_to("transactions#index")
     expect(get: "/categories").to route_to("categories#index")
     expect(get: "/policies").to route_to("policies#index")
-    expect(get: "/invoices").to route_to("invoices#index")
     expect(get: "/logs").to route_to("logs#index")
   end
 end
