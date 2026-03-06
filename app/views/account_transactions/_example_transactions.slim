@@ -13,6 +13,6 @@
           th.px-3.py-2 Meta
           th.px-3.py-2 Actions
 
-      = render 'accounts/transactions_table_body', account: account, transactions: example_transactions, ransack: nil
+        = render 'accounts/transactions_table_body', account: account, transactions: example_transactions, ransack: nil
 - else
   h3.text-lg.font-semibold.mt-6.mb-3.text-gray-500 Нет примеров транзакций
