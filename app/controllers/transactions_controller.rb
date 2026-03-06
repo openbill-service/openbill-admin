@@ -71,10 +71,6 @@ class TransactionsController < ApplicationController
 
   private
 
-  def transaction
-    @transaction ||= Transaction.find params[:id]
-  end
-
   def date
     return unless params.key?(:transaction)
     TransactionDate.parse permitted_params
@@ -86,7 +82,7 @@ class TransactionsController < ApplicationController
   end
 
   def transaction
-    OpenbillTransaction.find params[:id]
+    @transaction ||= OpenbillTransaction.find params[:id]
   end
 
   def ransack

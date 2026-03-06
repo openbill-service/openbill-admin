@@ -79,10 +79,56 @@ RSpec.describe "Smoke request specs", type: :request do
     end
   end
 
+  describe "GET /accounts/:account_id/reports" do
+    it "responds successfully" do
+      get "/accounts/#{account.id}/reports"
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "GET /transactions/:id" do
+    let!(:other_account) do
+      OpenbillAccount.create!(
+        key: "other-account-#{SecureRandom.hex(4)}",
+        amount_currency: "RUB",
+        category: other_category
+      )
+    end
+    let!(:transaction) do
+      OpenbillTransaction.create!(
+        from_account: account,
+        to_account: other_account,
+        amount_cents: 1000,
+        amount_currency: "RUB",
+        key: "test-tx-#{SecureRandom.hex(4)}",
+        details: "Test transaction",
+        username: "test"
+      )
+    end
+
+    it "responds successfully" do
+      get "/transactions/#{transaction.id}"
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe "GET /policies" do
     it "responds successfully" do
       get "/policies"
       expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "POST /policies" do
+    it "creates a policy with valid params" do
+      post "/policies", params: {
+        policy: {
+          name: "New Policy",
+          from_category_id: category.id,
+          to_category_id: other_category.id
+        }
+      }
+      expect(response).to have_http_status(:found)
     end
   end
 end

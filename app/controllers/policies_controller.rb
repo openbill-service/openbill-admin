@@ -25,6 +25,7 @@ class PoliciesController < ApplicationController
 
   rescue => err
     flash.now[:error] = err.message
+    policy = OpenbillPolicy.new if policy.nil?
     render :new, locals: { policy: policy }
   end
 
