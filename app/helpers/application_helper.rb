@@ -36,8 +36,8 @@ module ApplicationHelper
     request.url
   end
 
-  def spinner
-    content_tag :svg, class: "animate-spin h-5 w-5 text-blue-600", xmlns: 'http://www.w3.org/2000/svg',
+  def spinner(size: 5)
+    content_tag :svg, class: "animate-spin h-#{size} w-#{size} text-blue-600", xmlns: 'http://www.w3.org/2000/svg',
                       fill: 'none', viewBox: '0 0 24 24', role: 'status' do
       safe_join([
         content_tag(:circle, '', cx: '12', cy: '12', r: '10', stroke: 'currentColor',
