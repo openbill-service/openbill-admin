@@ -18,9 +18,6 @@ Rails.application.routes.draw do
 
   # All transactions
   resources :transactions do
-    collection do
-      get :pending_webhooks
-    end
     member do
       post :notify
     end
