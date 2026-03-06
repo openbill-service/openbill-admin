@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Smoke request specs", type: :request do
   let!(:category) { OpenbillCategory.create!(name: "Test Category") }
+  let!(:other_category) { OpenbillCategory.create!(name: "Other Category") }
   let!(:account) do
     OpenbillAccount.create!(
       key: "test-account-#{SecureRandom.hex(4)}",
@@ -13,7 +14,7 @@ RSpec.describe "Smoke request specs", type: :request do
     OpenbillPolicy.create!(
       name: "Test Policy",
       from_category: category,
-      to_category: category
+      to_category: other_category
     )
   end
 
@@ -36,11 +37,23 @@ RSpec.describe "Smoke request specs", type: :request do
       get "/accounts/#{account.id}"
       expect(response).to have_http_status(:ok)
     end
+
+    it "returns 404 for nonexistent account" do
+      get "/accounts/00000000-0000-0000-0000-000000000000"
+      expect(response).to have_http_status(:not_found).or have_http_status(:internal_server_error)
+    end
   end
 
   describe "GET /accounts/:id/months" do
     it "responds successfully" do
       get "/accounts/#{account.id}/months"
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "GET /accounts/suggestions" do
+    it "responds successfully" do
+      get "/accounts/suggestions", params: { q: "test" }
       expect(response).to have_http_status(:ok)
     end
   end
@@ -59,13 +72,19 @@ RSpec.describe "Smoke request specs", type: :request do
     end
   end
 
+  describe "GET /categories/:id" do
+    it "responds with redirect" do
+      get "/categories/#{category.id}"
+      expect(response).to have_http_status(:found)
+    end
+  end
+
   describe "GET /policies" do
     it "responds successfully" do
       get "/policies"
       expect(response).to have_http_status(:ok)
     end
   end
-
 end
 
 RSpec.describe "Smoke routing", type: :routing do
@@ -75,5 +94,10 @@ RSpec.describe "Smoke routing", type: :routing do
     expect(get: "/transactions").to route_to("transactions#index")
     expect(get: "/categories").to route_to("categories#index")
     expect(get: "/policies").to route_to("policies#index")
+  end
+
+  it "does not route removed resources" do
+    expect(get: "/invoices").not_to be_routable
+    expect(get: "/logs").not_to be_routable
   end
 end

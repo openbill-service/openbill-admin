@@ -17,7 +17,6 @@ Current integration points are concentrated in:
   - `OpenbillCategory`
   - `OpenbillTransaction`
   - `OpenbillPolicy`
-  - `OpenbillInvoice`
 - Adapter layer:
   - `OpenbillCore::AccountsRepository`
   - `OpenbillCore::OppositeAccountsByPolicy`
@@ -31,7 +30,6 @@ The admin app requires these tables and minimum columns:
 - `openbill_categories`: `id`, `name`
 - `openbill_transactions`: `id`, `from_account_id`, `to_account_id`, `amount_cents`, `amount_currency`, `key`, `details`, `created_at`
 - `openbill_policies`: `id`, `name`, `from_category_id`, `to_category_id`, `from_account_id`, `to_account_id`
-- `openbill_invoices`: `id`, `date`, `number`, `title`, `destination_account_id`, `amount_cents`, `amount_currency`
 
 Validation command:
 
