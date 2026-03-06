@@ -130,6 +130,16 @@ RSpec.describe "Smoke request specs", type: :request do
       }
       expect(response).to have_http_status(:found)
     end
+
+    it "handles invalid foreign key gracefully" do
+      post "/policies", params: {
+        policy: {
+          name: "Bad Policy",
+          from_category_id: "00000000-0000-0000-0000-000000000000"
+        }
+      }
+      expect(response).to have_http_status(:ok).or have_http_status(:unprocessable_entity)
+    end
   end
 end
 
@@ -145,5 +155,6 @@ RSpec.describe "Smoke routing", type: :routing do
   it "does not route removed resources" do
     expect(get: "/invoices").not_to be_routable
     expect(get: "/logs").not_to be_routable
+    expect(get: "/accounts/1/webhook_logs").not_to be_routable
   end
 end

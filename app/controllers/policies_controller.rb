@@ -23,10 +23,9 @@ class PoliciesController < ApplicationController
       render :new, locals: { policy: policy }
     end
 
-  rescue => err
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::StatementInvalid => err
     flash.now[:error] = err.message
-    policy = OpenbillPolicy.new if policy.nil?
-    render :new, locals: { policy: policy }
+    render :new, locals: { policy: policy || OpenbillPolicy.new }
   end
 
   def update
@@ -45,9 +44,9 @@ class PoliciesController < ApplicationController
 
   def destroy
     policy.destroy!
-    redirect_to :back
+    redirect_back(fallback_location: policies_path)
   rescue => err
-    redirect_to :back, flash: { error: err.message }
+    redirect_back(fallback_location: policies_path, flash: { error: err.message })
   end
 
   private
