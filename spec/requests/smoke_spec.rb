@@ -136,11 +136,6 @@ RSpec.describe "Smoke request specs", type: :request do
       expect(response).to have_http_status(:found)
     end
 
-    it "redirects after delete" do
-      delete "/policies/#{policy.id}"
-      expect(response).to have_http_status(:found).or have_http_status(:redirect)
-    end
-
     it "handles invalid foreign key gracefully" do
       post "/policies", params: {
         policy: {
@@ -149,6 +144,13 @@ RSpec.describe "Smoke request specs", type: :request do
         }
       }
       expect(response).to have_http_status(:ok).or have_http_status(:unprocessable_entity)
+    end
+  end
+
+  describe "DELETE /policies/:id" do
+    it "redirects after delete" do
+      delete "/policies/#{policy.id}"
+      expect(response).to have_http_status(:found)
     end
   end
 end
