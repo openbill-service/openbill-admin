@@ -1,4 +1,3 @@
 - if scope.respond_to? :total_pages
-  nav.pull-xs-right
-    = paginate scope, theme: 'twitter-bootstrap-4'
-  .clearfix
+  nav.flex.justify-end
+    = paginate scope
