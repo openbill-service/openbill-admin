@@ -1,18 +1,27 @@
-.mb-4.mt-2
-  = link_to 'Показать фильтр', '#filter', class: 'btn btn-sm btn-outline-primary', data: { bs_toggle: :collapse }, 'aria-expanded': false, 'aria-controls': 'collapseExample'
+div.mb-4.mt-2 data-controller="toggle" data-toggle-open-value=(params[:q].present? ? 'true' : 'false')
+  button.inline-flex.items-center.font-medium.rounded-md.transition.px-3.py-1.5.text-xs.border.border-blue-600.text-blue-600.hover:bg-blue-50 type="button" data-action="click->toggle#toggle" aria-expanded=(params[:q].present? ? 'true' : 'false') aria-controls="filter"
+    | Показать фильтр
 
-  #filter.mt-3.mb-2.collapse class=(params[:q].blank? ? '' : 'show')
+  #filter.mt-3.mb-2 data-toggle-target="content" class=(params[:q].blank? ? 'hidden' : '')
     = search_form_for ransack, url: accounts_path, method: 'get' do |f|
-      /-# = f.hidden_field :order
-      .row
-        .col-md-6
-          = f.input :key_cont, required: false, as: :search
-          = f.input :details_cont, required: false, as: :search
-        .col-md-3
-          = f.input :amount_cents_lteq, as: :numeric, required: false
-        .col-md-3
-          = f.input :amount_cents_gteq, as: :numeric, required: false
-      .mt-2
-        = f.button :submit, 'Найти', class: 'btn btn-primary'
+      /- = f.hidden_field :order
+      .grid.grid-cols-12.gap-4
+        .col-span-12.md:col-span-6
+          .mb-4
+            = f.label :key_cont, class: 'block text-sm font-medium text-gray-700 mb-1'
+            = f.search_field :key_cont, class: 'w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+          .mb-4
+            = f.label :details_cont, class: 'block text-sm font-medium text-gray-700 mb-1'
+            = f.search_field :details_cont, class: 'w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+        .col-span-12.md:col-span-3
+          .mb-4
+            = f.label :amount_cents_lteq, class: 'block text-sm font-medium text-gray-700 mb-1'
+            = f.number_field :amount_cents_lteq, class: 'w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+        .col-span-12.md:col-span-3
+          .mb-4
+            = f.label :amount_cents_gteq, class: 'block text-sm font-medium text-gray-700 mb-1'
+            = f.number_field :amount_cents_gteq, class: 'w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+      .mt-2.flex.items-center.gap-2
+        = f.submit 'Найти', class: 'inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition'
         - if params[:q].present?
-          = link_to 'Сбросить фильтр', accounts_path, class: 'btn btn-default'
+          = link_to 'Сбросить фильтр', accounts_path, class: 'inline-flex items-center font-medium rounded-md transition px-4 py-2 text-sm bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'

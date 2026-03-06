@@ -1,22 +1,23 @@
 - if transactions.any?
-  h2 Transactions (#{account.transactions_count})
+  h2.mt-6.mb-3 Transactions (#{account.transactions_count})
 
   = render 'pagination', scope: transactions
-  table.table.table-condensed.table-striped
-    thead
-      tr
-        th= sort_link ransack, :created_at, label: 'Time'
-        th= sort_link ransack, :date, label: 'Record date'
-        th Opposite account
-        th= sort_link ransack, :amount_cents, label: 'Amount'
-        th= sort_link ransack, :key
-        th Details
-        th Meta
-        th Actions
+  div.overflow-x-auto
+    table.w-full.text-sm.text-left
+      thead
+        tr.border-b.border-gray-200.bg-gray-50
+          th.px-3.py-2= sort_link ransack, :created_at, label: 'Time'
+          th.px-3.py-2= sort_link ransack, :date, label: 'Record date'
+          th.px-3.py-2 Opposite account
+          th.px-3.py-2= sort_link ransack, :amount_cents, label: 'Amount'
+          th.px-3.py-2= sort_link ransack, :key
+          th.px-3.py-2 Details
+          th.px-3.py-2 Meta
+          th.px-3.py-2 Actions
 
-    = render 'transactions_table_body', transactions: transactions, account: account
-  hr
+      = render 'transactions_table_body', transactions: transactions, account: account
+  hr.border-gray-200.my-4
   = render 'pagination', scope: transactions
 
 - else
-  p.lead No transactions
+  p.text-gray-500.text-lg.mt-4 No transactions

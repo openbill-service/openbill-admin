@@ -1,21 +1,22 @@
-table.table.table-condensed.table-striped
-  thead
-    tr
-      th.col-md-1= order_by filter, :created_at, label: 'Time'
-      th.col-md-3 Message
-      th.col-md-2= order_by filter, :url
-      th.col-md-3= order_by filter, :transaction_id, label: 'Transaction'
-      th.col-md-1= order_by filter, :status
-      th.col-md-2 Body
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2= order_by filter, :created_at, label: 'Time'
+        th.px-3.py-2 Message
+        th.px-3.py-2= order_by filter, :url
+        th.px-3.py-2= order_by filter, :transaction_id, label: 'Transaction'
+        th.px-3.py-2= order_by filter, :status
+        th.px-3.py-2 Body
 
-  tbody
-    - logs.each do |l|
-      tr
-        td.col-md-1
-          p = I18n.l l[:created_at], format: :short
-          small.text-muted= l[:pid]
-        td.col-md-3= l[:message]
-        td.col-md-2= l[:url]
-        td.col-md-3= l[:transaction_id]
-        td.col-md-1= l[:status]
-        td.col-md-2 = l[:body]
+    tbody
+      - logs.each do |l|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          td.px-3.py-2
+            p = I18n.l l[:created_at], format: :short
+            small.text-gray-500= l[:pid]
+          td.px-3.py-2= l[:message]
+          td.px-3.py-2= l[:url]
+          td.px-3.py-2= l[:transaction_id]
+          td.px-3.py-2= l[:status]
+          td.px-3.py-2 = l[:body]

@@ -1,29 +1,30 @@
-table.table.table-condensed.table-striped.table-sm
-  thead.thead-default
-    tr
-      th
-        = sort_link ransack, :key
-        = ', '
-        = sort_link ransack, :updated_at
-      th
-        = sort_link ransack, :transactions_count
-      - periods.each do |period|
-        th
-          = humanized_period period
-      th
-        = sort_link ransack, :amount_cents, "Всего на #{l(Date.today, format: :long)}"
-  tbody
-    - accounts.each do |account|
-      tr
-        td
-          = render 'account_link', account: account
-        td.text-muted
-          = account.transactions_count
-
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2.whitespace-nowrap
+          = sort_link ransack, :key
+          = ', '
+          = sort_link ransack, :updated_at
+        th.px-3.py-2.whitespace-nowrap
+          = sort_link ransack, :transactions_count
         - periods.each do |period|
-          td
-            = link_to humanized_amount(account.amount_by_period(period)),
-              transactions_url(q: {date_gteq: period.first, date_lteq: period.last, from_account_id_or_to_account_id_eq: account.id })
-        td= humanized_amount account.amount
+          th.px-3.py-2.whitespace-nowrap
+            = humanized_period period
+        th.px-3.py-2.whitespace-nowrap
+          = sort_link ransack, :amount_cents, "Всего на #{l(Date.today, format: :long)}"
+    tbody
+      - accounts.each do |account|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          td.px-3.py-2
+            = render 'account_link', account: account
+          td.px-3.py-2.text-gray-500
+            = account.transactions_count
 
-hr
+          - periods.each do |period|
+            td.px-3.py-2
+              = link_to humanized_amount(account.amount_by_period(period)),
+                transactions_url(q: {date_gteq: period.first, date_lteq: period.last, from_account_id_or_to_account_id_eq: account.id })
+          td.px-3.py-2= humanized_amount account.amount
+
+hr.border-gray-200.my-4
