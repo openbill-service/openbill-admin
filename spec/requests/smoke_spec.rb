@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "Smoke request specs", type: :request do
-  # Create minimal test data
   let!(:category) { OpenbillCategory.create!(name: "Test Category") }
   let!(:account) do
     OpenbillAccount.create!(
@@ -16,13 +15,6 @@ RSpec.describe "Smoke request specs", type: :request do
       from_category: category,
       to_category: category
     )
-  end
-
-  after do
-    OpenbillTransaction.delete_all
-    OpenbillPolicy.delete_all
-    OpenbillAccount.delete_all
-    OpenbillCategory.delete_all
   end
 
   describe "GET /" do
@@ -42,6 +34,13 @@ RSpec.describe "Smoke request specs", type: :request do
   describe "GET /accounts/:id" do
     it "responds successfully" do
       get "/accounts/#{account.id}"
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe "GET /accounts/:id/months" do
+    it "responds successfully" do
+      get "/accounts/#{account.id}/months"
       expect(response).to have_http_status(:ok)
     end
   end
@@ -67,12 +66,6 @@ RSpec.describe "Smoke request specs", type: :request do
     end
   end
 
-  describe "GET /logs" do
-    it "responds successfully" do
-      get "/logs"
-      expect(response).to have_http_status(:ok)
-    end
-  end
 end
 
 RSpec.describe "Smoke routing", type: :routing do
@@ -82,6 +75,5 @@ RSpec.describe "Smoke routing", type: :routing do
     expect(get: "/transactions").to route_to("transactions#index")
     expect(get: "/categories").to route_to("categories#index")
     expect(get: "/policies").to route_to("policies#index")
-    expect(get: "/logs").to route_to("logs#index")
   end
 end

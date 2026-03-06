@@ -58,12 +58,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def notify
-    flash[:success] = "Transaction #{transaction.id} is notified"
-    transaction.notify!
-    redirect_to :back
-  end
-
   def show
     render locals: { transaction: transaction }
   end

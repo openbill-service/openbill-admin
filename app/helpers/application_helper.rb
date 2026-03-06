@@ -55,12 +55,6 @@ module ApplicationHelper
     end
   end
 
-  def webhook_presents?
-    # TODO
-    # OpenbillWebhookLog.table_exists?
-    false
-  end
-
   def humanized_date(date)
     return '-' unless date.present?
     content_tag :div, class: 'text-nowrap' do

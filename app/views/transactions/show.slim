@@ -1,7 +1,6 @@
 h1
   | Transaction (#{transaction.id})
 p
-  = notify_button notify_transaction_path(transaction.id)
   = edit_button edit_transaction_path(transaction.id)
   = destroy_button transaction_path(transaction.id)
 

@@ -11,18 +11,10 @@ Rails.application.routes.draw do
     end
     resources :transactions, controller: 'account_transactions', only: [:index, :new, :create, :show]
     resources :reports, controller: 'account_reports', only: [:index, :show]
-    member do
-      get :webhook_logs
-    end
   end
 
   # All transactions
-  resources :transactions do
-    member do
-      post :notify
-    end
-  end
+  resources :transactions
   resources :categories
   resources :policies
-  resources :logs, only: [:index]
 end
