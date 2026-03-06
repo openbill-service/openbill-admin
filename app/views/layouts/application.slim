@@ -1,8 +1,8 @@
 doctype html
 html
   = render 'head'
-  body
+  body.min-h-screen.bg-white.text-gray-900
     = render 'layouts/topmenu'
-    main#content.container-fluid
+    main.max-w-full.mx-auto.px-4.sm:px-6.py-6
       = render 'layouts/messages'
       = yield

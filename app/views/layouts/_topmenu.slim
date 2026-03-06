@@ -1,12 +1,24 @@
-nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top.border-bottom
-  = content_tag :div, class: "#{defined?(container_class) ? container_class : 'container-fluid'} px-3" do
-    span.navbar-brand.mb-0.h1
-      = link_to root_url, class: 'text-dark text-decoration-none' do
-        = render 'logo'
-    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"]
-      span.navbar-toggler-icon
-    #navbarNav.collapse.navbar-collapse
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0.d-flex
+nav.sticky.top-0.z-50.bg-white.border-b.border-gray-200[data-controller="toggle"]
+  .max-w-full.mx-auto.px-4.sm:px-6
+    .flex.items-center.justify-between.h-14
+      .flex.items-center
+        = link_to root_url, class: 'text-lg font-semibold text-gray-900 no-underline' do
+          = render 'logo'
+      / Desktop nav
+      .hidden.lg:flex.items-center.space-x-1
+        = navbar_link_to OpenbillAccount.model_name.human(count: 2), accounts_path
+        = navbar_link_to OpenbillTransaction.model_name.human(count: 2), transactions_path
+        = navbar_link_to OpenbillCategory.model_name.human(count: 2), categories_path
+        = navbar_link_to OpenbillPolicy.model_name.human(count: 2), policies_path
+        = navbar_link_to OpenbillInvoice.model_name.human(count: 2), invoices_path
+      / Mobile menu button
+      .lg:hidden
+        button.inline-flex.items-center.justify-center.p-2.rounded-md.text-gray-600.hover:text-gray-900.hover:bg-gray-100[type="button" data-action="click->toggle#toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation"]
+          svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"]
+            path[stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"]
+    / Mobile menu
+    #mobile-menu.hidden.lg:hidden.border-t.border-gray-200.py-2[data-toggle-target="content"]
+      .flex.flex-col.space-y-1
         = navbar_link_to OpenbillAccount.model_name.human(count: 2), accounts_path
         = navbar_link_to OpenbillTransaction.model_name.human(count: 2), transactions_path
         = navbar_link_to OpenbillCategory.model_name.human(count: 2), categories_path

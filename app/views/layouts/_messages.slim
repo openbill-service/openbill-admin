@@ -1,5 +1,13 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    div[class="alert alert-#{name.to_sym}"]
-      a.close[data-dismiss='alert'] ×
+    - alert_classes = case name.to_s
+      when 'error', 'alert-danger', 'alert' then 'bg-red-50 border-red-200 text-red-800'
+      when 'warning', 'alert-warning' then 'bg-amber-50 border-amber-200 text-amber-800'
+      when 'notice', 'alert-info' then 'bg-blue-50 border-blue-200 text-blue-800'
+      when 'success', 'alert-success' then 'bg-emerald-50 border-emerald-200 text-emerald-800'
+      else 'bg-blue-50 border-blue-200 text-blue-800'
+      end
+    div[class="#{alert_classes} border px-4 py-3 rounded-md mb-4 flex items-center justify-between" role="alert" data-controller="dismiss"]
       div= msg
+      button.ml-4.text-current.opacity-50.hover:opacity-100[type="button" data-action="click->dismiss#close" aria-label="Закрыть"]
+        | &times;
