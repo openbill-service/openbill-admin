@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["content"]
+  static targets = ["content", "icon"]
   static values = { open: { type: Boolean, default: false } }
 
   toggle() {
