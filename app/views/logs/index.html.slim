@@ -1,9 +1,9 @@
-.pull-right
+div.flex.justify-end.mb-2
   = render 'pagination', scope: logs
-h1 Webhook logs
+h1.text-xl.font-semibold.mb-4 Webhook logs
 
 = render 'table', logs: logs, ransack: ransack
 
-hr
-.pull-right
+hr.border-gray-200.my-4
+div.flex.justify-end
   = render 'pagination', scope: logs

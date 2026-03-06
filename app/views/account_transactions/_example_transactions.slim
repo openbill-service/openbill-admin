@@ -1,17 +1,18 @@
 - if example_transactions.any?
-  h3 Примеры транзакций
-  table.table.table-condensed.table-striped
-    thead
-      tr
-        th Время создания
-        th Дата
-        th Противоположный счет
-        th Сумма
-        th Ключ
-        th Details
-        th Meta
-        th Actions
+  h3.text-lg.font-semibold.mt-6.mb-3 Примеры транзакций
+  div.overflow-x-auto
+    table.w-full.text-sm.text-left
+      thead
+        tr.border-b.border-gray-200.bg-gray-50
+          th.px-3.py-2 Время создания
+          th.px-3.py-2 Дата
+          th.px-3.py-2 Противоположный счет
+          th.px-3.py-2 Сумма
+          th.px-3.py-2 Ключ
+          th.px-3.py-2 Details
+          th.px-3.py-2 Meta
+          th.px-3.py-2 Actions
 
-      = render 'accounts/transactions_table_body', account: account, transactions: example_transactions, ransack: nil
+        = render 'accounts/transactions_table_body', account: account, transactions: example_transactions, ransack: nil
 - else
-  h3 Нет примеров транзакций
+  h3.text-lg.font-semibold.mt-6.mb-3.text-gray-500 Нет примеров транзакций

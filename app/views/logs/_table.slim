@@ -1,21 +1,22 @@
-table.table.table-condensed.table-striped
-  thead
-    tr
-      th= sort_link ransack, :created_at, label: 'Time'
-      th Message
-      th= sort_link ransack, :url
-      th= sort_link ransack, :transaction_id, label: 'Transaction'
-      th= sort_link ransack, :status
-      th Body
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2= sort_link ransack, :created_at, label: 'Time'
+        th.px-3.py-2 Message
+        th.px-3.py-2= sort_link ransack, :url
+        th.px-3.py-2= sort_link ransack, :transaction_id, label: 'Transaction'
+        th.px-3.py-2= sort_link ransack, :status
+        th.px-3.py-2 Body
 
-  tbody
-    - logs.each do |l|
-      tr
-        td
-          p = I18n.l l[:created_at], format: :short
-          small.text-muted= l[:pid]
-        td= l[:message]
-        td= l[:url]
-        td= link_to l[:transaction_id], logs_path(transaction_id: l[:transaction_id])
-        td= l[:status]
-        td= l[:body]
+    tbody
+      - logs.each do |l|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          td.px-3.py-2
+            p.whitespace-nowrap= I18n.l l[:created_at], format: :short
+            small.text-gray-500= l[:pid]
+          td.px-3.py-2= l[:message]
+          td.px-3.py-2= l[:url]
+          td.px-3.py-2= link_to l[:transaction_id], logs_path(transaction_id: l[:transaction_id])
+          td.px-3.py-2= l[:status]
+          td.px-3.py-2= l[:body]

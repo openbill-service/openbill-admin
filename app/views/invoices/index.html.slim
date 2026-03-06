@@ -1,29 +1,28 @@
-h1
-  | Invoices
-  .pull-xs-right= link_to 'New invoice', new_invoice_path, class: 'btn btn-sm btn-success'
+div.flex.items-center.justify-between.mb-4
+  h1.text-xl.font-semibold Invoices
+  = tw_button_link 'New invoice', new_invoice_path, variant: :success, size: :sm
 
-table.table.table-condensed.table-striped.m-t-3
-  thead.thead-default
-    tr
-      th UUID
-      th Date
-      th Number
-      th Amount
-      th Created at
-      th
-        .pull-xs-right= t :actions
-  tbody
-    - invoices.each do |invoice|
-      tr
-        td
-          = link_to invoice.id, edit_invoice_path(invoice.id)
-        td= humanized_date invoice.date
-        td= invoice.number
-        td= humanized_amount invoice.amount
-        td= humanized_date invoice.created_at
-
-        td.pull-xs-right
-          .btn-group
-            = destroy_button invoice_path(invoice.id)
-            = link_to t('show.html'), invoice_path(invoice.id, format: :html), target: '_blank', class: 'btn btn-sm btn-info'
-            = link_to t('show.pdf'), invoice_path(invoice.id, format: :pdf), target: '_blank', class: 'btn btn-sm btn-info'
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2 UUID
+        th.px-3.py-2 Date
+        th.px-3.py-2 Number
+        th.px-3.py-2 Amount
+        th.px-3.py-2 Created at
+        th.px-3.py-2.text-right= t :actions
+    tbody
+      - invoices.each do |invoice|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          td.px-3.py-2
+            = link_to invoice.id, edit_invoice_path(invoice.id)
+          td.px-3.py-2= humanized_date invoice.date
+          td.px-3.py-2= invoice.number
+          td.px-3.py-2= humanized_amount invoice.amount
+          td.px-3.py-2= humanized_date invoice.created_at
+          td.px-3.py-2.text-right
+            .inline-flex.gap-1
+              = destroy_button invoice_path(invoice.id)
+              = tw_button_link t('show.html'), invoice_path(invoice.id, format: :html), variant: :info, size: :sm, target: '_blank'
+              = tw_button_link t('show.pdf'), invoice_path(invoice.id, format: :pdf), variant: :info, size: :sm, target: '_blank'

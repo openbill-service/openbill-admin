@@ -1,17 +1,17 @@
 = simple_form_for invoice do |f|
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :date, as: :date_picker
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :number
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :title
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :destination_account_id
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :amount_cents
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :amount_currency, collection: currencies_collection, include_blank: false
-  = f.submit class: 'btn btn-success'
+  = f.submit class: 'inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition'

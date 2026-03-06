@@ -1,24 +1,13 @@
-.row
-  .col-md-1
-    b Id
-  .col-md-6= invoice.id
-.row
-  .col-md-1
-    b Number
-  .col-md-6= invoice.number
-.row
-  .col-md-1
-    b Title
-  .col-md-6= invoice.title
-.row
-  .col-md-1
-    b Destination account id
-  .col-md-6= link_to invoice.destination_account_id, account_path(invoice.destination_account_id)
-.row
-  .col-md-1
-    b Date
-  .col-md-6= humanized_date invoice.date
-.row
-  .col-md-1
-    b Amount
-  .col-md-6= humanized_amount invoice.amount
+dl.grid.grid-cols-12.gap-2.text-sm
+  dt.col-span-12.md:col-span-2.font-semibold Id
+  dd.col-span-12.md:col-span-10= invoice.id
+  dt.col-span-12.md:col-span-2.font-semibold Number
+  dd.col-span-12.md:col-span-10= invoice.number
+  dt.col-span-12.md:col-span-2.font-semibold Title
+  dd.col-span-12.md:col-span-10= invoice.title
+  dt.col-span-12.md:col-span-2.font-semibold Destination account id
+  dd.col-span-12.md:col-span-10= link_to invoice.destination_account_id, account_path(invoice.destination_account_id)
+  dt.col-span-12.md:col-span-2.font-semibold Date
+  dd.col-span-12.md:col-span-10= humanized_date invoice.date
+  dt.col-span-12.md:col-span-2.font-semibold Amount
+  dd.col-span-12.md:col-span-10= humanized_amount invoice.amount

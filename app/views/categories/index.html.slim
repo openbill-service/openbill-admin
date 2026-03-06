@@ -1,22 +1,22 @@
-h1
-  | Categories
-  .pull-xs-right= link_to 'New category', new_category_path, class: 'btn btn-sm btn-success'
+div.flex.items-center.justify-between.mb-4
+  h1.text-xl.font-semibold Categories
+  = tw_button_link 'New category', new_category_path, variant: :success, size: :sm
 
-table.table.table-condensed.table-striped.m-t-3
-  thead.thead-default
-    tr
-      th Name
-      th Parent
-      th Accounts count
-      th
-        .pull-xs-right= t :actions
-  tbody
-    - categories.each do |category|
-      tr
-        td
-          = link_to category.name, edit_category_path(category.id)
-        td= category.parent_id
-        td= accounts_count(category)
-        td.pull-xs-right
-          .btn-group
-            = destroy_button category_path(category.id)
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2 Name
+        th.px-3.py-2 Parent
+        th.px-3.py-2 Accounts count
+        th.px-3.py-2.text-right= t :actions
+    tbody
+      - categories.each do |category|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          td.px-3.py-2
+            = link_to category.name, edit_category_path(category.id)
+          td.px-3.py-2= category.parent_id
+          td.px-3.py-2= accounts_count(category)
+          td.px-3.py-2.text-right
+            .inline-flex.gap-1
+              = destroy_button category_path(category.id)
