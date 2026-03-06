@@ -1,63 +1,67 @@
-.pull-right
-  = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'btn btn-sm btn-default'
-  | &nbsp;
-  = link_to 'Export to CSV', transactions_path(request.query_parameters.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
-  | &nbsp;
-  = link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
-h1
+div.flex.items-center.justify-end.gap-2.mb-4
+  = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+  = link_to 'Export to CSV', transactions_path(request.query_parameters.merge format: :csv), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50', target: '_blank'
+  = link_to 'New transaction', new_transaction_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
+
+h1.text-xl.font-semibold.mb-4
   | Transactions (#{transactions_count})
 
 = render 'filter', ransack: ransack
-= render 'pagination', scope: transactions
+
+div.flex.justify-end.mb-2
+  = render 'pagination', scope: transactions
 
 - if transactions.any?
-  table.table.table-condensed.table-striped
-    thead
-      tr
-        th= sort_link ransack, :created_at, label: 'Create time'
-        th= sort_link ransack, :date, label: 'Record date'
-        th= sort_link ransack, :from_account_id, label: 'Source account'
-        th= sort_link ransack, :to_account_id, label: 'Destination account'
-        th= sort_link ransack, :amount_cents, label: 'Amount'
-        th= sort_link ransack, :key
-        th Details
-        th Meta
-        th Webhook state
-        th Actions
+  div.overflow-x-auto
+    table.w-full.text-sm.text-left
+      thead
+        tr.border-b.border-gray-200.bg-gray-50
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :created_at, label: 'Create time'
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :date, label: 'Record date'
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :from_account_id, label: 'Source account'
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :to_account_id, label: 'Destination account'
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :amount_cents, label: 'Amount'
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :key
+          th.px-3.py-2.whitespace-nowrap Details
+          th.px-3.py-2.whitespace-nowrap Meta
+          th.px-3.py-2.whitespace-nowrap Webhook state
+          th.px-3.py-2.whitespace-nowrap Actions
 
-    tbody
-    - transactions.each do |t|
-      tr
-        td
-          = link_to transaction_path t.id do
-            .text-nowrap= I18n.l t.created_at, format: :short
-        td= humanized_date t.date
-        td
-          = link_to t.from_account, account_path(t.from_account_id)
-          div
-            small.text-muted= t.from_account.details
-        td
-          = link_to t.to_account, account_path(t.to_account_id)
-          div
-            small.text-muted= t.to_account.details
-        td= humanized_amount t.amount
-        td
-          code = t.key
-        td
-          .text-muted= t.details
-        td= humanized_meta t.meta
-        td
-          - if webhook_presents?
-            - if t.last_webhook_log.present?
-              = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
-        td
-          = show_button transaction_path(t.id)
-          - if t.reverse_transaction_id.present?
-            br
-            = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
+      tbody
+        - transactions.each do |t|
+          tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+            td.px-3.py-2
+              = link_to transaction_path(t.id) do
+                span.whitespace-nowrap= I18n.l t.created_at, format: :short
+            td.px-3.py-2= humanized_date t.date
+            td.px-3.py-2
+              = link_to t.from_account, account_path(t.from_account_id)
+              div
+                small.text-gray-500= t.from_account.details
+            td.px-3.py-2
+              = link_to t.to_account, account_path(t.to_account_id)
+              div
+                small.text-gray-500= t.to_account.details
+            td.px-3.py-2= humanized_amount t.amount
+            td.px-3.py-2
+              code = t.key
+            td.px-3.py-2
+              span.text-gray-500= t.details
+            td.px-3.py-2= humanized_meta t.meta
+            td.px-3.py-2
+              - if webhook_presents?
+                - if t.last_webhook_log.present?
+                  = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
+            td.px-3.py-2
+              = show_button transaction_path(t.id)
+              - if t.reverse_transaction_id.present?
+                br
+                = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
 
 - else
-  .mt-4.alert.alert-info Нет транзакций по такому запросу
-hr
+  div.mt-4.p-4.bg-blue-50.text-blue-700.rounded-md.text-sm Нет транзакций по такому запросу
 
-= render 'pagination', scope: transactions
+hr.border-gray-200.my-4
+
+div.flex.justify-end.mt-2
+  = render 'pagination', scope: transactions

@@ -1,25 +1,25 @@
 - if transaction.reverse_transaction_id.present?
-  h2 Make a reverse transaction
+  h2.text-lg.font-semibold.mb-4 Make a reverse transaction
 = simple_form_for transaction do |f|
   = f.input :reverse_transaction_id, as: :hidden
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = select_account_field f, :from_account_id
-    .col-md-6
+    .col-span-12.md:col-span-6
       = select_account_field f, :to_account_id
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :amount_cents
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :amount_currency, collection: currencies_collection, include_blank: false
-  .row
-    .col-md-3
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-3
       = f.input :date, as: :date_picker
-    .col-md-3
+    .col-span-12.md:col-span-3
       = f.input :key
-    .col-md-3
+    .col-span-12.md:col-span-3
       = f.input :details, as: :text
-    .col-md-3
+    .col-span-12.md:col-span-3
       = f.input :meta
 
-  = f.submit class: 'btn btn-success'
+  = f.submit class: 'inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition'
