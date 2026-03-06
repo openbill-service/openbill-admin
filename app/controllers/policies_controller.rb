@@ -20,12 +20,12 @@ class PoliciesController < ApplicationController
     if policy.save
       redirect_to policies_path
     else
-      render :new, locals: { policy: policy_form }
+      render :new, locals: { policy: policy }
     end
 
   rescue => err
     flash.now[:error] = err.message
-    render :new, locals: { policy: policy_form }
+    render :new, locals: { policy: policy }
   end
 
   def update
