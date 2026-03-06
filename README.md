@@ -1,6 +1,6 @@
 # OpenBill Admin
 
-Administrative interface for the OpenBill billing system. Manage accounts, transactions, categories, policies, and invoices.
+Administrative interface for the OpenBill billing system. Manage accounts, transactions, categories, and policies.
 
 ## Why OpenBill
 
@@ -111,7 +111,6 @@ OpenBill Admin works with the following main entities:
 - **Categories** — chart of accounts for organizing accounts
 - **Transactions** — money movement between accounts
 - **Policies** — rules defining permitted transactions between accounts/categories
-- **Invoices** — billing and payment tracking
 
 ## Openbill-core Integration
 
