@@ -40,7 +40,7 @@ RSpec.describe "Smoke request specs", type: :request do
 
     it "returns 404 for nonexistent account" do
       get "/accounts/00000000-0000-0000-0000-000000000000"
-      expect(response).to have_http_status(:not_found).or have_http_status(:internal_server_error)
+      expect(response).to have_http_status(:not_found)
     end
   end
 
