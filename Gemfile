@@ -28,7 +28,7 @@ gem "stimulus-rails"
 # gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'kaminari'
-gem 'bootstrap-kaminari-views', github: 'klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
+# gem 'bootstrap-kaminari-views', github: 'klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
 gem "bootstrap-icons-helper", "~> 2.0"
 gem 'pg'
 gem 'money'
