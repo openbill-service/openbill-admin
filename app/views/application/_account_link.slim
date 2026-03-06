@@ -1,6 +1,6 @@
-= link_to account_path(account.id), data: { bs_toggle: :tooltip }, title: account.meta.to_json do
+= link_to account_path(account.id), title: account.meta.to_json do
   = account.details.presence || account.name
-  small.text-muted= " [#{account}]"
+  small.text-gray-500= " [#{account}]"
 br
-.text-muted
+.text-gray-500
   small= l account.updated_at, format: :short
