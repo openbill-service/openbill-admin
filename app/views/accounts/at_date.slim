@@ -7,13 +7,14 @@ h1.flex.items-center.justify-between.mb-4
 /= render 'date_filter', ransack: ransack, category: current_category
 = render 'pagination', scope: accounts
 
+- has_date_amount = accounts.any? { |a| a.date_amount_cents.present? }
 div.overflow-x-auto
   table.w-full.text-sm.text-left
     thead
       tr.border-b.border-gray-200.bg-gray-50
         th.px-3.py-2= sort_link ransack, :key
         th.px-3.py-2= sort_link ransack, :amount_cents
-        - if accounts.any? { |a| a.date_amount_cents.present? }
+        - if has_date_amount
           th.px-3.py-2 Amount at date
         th.px-3.py-2= sort_link ransack, :updated_at
         th.px-3.py-2= sort_link ransack, :transactions_count
@@ -28,7 +29,7 @@ div.overflow-x-auto
             small.text-gray-500
               = account.details
           td.px-3.py-2= humanized_amount account.amount
-          - if accounts.any? { |a| a.date_amount_cents.present? }
+          - if has_date_amount
             td.px-3.py-2= account.date_amount_cents.present? ? humanized_amount(account.date_amount) : nil
           td.px-3.py-2= l account.updated_at, format: :short
           td.px-3.py-2= link_to account.transactions_count, account_path(account.id)
