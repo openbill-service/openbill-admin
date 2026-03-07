@@ -25,7 +25,7 @@ SimpleForm.setup do |config|
   config.error_notification_tag = :div
 
   # CSS class to add for error notification helper.
-  config.error_notification_class = 'error_notification'
+  config.error_notification_class = 'bg-red-50 border border-red-200 text-red-800 rounded-md p-4 mb-4'
 
   # ID to add for error notification helper.
   # config.error_notification_id = nil

@@ -28,8 +28,8 @@ div.overflow-x-auto
             small.text-gray-500
               = account.details
           td.px-3.py-2= humanized_amount account.amount
-          - if account.date_amount_cents.present?
-            td.px-3.py-2= humanized_amount account.date_amount
+          - if accounts.any? { |a| a.date_amount_cents.present? }
+            td.px-3.py-2= account.date_amount_cents.present? ? humanized_amount(account.date_amount) : nil
           td.px-3.py-2= l account.updated_at, format: :short
           td.px-3.py-2= link_to account.transactions_count, account_path(account.id)
           td.px-3.py-2.text-gray-500= humanized_meta account.meta
