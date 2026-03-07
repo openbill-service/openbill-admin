@@ -28,13 +28,11 @@ gem "stimulus-rails"
 # gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'kaminari'
-gem 'bootstrap-kaminari-views', github: 'klacointe/bootstrap-kaminari-views', branch: 'bootstrap4'
 gem "bootstrap-icons-helper", "~> 2.0"
 gem 'pg'
 gem 'money'
 gem 'money-rails'
 gem 'slim-rails'
-gem 'nprogress-rails'
 gem "semver2", github: "haf/semver"
 gem 'rack_password'
 
@@ -44,10 +42,6 @@ gem 'foreman'
 gem 'bugsnag'
 gem 'hashie'
 
-gem 'simple-navigation', github: 'andi/simple-navigation'
-gem 'simple-navigation-bootstrap'
-
-gem 'font-awesome-rails'
 gem 'simple_form'
 
 gem 'active_link_to'

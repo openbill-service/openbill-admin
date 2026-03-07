@@ -1,0 +1,8 @@
+/ Link showing page number
+- if page.current?
+  li
+    span.px-3.py-1.text-sm.rounded.bg-blue-600.text-white aria-current="page"
+      = page
+- else
+  li
+    = link_to page, url, class: "px-3 py-1 text-sm rounded hover:bg-gray-100", remote: remote, rel: page.rel

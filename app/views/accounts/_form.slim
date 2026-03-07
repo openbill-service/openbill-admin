@@ -1,16 +1,16 @@
 = simple_form_for account do |f|
-  .row
-    .col-md-3
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-3
       = f.input :key
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :category_id, collection: categories_collection, include_blank: false
     - unless account.persisted?
-      .col-md-3
+      .col-span-12.md:col-span-3
         = f.input :amount_currency, collection: currencies_collection, include_blank: false
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :meta
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :details
 
-  = f.submit class: 'btn btn-success'
+  = f.submit class: 'inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition'

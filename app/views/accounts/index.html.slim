@@ -1,14 +1,12 @@
-.pull-right
-  /= link_to 'Accounts at date', at_date_accounts_path, class: 'btn btn-sm btn-default'
-  /| &nbsp;
+div.flex.items-center.justify-end.gap-2.mb-4
+  = link_to 'Accounts at date', at_date_accounts_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
   = export_csv_link
-  | &nbsp;
-  = link_to t(:new_account, scope: :buttons), new_account_path, class: 'btn btn-sm btn-success'
+  = link_to t(:new_account, scope: :buttons), new_account_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
 
 h2.mb-4 Счета (#{accounts.count} из #{OpenbillAccount.count})
 = render 'categories', categories: categories, current_category: current_category
 
-.pull-right
+div.flex.justify-end.mb-2
   = render 'pagination', scope: accounts
 
 = render 'filter', ransack: ransack, category: current_category
@@ -19,5 +17,5 @@ h2.mb-4 Счета (#{accounts.count} из #{OpenbillAccount.count})
 - else
   p Unknown index type #{index_type}
 
-.pull-right
+div.flex.justify-end.mt-2
   = render 'pagination', scope: accounts

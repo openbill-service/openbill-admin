@@ -1,26 +1,27 @@
 = render 'accounts/header', account: account
 
-table.table.table-striped.table-hover.table-sm
-  thead
-    tr
-      th Opposite accounts
-      - report.columns.each do |column|
-        th
-          = report_column_title report, column
-  tbody
-    tr
-      th 
-        = link_to 'Total', account_transactions_path(account.id)
-      - report.columns.each do |month|
-        td
-          = render 'record', report: report, key: { month: month, opposite_account_id: :total }
-
-    - report.opposite_accounts.each do |oa|
-      tr
-        th
-          div= link_to oa, account_reports_path(oa.id)
-          small.text-muted= oa.details
-
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2 Opposite accounts
+        - report.columns.each do |column|
+          th.px-3.py-2
+            = report_column_title report, column
+    tbody
+      tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100.font-semibold
+        th.px-3.py-2
+          = link_to 'Total', account_transactions_path(account.id)
         - report.columns.each do |month|
-          td
-            = render 'record', report: report, key: { month: month, opposite_account_id: oa.id }
+          td.px-3.py-2
+            = render 'record', report: report, key: { month: month, opposite_account_id: :total }
+
+      - report.opposite_accounts.each do |oa|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          th.px-3.py-2
+            div= link_to oa, account_reports_path(oa.id)
+            small.text-gray-500= oa.details
+
+          - report.columns.each do |month|
+            td.px-3.py-2
+              = render 'record', report: report, key: { month: month, opposite_account_id: oa.id }

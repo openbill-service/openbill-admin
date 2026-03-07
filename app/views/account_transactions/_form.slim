@@ -3,26 +3,25 @@
   = full_error_messages f
   = hidden_field_tag :direction, f.object.direction
   = f.input :amount_currency, as: :hidden
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :opposite_account_id, collection: opposite_accounts_collection, include_blank: false
-    .col-md-2
-      .p-m
-        .form-group
-          = f.label :amount_cents, class: 'form-control-label'
-          .input-group
-            .input-group-addon= money_symbol_from_string account_transaction_form.amount_currency
-            = f.input_field :amount_cents, class: 'form-control', autofocus: true
-          = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
-    .col-md-4
+    .col-span-12.md:col-span-2
+      .mb-4
+        = f.label :amount_cents, class: 'block text-sm font-medium text-gray-700 mb-1'
+        .flex
+          span.inline-flex.items-center.px-3.rounded-l-md.border.border-r-0.border-gray-300.bg-gray-50.text-gray-500.text-sm= money_symbol_from_string account_transaction_form.amount_currency
+          = f.input_field :amount_cents, class: 'w-full border border-gray-300 rounded-r-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500', autofocus: true
+        = f.input :amount_currency, as: :hidden, input_html: { value: account_transaction_form.amount_currency }
+    .col-span-12.md:col-span-4
       = f.input :date, as: :date_picker, required: false
-  .row
-    .col-md-6
+  .grid.grid-cols-12.gap-4
+    .col-span-12.md:col-span-6
       = f.input :key
-    .col-md-6
+    .col-span-12.md:col-span-6
       = f.input :meta
-  .row
-    .col-md-12
+  .grid.grid-cols-12.gap-4
+    .col-span-12
       = f.input :details, as: :text
 
-  = f.button :submit, class: 'btn btn-success'
+  = f.button :submit, class: 'inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-md hover:bg-emerald-700 transition'

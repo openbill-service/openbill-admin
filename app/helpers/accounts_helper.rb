@@ -22,11 +22,13 @@ module AccountsHelper
   end
 
   def income_transaction_button(income_account: )
-    link_to fa_icon(:plus), new_account_transaction_path(income_account.id, direction: :income), class: 'btn btn-sm btn-success'
+    link_to bootstrap_icon("plus-lg"), new_account_transaction_path(income_account.id, direction: :income),
+            class: 'inline-flex items-center font-medium rounded-md transition px-2 py-1 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
   end
 
   def outcome_transaction_button(outcome_account: )
-    link_to fa_icon(:minus), new_account_transaction_path(outcome_account.id, direction: :outcome), class: 'btn btn-sm btn-danger'
+    link_to bootstrap_icon("dash-lg"), new_account_transaction_path(outcome_account.id, direction: :outcome),
+            class: 'inline-flex items-center font-medium rounded-md transition px-2 py-1 text-xs bg-red-600 text-white hover:bg-red-700'
   end
 
   def account_title(account)
@@ -52,5 +54,10 @@ module AccountsHelper
 
   def account_select_item(acc)
     ["#{acc.key} [#{acc.details}]", acc.id]
+  end
+
+  def category_pill_class(active)
+    base = 'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md'
+    active ? "#{base} bg-blue-600 text-white" : "#{base} text-gray-700 hover:bg-gray-100"
   end
 end

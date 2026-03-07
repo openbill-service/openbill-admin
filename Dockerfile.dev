@@ -13,10 +13,10 @@ RUN apt-get update -qq && \
       curl \
       git \
       libpq-dev \
-      nodejs \
-      npm \
       pkg-config \
       postgresql-client && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install --no-install-recommends -y nodejs && \
     npm install -g yarn@${YARN_VERSION} && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 

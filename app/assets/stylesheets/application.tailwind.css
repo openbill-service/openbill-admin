@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@layer base {
+  @keyframes slide-to-right {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+
+  html[data-turbo-visit-direction="forward"]::view-transition-old(sidebar):only-child {
+    animation: slide-to-right 0.5s ease-out;
+  }
+}

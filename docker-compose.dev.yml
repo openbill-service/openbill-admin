@@ -10,8 +10,8 @@ services:
       DATABASE_HOST: postgres
       DATABASE_USER: postgres
       DATABASE_PASS: postgres
-      DATABASE_NAME: kiiiosk_production
-      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_NAME: openbill_development
+      DATABASE_NAME_TEST: openbill_test
       DATABASE_POOL: 5
       PORT: 3000
     volumes:

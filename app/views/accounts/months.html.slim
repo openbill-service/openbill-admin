@@ -1,15 +1,16 @@
 = render 'header', account: account
 
-table.table.table-condensed.table-stripped
-  thead
-    tr
-      th Аккаунт
-      - periods.each do |m|
-        th= humanized_period m
-  tbody
-    - accounts.each do |a|
-      tr
-        td
-          = render 'account_link', account: a.account
-        - periods.each do |period|
-          td= humanized_amount a[:periods][period]
+div.overflow-x-auto
+  table.w-full.text-sm.text-left
+    thead
+      tr.border-b.border-gray-200.bg-gray-50
+        th.px-3.py-2 Аккаунт
+        - periods.each do |m|
+          th.px-3.py-2= humanized_period m
+    tbody
+      - accounts.each do |a|
+        tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+          td.px-3.py-2
+            = render 'account_link', account: a.account
+          - periods.each do |period|
+            td.px-3.py-2= humanized_amount a[:periods][period]

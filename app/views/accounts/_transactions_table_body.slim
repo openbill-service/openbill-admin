@@ -1,22 +1,22 @@
 tbody
   - transactions.each do |transaction|
     - t = AccountTransaction.new account, transaction
-    tr
-      td
+    tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100
+      td.px-3.py-2
         = link_to transaction_path t.id do
-          .text-nowrap= I18n.l t.created_at, format: :short
-      td.text-nowrap= humanized_date t.date
-      td
+          span.whitespace-nowrap= I18n.l t.created_at, format: :short
+      td.px-3.py-2.whitespace-nowrap= humanized_date t.date
+      td.px-3.py-2
         = link_to t.opposite_account, account_path(t.opposite_account.id)
         div
-          small.text-muted= t.opposite_account.details
-      td= humanized_amount t.amount
-      td
+          small.text-gray-500= t.opposite_account.details
+      td.px-3.py-2= humanized_amount t.amount
+      td.px-3.py-2
         code = t.key
-      td
-        .text-muted= t.details
-      td= humanized_meta t.meta
-      td
+      td.px-3.py-2
+        span.text-gray-500= t.details
+      td.px-3.py-2= humanized_meta t.meta
+      td.px-3.py-2
         = link_to 'Show', transaction_path(t.id)
         - if t.reverse_transaction_id.present?
           br
