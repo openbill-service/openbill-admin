@@ -8,6 +8,7 @@ environment:
 compose:
   files:
     - docker-compose.dev.yml
+  project_name: openbill-admin-dip
 
 interaction:
   shell:
@@ -35,8 +36,8 @@ interaction:
       DATABASE_HOST: postgres
       DATABASE_USER: postgres
       DATABASE_PASS: postgres
-      DATABASE_NAME: kiiiosk_production
-      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_NAME: openbill_development
+      DATABASE_NAME_TEST: openbill_test
       DATABASE_POOL: 5
 
   rake:
@@ -47,8 +48,8 @@ interaction:
       DATABASE_HOST: postgres
       DATABASE_USER: postgres
       DATABASE_PASS: postgres
-      DATABASE_NAME: kiiiosk_production
-      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_NAME: openbill_development
+      DATABASE_NAME_TEST: openbill_test
       DATABASE_POOL: 5
 
   rspec:
@@ -60,8 +61,8 @@ interaction:
       DATABASE_HOST: postgres
       DATABASE_USER: postgres
       DATABASE_PASS: postgres
-      DATABASE_NAME: kiiiosk_production
-      DATABASE_NAME_TEST: kormilica_test
+      DATABASE_NAME: openbill_development
+      DATABASE_NAME_TEST: openbill_test
       DATABASE_POOL: 5
     compose:
       run_options:
@@ -75,7 +76,10 @@ interaction:
 
 provision:
   - dip compose up -d postgres
+  - dip compose exec postgres pg_isready -U postgres
   - dip bundle install
   - dip yarn install
-  - dip rake db:create db:migrate
-  - dip RAILS_ENV=test rake db:create db:migrate
+  - dip rake db:create
+  - dip rake db:migrate
+  - dip rake db:create RAILS_ENV=test
+  - dip rake db:migrate RAILS_ENV=test

@@ -1,11 +1,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  pool: 5
   <% if ENV.key?('DATABASE_HOST') %>
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
   <% end %>
-  database: <%= ENV.fetch('DATABASE_NAME', 'kiiiosk_production' ) %>
+  database: <%= ENV.fetch('DATABASE_NAME', 'openbill_development') %>
   pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASS'] %>
@@ -14,27 +13,18 @@ test:
   adapter: postgresql
   encoding: unicode
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
-  database: <%= ENV.fetch('DATABASE_NAME_TEST', 'kormilica_test') %>
+  database: <%= ENV.fetch('DATABASE_NAME_TEST') { "openbill_test_#{require 'digest'; Digest::MD5.hexdigest(`pwd`.chomp)[0,8]}" } %>
   pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
   username: <%= ENV.fetch('DATABASE_USER', '') %>
   password: <%= ENV.fetch('DATABASE_PASS', '') %>
 
-staging:
-  adapter: postgresql
-  encoding: unicode
-  database: kormilica_test
-  pool: 5
-  username:
-  password:
-
 production:
   adapter: postgresql
   encoding: unicode
-  reconnect: true
-    <% if ENV.key?('DATABASE_HOST') %>
+  <% if ENV.key?('DATABASE_HOST') %>
   host: <%= ENV.fetch('DATABASE_HOST', 'localhost') %>
   <% end %>
-  database: <%= ENV.fetch('DATABASE_NAME', 'merchantly_production' ) %>
+  database: <%= ENV.fetch('DATABASE_NAME', 'openbill_production') %>
   pool: <%= ENV.fetch('DATABASE_POOL', 5) %>
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASS'] %>

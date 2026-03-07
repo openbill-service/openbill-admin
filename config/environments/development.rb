@@ -19,7 +19,7 @@ Rails.application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
-  config.hosts << ENV.fetch('OPENBILL_ADMIN_HOST', 'localhost')
+  config.hosts.clear
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
