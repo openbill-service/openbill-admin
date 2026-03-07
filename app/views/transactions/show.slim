@@ -2,7 +2,6 @@ h1.text-xl.font-semibold.mb-4
   | Transaction (#{transaction.id})
 
 div.flex.items-center.gap-2.mb-4
-  = notify_button notify_transaction_path(transaction.id)
   = edit_button edit_transaction_path(transaction.id)
   = destroy_button transaction_path(transaction.id)
 

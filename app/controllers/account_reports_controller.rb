@@ -47,7 +47,7 @@ class AccountReportsController < ApplicationController
   end
 
   def account
-    @_account ||= OpenbillAccount params[:account_id]
+    @_account ||= OpenbillAccount.find(params[:account_id])
   end
 end
 

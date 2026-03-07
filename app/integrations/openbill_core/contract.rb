@@ -6,9 +6,7 @@ module OpenbillCore
       openbill_accounts: %w[id category_id key amount_cents amount_currency created_at],
       openbill_categories: %w[id name],
       openbill_transactions: %w[id from_account_id to_account_id amount_cents amount_currency key details created_at],
-      openbill_policies: %w[id name from_category_id to_category_id from_account_id to_account_id],
-      openbill_invoices: %w[id date number title destination_account_id amount_cents amount_currency],
-      openbill_webhook_logs: %w[id level message pid url transaction_id created_at]
+      openbill_policies: %w[id name from_category_id to_category_id from_account_id to_account_id]
     }.freeze
 
     def verify!(connection: ApplicationRecord.connection)

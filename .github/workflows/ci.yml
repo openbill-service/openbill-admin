@@ -50,6 +50,15 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Build CSS
+        run: npm install && npx sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules && npx postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css
+
       - name: Run tests
         env:
           RAILS_ENV: test

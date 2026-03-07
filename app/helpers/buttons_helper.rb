@@ -33,10 +33,6 @@ module ButtonsHelper
     link_to(label, url, **opts, class: css)
   end
 
-  def notify_button(link)
-    tw_button_link 'Notify', link, variant: :warning, size: :sm, method: 'POST'
-  end
-
   def destroy_button(link)
     tw_button_link t('delete'), link, variant: :danger, size: :sm,
                    method: :delete, 'data-confirm' => 'Точно удалить?'
