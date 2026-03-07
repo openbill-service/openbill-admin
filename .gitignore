@@ -44,3 +44,4 @@ gems.tags
 
 # pr-review-fix-loop local artifacts
 .claude/*.local.md
+.cache
