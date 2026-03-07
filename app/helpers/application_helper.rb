@@ -1,4 +1,18 @@
 module ApplicationHelper
+  FLASH_COLORS = {
+    'error' => 'bg-red-50 border-red-200 text-red-800',
+    'alert-danger' => 'bg-red-50 border-red-200 text-red-800',
+    'alert' => 'bg-red-50 border-red-200 text-red-800',
+    'warning' => 'bg-amber-50 border-amber-200 text-amber-800',
+    'alert-warning' => 'bg-amber-50 border-amber-200 text-amber-800',
+    'notice' => 'bg-blue-50 border-blue-200 text-blue-800',
+    'alert-info' => 'bg-blue-50 border-blue-200 text-blue-800',
+    'success' => 'bg-emerald-50 border-emerald-200 text-emerald-800',
+    'alert-success' => 'bg-emerald-50 border-emerald-200 text-emerald-800'
+  }.freeze
+
+  FLASH_DEFAULT_COLOR = 'bg-blue-50 border-blue-200 text-blue-800'.freeze
+
   def app_title
     "Openbill Admin #{AppVersion}"
   end

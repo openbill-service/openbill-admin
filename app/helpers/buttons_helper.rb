@@ -18,16 +18,16 @@ module ButtonsHelper
   TW_BTN_BASE = 'inline-flex items-center font-medium rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed'.freeze
 
   def tw_button(label, variant: :primary, size: :md, **opts)
-    variant_classes = TW_BTN_VARIANTS.fetch(variant, TW_BTN_VARIANTS[:primary])
-    size_classes = TW_BTN_SIZES.fetch(size, TW_BTN_SIZES[:md])
+    variant_classes = TW_BTN_VARIANTS.fetch(variant)
+    size_classes = TW_BTN_SIZES.fetch(size)
     extra = opts.delete(:class)
     css = [TW_BTN_BASE, variant_classes, size_classes, extra].compact.join(' ')
     content_tag(:button, label, **opts, class: css)
   end
 
   def tw_button_link(label, url, variant: :primary, size: :md, **opts)
-    variant_classes = TW_BTN_VARIANTS.fetch(variant, TW_BTN_VARIANTS[:primary])
-    size_classes = TW_BTN_SIZES.fetch(size, TW_BTN_SIZES[:md])
+    variant_classes = TW_BTN_VARIANTS.fetch(variant)
+    size_classes = TW_BTN_SIZES.fetch(size)
     extra = opts.delete(:class)
     css = [TW_BTN_BASE, variant_classes, size_classes, extra].compact.join(' ')
     link_to(label, url, **opts, class: css)

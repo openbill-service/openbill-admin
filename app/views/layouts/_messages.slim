@@ -1,7 +1,6 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    - color_map = { 'error' => 'bg-red-50 border-red-200 text-red-800', 'alert-danger' => 'bg-red-50 border-red-200 text-red-800', 'alert' => 'bg-red-50 border-red-200 text-red-800', 'warning' => 'bg-amber-50 border-amber-200 text-amber-800', 'alert-warning' => 'bg-amber-50 border-amber-200 text-amber-800', 'notice' => 'bg-blue-50 border-blue-200 text-blue-800', 'alert-info' => 'bg-blue-50 border-blue-200 text-blue-800', 'success' => 'bg-emerald-50 border-emerald-200 text-emerald-800', 'alert-success' => 'bg-emerald-50 border-emerald-200 text-emerald-800' }
-    - alert_classes = color_map[name.to_s] || 'bg-blue-50 border-blue-200 text-blue-800'
+    - alert_classes = ApplicationHelper::FLASH_COLORS[name.to_s] || ApplicationHelper::FLASH_DEFAULT_COLOR
     div[class="#{alert_classes} border px-4 py-3 rounded-md mb-4 flex items-center justify-between" role="alert" data-controller="dismiss"]
       div= msg
       button.ml-4.text-current.opacity-50.hover:opacity-100[type="button" data-action="click->dismiss#close" aria-label="Закрыть"]
