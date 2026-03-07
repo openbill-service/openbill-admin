@@ -8,7 +8,6 @@ environment:
 compose:
   files:
     - docker-compose.dev.yml
-  project_name: openbill-admin-dip
 
 interaction:
   shell:
