@@ -28,6 +28,12 @@ SimpleForm.setup do |config|
   end
 
   config.default_wrapper = :tailwind
+  config.wrapper_mappings = {
+    boolean: :tailwind_boolean,
+    select: :tailwind_select,
+    grouped_select: :tailwind_select,
+    collection_select: :tailwind_select
+  }
   config.button_class = 'inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition'
   config.boolean_label_class = 'text-sm text-gray-700'
 end

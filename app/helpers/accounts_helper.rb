@@ -22,12 +22,12 @@ module AccountsHelper
   end
 
   def income_transaction_button(income_account: )
-    link_to fa_icon(:plus), new_account_transaction_path(income_account.id, direction: :income),
+    link_to bootstrap_icon("plus-lg"), new_account_transaction_path(income_account.id, direction: :income),
             class: 'inline-flex items-center font-medium rounded-md transition px-2 py-1 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
   end
 
   def outcome_transaction_button(outcome_account: )
-    link_to fa_icon(:minus), new_account_transaction_path(outcome_account.id, direction: :outcome),
+    link_to bootstrap_icon("dash-lg"), new_account_transaction_path(outcome_account.id, direction: :outcome),
             class: 'inline-flex items-center font-medium rounded-md transition px-2 py-1 text-xs bg-red-600 text-white hover:bg-red-700'
   end
 
