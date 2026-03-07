@@ -55,4 +55,9 @@ module AccountsHelper
   def account_select_item(acc)
     ["#{acc.key} [#{acc.details}]", acc.id]
   end
+
+  def category_pill_class(active)
+    base = 'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md'
+    active ? "#{base} bg-blue-600 text-white" : "#{base} text-gray-700 hover:bg-gray-100"
+  end
 end

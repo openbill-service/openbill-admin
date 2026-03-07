@@ -4,7 +4,6 @@ h1.flex.items-center.justify-between.mb-4
 
 = render 'date_categories', categories: categories
 
-/= render 'date_filter', ransack: ransack, category: current_category
 = render 'pagination', scope: accounts
 
 - has_date_amount = accounts.any? { |a| a.date_amount_cents.present? }

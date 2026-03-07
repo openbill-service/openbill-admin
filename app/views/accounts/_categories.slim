@@ -1,4 +1,4 @@
 nav.flex.flex-wrap.gap-1.mb-4
-  = link_to "All (#{accounts_count})", accounts_path, class: (current_category.blank? ? 'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 text-white' : 'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100')
+  = link_to "All (#{accounts_count})", accounts_path, class: category_pill_class(current_category.blank?)
   - categories.each do |cat|
-    = link_to "#{cat.name} (#{accounts_count(cat)})", accounts_path(q: { category_id_eq: cat.id }), class: (current_category.try(:id) == cat.id ? 'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md bg-blue-600 text-white' : 'inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md text-gray-700 hover:bg-gray-100')
+    = link_to "#{cat.name} (#{accounts_count(cat)})", accounts_path(q: { category_id_eq: cat.id }), class: category_pill_class(current_category.try(:id) == cat.id)
