@@ -135,22 +135,7 @@ class AccountsController < ApplicationController
     render :edit, locals: { account_key: account.key, account: account }
   end
 
-  def webhook_logs
-    render locals: { logs: logs, db_error: @db_error }
-  end
-
   private
-
-  def logs
-    query = WebhooksQuery.new(filter: webhooks_filter).call
-    filter.apply(query).paginate page, per_page
-  end
-
-  def webhooks_filter
-    WebhooksFilter.new(
-      account: account
-    )
-  end
 
   def ransack
     OpenbillAccount.ransack params[:q]

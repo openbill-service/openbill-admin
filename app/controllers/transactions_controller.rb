@@ -22,13 +22,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def pending_webhooks
-    render locals: {
-      transactions: pending_webhooks_transactions.includes(:to_account, :from_account, :last_webhook_log).page(page).per(per_page),
-      transactions_count: transactions.count
-    }
-  end
-
   def new
     if reverse_transaction.present?
       transaction.amount_cents = reverse_transaction.amount.to_f
@@ -65,12 +58,6 @@ class TransactionsController < ApplicationController
     end
   end
 
-  def notify
-    flash[:success] = "Transaction #{transaction.id} is notified"
-    transaction.notify!
-    redirect_to :back
-  end
-
   def show
     render locals: { transaction: transaction }
   end
@@ -84,10 +71,6 @@ class TransactionsController < ApplicationController
 
   private
 
-  def transaction
-    @transaction ||= Transaction.find params[:id]
-  end
-
   def date
     return unless params.key?(:transaction)
     TransactionDate.parse permitted_params
@@ -99,7 +82,7 @@ class TransactionsController < ApplicationController
   end
 
   def transaction
-    OpenbillTransaction.find params[:id]
+    @transaction ||= OpenbillTransaction.find params[:id]
   end
 
   def ransack
@@ -108,12 +91,6 @@ class TransactionsController < ApplicationController
 
   def transactions
     ransack.result.includes(:to_account, :from_account).order('created_at asc')
-  end
-
-  def pending_webhooks_transactions
-    # TODO
-    raise 'todo'
-    filter.apply(OpenbillTransaction.get_pending_webhooks_transactions)
   end
 
   def permitted_params

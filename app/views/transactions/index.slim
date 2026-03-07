@@ -1,6 +1,4 @@
 .pull-right
-  = link_to 'Pending webhooks', pending_webhooks_transactions_path, class: 'btn btn-sm btn-default'
-  | &nbsp;
   = link_to 'Export to CSV', transactions_path(request.query_parameters.merge format: :csv), class: 'btn btn-sm btn-default', target: '_blank'
   | &nbsp;
   = link_to 'New transaction', new_transaction_path, class: 'btn btn-sm btn-success'
@@ -22,7 +20,6 @@ h1
         th= sort_link ransack, :key
         th Details
         th Meta
-        th Webhook state
         th Actions
 
     tbody
@@ -46,10 +43,6 @@ h1
         td
           .text-muted= t.details
         td= humanized_meta t.meta
-        td
-          - if webhook_presents?
-            - if t.last_webhook_log.present?
-              = link_to t.last_webhook_log.message, logs_path(transaction_id: t.id)
         td
           = show_button transaction_path(t.id)
           - if t.reverse_transaction_id.present?
