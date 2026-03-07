@@ -1,4 +1,4 @@
 [tools]
-node = "20"
+node = "latest"
 ruby = "3.4.8"
 yarn = "1"
