@@ -1,6 +1,6 @@
 h1.flex.items-center.justify-between.mb-4
-  | Accounts at date
-  = link_to 'New account', new_account_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
+  = t('ui.accounts.at_date')
+  = link_to t('ui.accounts.new'), new_account_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
 
 = render 'date_categories', categories: categories
 
@@ -14,11 +14,11 @@ div.overflow-x-auto
         th.px-3.py-2= sort_link ransack, :key
         th.px-3.py-2= sort_link ransack, :amount_cents
         - if has_date_amount
-          th.px-3.py-2 Amount at date
+          th.px-3.py-2= t('ui.accounts.amount_at_date')
         th.px-3.py-2= sort_link ransack, :updated_at
         th.px-3.py-2= sort_link ransack, :transactions_count
-        th.px-3.py-2= t :meta
-        th.px-3.py-2.text-right= t :actions
+        th.px-3.py-2= t('ui.meta')
+        th.px-3.py-2.text-right= t('ui.actions')
     tbody
       - accounts.each do |account|
         tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100

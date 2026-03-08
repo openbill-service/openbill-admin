@@ -35,7 +35,7 @@ module ButtonsHelper
 
   def destroy_button(link)
     tw_button_link t('delete'), link, variant: :danger, size: :sm,
-                   method: :delete, 'data-confirm' => 'Точно удалить?'
+                   method: :delete, 'data-confirm' => t('ui.confirm_delete')
   end
 
   def edit_button(link)

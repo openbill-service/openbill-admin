@@ -1,0 +1,77 @@
+ru:
+  ui:
+    show_filter: Показать фильтр
+    search: Найти
+    reset_filter: Сбросить фильтр
+    export_csv: Экспорт в CSV
+    confirm_delete: Точно удалить?
+    close: Закрыть
+    no_transactions: Нет транзакций по такому запросу
+    no_examples: Нет примеров транзакций
+    until_date: "до %{date}"
+    total_on_date: "Всего на %{date}"
+    total: Итого
+    actions: Действия
+    meta: Мета
+    reports: Отчёты
+    months: Месяцы
+    accounts:
+      title: "Счета (%{filtered} из %{total})"
+      at_date: Счета на дату
+      new: Новый счет
+      edit: "Редактирование счета"
+      show: Счет
+      amount_at_date: Сумма на дату
+      account_label: Аккаунт
+    transactions:
+      title: "Транзакции (%{count})"
+      new: Новая транзакция
+      show: "Транзакция (%{id})"
+      create_time: Время создания
+      record_date: Дата записи
+      source_account: Счет источник
+      destination_account: Счет назначения
+      amount: Сумма
+      details: Детали
+      key: Ключ
+      reversed: "Сторнировано (Исходная транзакция)"
+      original: Исходная транзакция
+      reversation: Транзакция сторнирования
+      reverse: Сторнировать
+      make_reverse: Создать обратную транзакцию
+      opposite_account: Противоположный счет
+      time: Время
+      no_transactions: Нет транзакций
+      username: Пользователь
+      id: ID
+      category: Категория
+      created_at: Дата создания
+    categories:
+      title: Категории
+      new: Новая категория
+      edit: Редактирование категории
+      name: Название
+      parent: Родитель
+      accounts_count: Количество счетов
+    policies:
+      title: Правила
+      new: Новое правило
+      edit: Редактирование правила
+      name: Название
+      from_category: Категория источника
+      to_category: Категория назначения
+      from_account: Счет источник
+      to_account: Счет назначения
+      allow_reverse: Разрешить сторно
+    account_transactions:
+      new_title: Зачисление на счет
+      creating_direction: "Создаем %{direction} транзакцию"
+      example_title: Примеры транзакций
+      creation_time: Время создания
+      date: Дата
+      opposite_account: Противоположный счет
+      amount: Сумма
+      key: Ключ
+    welcome:
+      title: Добро пожаловать
+      find_me: Шаблон в app/views/welcome/index.html.slim

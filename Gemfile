@@ -45,6 +45,7 @@ gem 'hashie'
 gem 'simple_form'
 
 gem 'active_link_to'
+gem 'http_accept_language'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

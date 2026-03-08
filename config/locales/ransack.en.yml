@@ -1,0 +1,24 @@
+en:
+  ransack:
+    asc: Ascending
+    desc: Descending
+    predicates:
+      cont: contains
+      not_cont: not contains
+      start: starts with
+      end: ends with
+      gt: greater than
+      lt: less than
+      lteq: Less than or equal to
+    models:
+      OpenbillAccount: Account
+    attributes:
+      default:
+        date: Date
+      transaction:
+        date: Date
+      openbill_transaction:
+        date: Date
+      openbill_account:
+        key: Name
+        key_cont: Name

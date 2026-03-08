@@ -12,18 +12,18 @@
   .col-span-12.md:col-span-6
     div.p-6
       dl.grid.grid-cols-12.gap-y-2
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Amount
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.amount')
         dd.col-span-12.sm:col-span-9.text-sm= humanized_amount account.amount
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Details
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.details')
         dd.col-span-12.sm:col-span-9.text-sm= account.details
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Meta
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.meta')
         dd.col-span-12.sm:col-span-9.text-sm.text-gray-500= humanized_meta account.meta
   .col-span-12.md:col-span-6
     div.p-6
       dl.grid.grid-cols-12.gap-y-2
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 ID
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.id')
         dd.col-span-12.sm:col-span-9.text-sm= account.id
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Category
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.category')
         dd.col-span-12.sm:col-span-9.text-sm
           = link_to account.category, category_path(account.category_id)
 

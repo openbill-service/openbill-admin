@@ -1,4 +1,4 @@
 nav.flex.flex-wrap.gap-1.mb-4
-  = link_to "All (#{accounts_count})", accounts_path, class: category_pill_class(current_category.blank?)
+  = link_to "#{t('ui.total')} (#{accounts_count})", accounts_path, class: category_pill_class(current_category.blank?)
   - categories.each do |cat|
     = link_to "#{cat.name} (#{accounts_count(cat)})", accounts_path(q: { category_id_eq: cat.id }), class: category_pill_class(current_category.try(:id) == cat.id)

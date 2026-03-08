@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    attributes:
+      account:
+        key: Key
+        transactions_count: Transactions count
+        updated_at: Last updated

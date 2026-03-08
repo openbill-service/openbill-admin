@@ -177,6 +177,10 @@ ru:
       create: Создать %{model}
       submit: Сохранить %{model}
       update: Сохранить %{model}
+    back: Назад
+  show: Показать
+  edit: Редактировать
+  delete: Удалить
   number:
     currency:
       format:

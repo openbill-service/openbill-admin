@@ -1,15 +1,15 @@
 div.flex.items-center.justify-between.mb-4
-  h1.text-xl.font-semibold Categories
-  = tw_button_link 'New category', new_category_path, variant: :success, size: :sm
+  h1.text-xl.font-semibold= t('ui.categories.title')
+  = tw_button_link t('ui.categories.new'), new_category_path, variant: :success, size: :sm
 
 div.overflow-x-auto
   table.w-full.text-sm.text-left
     thead
       tr.border-b.border-gray-200.bg-gray-50
-        th.px-3.py-2 Name
-        th.px-3.py-2 Parent
-        th.px-3.py-2 Accounts count
-        th.px-3.py-2.text-right= t :actions
+        th.px-3.py-2= t('ui.categories.name')
+        th.px-3.py-2= t('ui.categories.parent')
+        th.px-3.py-2= t('ui.categories.accounts_count')
+        th.px-3.py-2.text-right= t('ui.actions')
     tbody
       - categories.each do |category|
         tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100

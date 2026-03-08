@@ -1,5 +1,11 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+
+# Ensure compiled CSS exists for request specs (Tailwind CSS is built externally)
+require 'fileutils'
+css_path = File.expand_path('../../app/assets/builds/application.css', __FILE__)
+FileUtils.touch(css_path) unless File.exist?(css_path)
+
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?

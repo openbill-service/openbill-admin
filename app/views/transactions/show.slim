@@ -1,5 +1,5 @@
 h1.text-xl.font-semibold.mb-4
-  | Transaction (#{transaction.id})
+  = t('ui.transactions.show', id: transaction.id)
 
 div.flex.items-center.gap-2.mb-4
   = edit_button edit_transaction_path(transaction.id)
@@ -7,37 +7,37 @@ div.flex.items-center.gap-2.mb-4
 
 div.mb-4
   - if transaction.reverse_transaction_id.present?
-    = link_to "Original transaction", transaction_path(transaction.reverse_transaction_id), class: 'text-blue-600 hover:text-blue-800 underline text-sm'
+    = link_to t('ui.transactions.original'), transaction_path(transaction.reverse_transaction_id), class: 'text-blue-600 hover:text-blue-800 underline text-sm'
   - elsif transaction.reversation_transaction.present?
-    = link_to 'Reversation transaction', transaction_path(transaction.reversation_transaction.id), class: 'text-blue-600 hover:text-blue-800 underline text-sm'
+    = link_to t('ui.transactions.reversation'), transaction_path(transaction.reversation_transaction.id), class: 'text-blue-600 hover:text-blue-800 underline text-sm'
   - else
-    = link_to 'Reverse', new_transaction_path(transaction: { reverse_transaction_id: transaction.id }), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+    = link_to t('ui.transactions.reverse'), new_transaction_path(transaction: { reverse_transaction_id: transaction.id }), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
 
 .grid.grid-cols-12.gap-4
   .col-span-12.md:col-span-6
     div.p-6
       dl.grid.grid-cols-12.gap-y-2
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Created at
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.created_at')
         dd.col-span-12.sm:col-span-9.text-sm= I18n.l transaction.created_at, format: :short
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Record date
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.record_date')
         dd.col-span-12.sm:col-span-9.text-sm= humanized_date transaction.date
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Key
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.key')
         dd.col-span-12.sm:col-span-9.text-sm= transaction.key
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 From account
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.source_account')
         dd.col-span-12.sm:col-span-9.text-sm
           = link_to transaction.from_account, account_path(transaction.from_account_id)
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 To account
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.destination_account')
         dd.col-span-12.sm:col-span-9.text-sm
           = link_to transaction.to_account, account_path(transaction.to_account_id)
 
   .col-span-12.md:col-span-6
     div.p-6
       dl.grid.grid-cols-12.gap-y-2
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Amount
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.amount')
         dd.col-span-12.sm:col-span-9.text-sm= humanized_amount transaction.amount
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Details
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.details')
         dd.col-span-12.sm:col-span-9.text-sm= transaction.details
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Meta
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.meta')
         dd.col-span-12.sm:col-span-9.text-sm.text-gray-500= humanized_meta transaction.meta
-        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700 Username
+        dt.col-span-12.sm:col-span-3.text-sm.font-medium.text-gray-700= t('ui.transactions.username')
         dd.col-span-12.sm:col-span-9.text-sm= transaction.username

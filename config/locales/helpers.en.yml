@@ -1,0 +1,8 @@
+en:
+  helpers:
+    submit:
+      account:
+        create: Create
+        update: Save
+      account_transaction_form:
+        create: Create

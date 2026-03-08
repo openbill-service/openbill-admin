@@ -1,9 +1,9 @@
 div.flex.items-center.justify-end.gap-2.mb-4
-  = link_to 'Export to CSV', transactions_path(request.query_parameters.merge format: :csv), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50', target: '_blank'
-  = link_to 'New transaction', new_transaction_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
+  = export_csv_link
+  = link_to t('ui.transactions.new'), new_transaction_path, class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-emerald-600 text-white hover:bg-emerald-700'
 
 h1.text-xl.font-semibold.mb-4
-  | Transactions (#{transactions_count})
+  = t('ui.transactions.title', count: transactions_count)
 
 = render 'filter', ransack: ransack
 
@@ -15,15 +15,15 @@ div.flex.justify-end.mb-2
     table.w-full.text-sm.text-left
       thead
         tr.border-b.border-gray-200.bg-gray-50
-          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :created_at, label: 'Create time'
-          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :date, label: 'Record date'
-          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :from_account_id, label: 'Source account'
-          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :to_account_id, label: 'Destination account'
-          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :amount_cents, label: 'Amount'
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :created_at, label: t('ui.transactions.create_time')
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :date, label: t('ui.transactions.record_date')
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :from_account_id, label: t('ui.transactions.source_account')
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :to_account_id, label: t('ui.transactions.destination_account')
+          th.px-3.py-2.whitespace-nowrap= sort_link ransack, :amount_cents, label: t('ui.transactions.amount')
           th.px-3.py-2.whitespace-nowrap= sort_link ransack, :key
-          th.px-3.py-2.whitespace-nowrap Details
-          th.px-3.py-2.whitespace-nowrap Meta
-          th.px-3.py-2.whitespace-nowrap Actions
+          th.px-3.py-2.whitespace-nowrap= t('ui.transactions.details')
+          th.px-3.py-2.whitespace-nowrap= t('ui.meta')
+          th.px-3.py-2.whitespace-nowrap= t('ui.actions')
 
       tbody
         - transactions.each do |t|
@@ -50,10 +50,10 @@ div.flex.justify-end.mb-2
               = show_button transaction_path(t.id)
               - if t.reverse_transaction_id.present?
                 br
-                = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
+                = link_to t('ui.transactions.reversed'), transaction_path(t.reverse_transaction_id)
 
 - else
-  div.mt-4.p-4.bg-blue-50.text-blue-700.rounded-md.text-sm Нет транзакций по такому запросу
+  div.mt-4.p-4.bg-blue-50.text-blue-700.rounded-md.text-sm= t('ui.no_transactions')
 
 hr.border-gray-200.my-4
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :locale, only: [:update]
+
   root 'welcome#index'
 
   resources :accounts, except: [:destroy] do
