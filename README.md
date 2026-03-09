@@ -9,21 +9,56 @@ Administrative interface for the OpenBill billing system. Manage accounts, trans
 
 ## Requirements
 
+### Recommended workflow (Docker + dip)
+
+- Docker + Docker Compose
+- Ruby 3.4+ with Bundler (to run `./bin/dip` wrapper)
+
+### Native fallback workflow
+
 - Ruby 3.4+
 - PostgreSQL 14+
-- Node.js and Yarn (for CSS compilation only)
+- Node.js 20+ (npm in CI; yarn is also supported locally)
 
-## Build, CI, and GHCR
+## Quick Start (Docker, recommended)
 
-Standard local commands:
+The project supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).
 
 ```bash
-make setup
-make lint
-make test
-make build
-make image IMAGE_TAG=local
+bundle install
+./bin/dip provision
+./bin/dip server
 ```
+
+App is available at `http://localhost:3000` (or `http://localhost:${PORT}` when `PORT` is set).
+
+### Common dip commands
+
+```bash
+./bin/dip shell                              # shell in app container
+./bin/dip rails db:migrate                   # run migrations
+./bin/dip rake openbill_core:verify_contract # verify integration contract
+./bin/dip rspec                              # run test suite in container
+./bin/dip down                               # stop containers
+```
+
+## Command Reference (make vs dip)
+
+Use `dip` for day-to-day local development. Use `make` for CI parity and image workflows.
+
+| Goal | Command |
+|---|---|
+| Install native dependencies | `make setup` |
+| Run static/runtime checks | `make lint` |
+| Run full CI-like test flow | `make test` |
+| Build production assets | `make build` |
+| Build Docker image locally | `make image IMAGE_TAG=local` |
+| Provision Docker dev env | `./bin/dip provision` |
+| Start app in Docker | `./bin/dip server` |
+| Run tests in Docker | `./bin/dip rspec` |
+| Verify Openbill-Core DB contract in Docker | `./bin/dip rake openbill_core:verify_contract` |
+
+## CI and GHCR
 
 CI runs on every PR and on pushes to `master`/`main`:
 
@@ -39,35 +74,13 @@ Published image tags are predictable and include:
 - `vX`
 - `latest` (updated only on release tags)
 
-## Quick Start (Docker, recommended)
-
-The project supports local Docker development via [`bibendi/dip`](https://github.com/bibendi/dip).
-
-```bash
-bundle install
-./bin/dip provision
-./bin/dip server
-```
-
-App will be available at `http://localhost:3000` (or `http://localhost:${PORT}` when `PORT` is set).
-
-### Common dip commands
-
-```bash
-./bin/dip shell                              # open shell in container
-./bin/dip rails db:migrate                   # run migrations
-./bin/dip rake openbill_core:verify_contract # check integration contract
-./bin/dip test                               # full test cycle (db prepare + contract + zeitwerk + rspec)
-./bin/dip down                               # stop containers
-```
-
-## Native Setup (alternative)
+## Native Setup (fallback)
 
 ### Install dependencies
 
 ```bash
 bundle install
-yarn install
+npm install
 ```
 
 ### Configure environment
@@ -77,9 +90,10 @@ Create a `.env` file with the following variables:
 ```
 DATABASE_HOST=localhost
 DATABASE_NAME=openbill_development
-DATABASE_USER=your_database_user
-DATABASE_PASS=your_database_password
-RACK_PASSWORD=your_admin_password
+DATABASE_NAME_TEST=openbill_test
+DATABASE_USER=postgres
+DATABASE_PASS=postgres
+DATABASE_POOL=5
 SECRET_KEY_BASE=your_secret_key_base
 ```
 
@@ -89,10 +103,14 @@ Generate a secret key base:
 bundle exec rails secret
 ```
 
-### Set up the database
+`RACK_PASSWORD` is required in production only.
+
+### Set up databases
 
 ```bash
 bundle exec rails db:create db:migrate
+bundle exec rails db:create RAILS_ENV=test
+bundle exec rails db:migrate RAILS_ENV=test
 ```
 
 ### Run the server
@@ -101,7 +119,7 @@ bundle exec rails db:create db:migrate
 bundle exec rails server
 ```
 
-The app will be available at http://localhost:3000.
+App is available at `http://localhost:3000`.
 
 ## Database Structure
 
@@ -117,10 +135,16 @@ OpenBill Admin works with the following main entities:
 OpenBill Admin integrates with [`openbill-core`](https://github.com/openbill-service/openbill-core) directly through PostgreSQL (no API/client layer).
 
 - Integration contract and compatibility rules: [`docs/openbill-core-integration.md`](docs/openbill-core-integration.md)
-- Verify the contract:
+- Verify the contract (native):
 
 ```bash
 bundle exec rake openbill_core:verify_contract
+```
+
+- Verify the contract (Docker):
+
+```bash
+./bin/dip rake openbill_core:verify_contract
 ```
 
 ## Authentication

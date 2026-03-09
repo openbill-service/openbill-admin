@@ -1,5 +1,13 @@
 # Developer Notes
 
+## Documentation Ownership
+
+- `README.md`: onboarding, run/test/build commands, CI/GHCR overview.
+- `DEVELOPERS.md`: engineering rationale and team conventions only.
+- `docs/openbill-core-integration.md`: DB integration contract with `openbill-core`.
+
+When workflow, CI, or setup commands change, update `README.md` in the same PR.
+
 ## Why not the money type?
 
 We intentionally store money as `amount_cents` + `amount_currency` instead of database `money` type.
@@ -13,12 +21,10 @@ Reasons:
 
 At the domain layer we still use the `Money` gem (`money-rails`) for calculations and presentation.
 
-## Local Docker workflow
+## Local Workflow Policy
 
-For containerized development use `dip` commands from this repository:
+Primary local development workflow is `dip` (Docker-based). Native workflow is fallback-only.
 
-- `./bin/dip provision`
-- `./bin/dip server`
-- `./bin/dip rspec`
+Canonical command references are documented in [`README.md`](README.md).
 
 Avoid mixing direct `docker compose` calls into daily flow except troubleshooting.
