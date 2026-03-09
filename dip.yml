@@ -96,7 +96,7 @@ interaction:
 provision:
   - dip build app
   - dip compose up -d postgres
-  - dip compose exec postgres pg_isready -U postgres
+  - bash -lc 'until dip compose exec postgres pg_isready -U postgres >/dev/null 2>&1; do sleep 1; done; dip compose exec postgres pg_isready -U postgres'
   - dip bundle install
   - dip yarn install --frozen-lockfile || dip yarn install
   - dip rails db:prepare
