@@ -37,6 +37,12 @@ Validation command:
 bundle exec rake openbill_core:verify_contract
 ```
 
+Docker-based local validation:
+
+```bash
+./bin/dip rake openbill_core:verify_contract
+```
+
 ## Compatibility Requirements
 
 - Keep table names in `openbill_*` namespace.
