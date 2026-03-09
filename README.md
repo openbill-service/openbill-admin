@@ -18,7 +18,7 @@ Administrative interface for the OpenBill billing system. Manage accounts, trans
 
 - Ruby 3.4+
 - PostgreSQL 14+
-- Node.js 20+ (npm in CI; yarn is also supported locally)
+- Node.js 20+ (CI uses npm; local workflow uses yarn)
 
 ## Quick Start (Docker, recommended)
 
@@ -38,7 +38,7 @@ App is available at `http://localhost:3000` (or `http://localhost:${PORT}` when 
 ./bin/dip shell                              # shell in app container
 ./bin/dip rails db:migrate                   # run migrations
 ./bin/dip rake openbill_core:verify_contract # verify integration contract
-./bin/dip rspec                              # run test suite in container
+./bin/dip test                               # full CI-like test flow in container
 ./bin/dip down                               # stop containers
 ```
 
@@ -55,7 +55,8 @@ Use `dip` for day-to-day local development. Use `make` for CI parity and image w
 | Build Docker image locally | `make image IMAGE_TAG=local` |
 | Provision Docker dev env | `./bin/dip provision` |
 | Start app in Docker | `./bin/dip server` |
-| Run tests in Docker | `./bin/dip rspec` |
+| Run full CI-like test flow in Docker | `./bin/dip test` |
+| Run RSpec only in Docker | `./bin/dip rspec` |
 | Verify Openbill-Core DB contract in Docker | `./bin/dip rake openbill_core:verify_contract` |
 
 ## CI and GHCR
@@ -80,7 +81,7 @@ Published image tags are predictable and include:
 
 ```bash
 bundle install
-npm install
+yarn install --frozen-lockfile || yarn install
 ```
 
 ### Configure environment
