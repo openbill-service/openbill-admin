@@ -121,7 +121,7 @@ dev-up:
 	./bin/dip server
 
 dev-test:
-	./bin/dip rspec
+	./bin/dip test
 
 dev-down:
 	./bin/dip down

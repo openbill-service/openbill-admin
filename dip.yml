@@ -67,6 +67,26 @@ interaction:
       run_options:
         - -e RAILS_ENV=test
 
+  test:
+    description: Run full test cycle (db prepare + contract + zeitwerk + rspec)
+    service: app
+    command: >-
+      bash -lc "bundle exec rails db:prepare &&
+      bundle exec rake openbill_core:verify_contract &&
+      bundle exec rails zeitwerk:check &&
+      bundle exec rspec"
+    environment:
+      RAILS_ENV: test
+      DATABASE_HOST: postgres
+      DATABASE_USER: postgres
+      DATABASE_PASS: postgres
+      DATABASE_NAME: openbill_development
+      DATABASE_NAME_TEST: openbill_test
+      DATABASE_POOL: 5
+    compose:
+      run_options:
+        - -e RAILS_ENV=test
+
   server:
     description: Start the application in Docker
     service: app
@@ -74,11 +94,10 @@ interaction:
       method: up
 
 provision:
+  - dip build app
   - dip compose up -d postgres
   - dip compose exec postgres pg_isready -U postgres
   - dip bundle install
-  - dip yarn install
-  - dip rake db:create
-  - dip rake db:migrate
-  - dip rake db:create RAILS_ENV=test
-  - dip rake db:migrate RAILS_ENV=test
+  - dip yarn install --frozen-lockfile || dip yarn install
+  - dip rails db:prepare
+  - dip rails db:prepare RAILS_ENV=test

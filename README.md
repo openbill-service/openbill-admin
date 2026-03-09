@@ -57,7 +57,7 @@ App will be available at `http://localhost:3000` (or `http://localhost:${PORT}` 
 ./bin/dip shell                              # open shell in container
 ./bin/dip rails db:migrate                   # run migrations
 ./bin/dip rake openbill_core:verify_contract # check integration contract
-./bin/dip rspec                              # run tests
+./bin/dip test                               # full test cycle (db prepare + contract + zeitwerk + rspec)
 ./bin/dip down                               # stop containers
 ```
 
