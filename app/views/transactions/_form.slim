@@ -1,5 +1,5 @@
 - if transaction.reverse_transaction_id.present?
-  h2.text-lg.font-semibold.mb-4 Make a reverse transaction
+  h2.text-lg.font-semibold.mb-4= t('ui.transactions.make_reverse')
 = simple_form_for transaction do |f|
   = f.input :reverse_transaction_id, as: :hidden
   .grid.grid-cols-12.gap-4

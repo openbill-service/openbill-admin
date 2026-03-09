@@ -1,6 +1,6 @@
 div.mb-4.mt-2 data-controller="toggle" data-toggle-open-value=(params[:philtre].present? ? 'true' : 'false')
   button.inline-flex.items-center.font-medium.rounded-md.transition.px-3.py-1.5.text-xs.border.border-blue-600.text-blue-600.hover:bg-blue-50 type="button" data-action="click->toggle#toggle" aria-expanded=(params[:philtre].present? ? 'true' : 'false') aria-controls="filter"
-    | Показать фильтр
+    = t('ui.show_filter')
 
   #filter.mt-3.mb-2 data-toggle-target="content" class=(params[:philtre].blank? ? 'hidden' : '')
     = simple_form_for filter.for_form, url: account_transactions_path(account.id), method: 'get' do |f|

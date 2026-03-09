@@ -12,7 +12,7 @@ div.overflow-x-auto
           th.px-3.py-2.whitespace-nowrap
             = humanized_period period
         th.px-3.py-2.whitespace-nowrap
-          = sort_link ransack, :amount_cents, "Всего на #{l(Date.today, format: :long)}"
+          = sort_link ransack, :amount_cents, t('ui.total_on_date', date: l(Date.today, format: :long))
     tbody
       - accounts.each do |account|
         tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100

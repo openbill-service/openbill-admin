@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    models:
+      account:
+        one: Account
+        other: Accounts
+      transaction:
+        one: Transaction
+        other: Transactions
+      policy:
+        one: Policy
+        other: Policies
+      category:
+        one: Category
+        other: Categories
+      invoice:
+        one: Invoice
+        other: Invoices
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"

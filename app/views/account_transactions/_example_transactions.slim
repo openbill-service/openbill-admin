@@ -1,18 +1,18 @@
 - if example_transactions.any?
-  h3.text-lg.font-semibold.mt-6.mb-3 Примеры транзакций
+  h3.text-lg.font-semibold.mt-6.mb-3= t('ui.account_transactions.example_title')
   div.overflow-x-auto
     table.w-full.text-sm.text-left
       thead
         tr.border-b.border-gray-200.bg-gray-50
-          th.px-3.py-2 Время создания
-          th.px-3.py-2 Дата
-          th.px-3.py-2 Противоположный счет
-          th.px-3.py-2 Сумма
-          th.px-3.py-2 Ключ
-          th.px-3.py-2 Details
-          th.px-3.py-2 Meta
-          th.px-3.py-2 Actions
+          th.px-3.py-2= t('ui.account_transactions.creation_time')
+          th.px-3.py-2= t('ui.account_transactions.date')
+          th.px-3.py-2= t('ui.account_transactions.opposite_account')
+          th.px-3.py-2= t('ui.account_transactions.amount')
+          th.px-3.py-2= t('ui.account_transactions.key')
+          th.px-3.py-2= t('ui.transactions.details')
+          th.px-3.py-2= t('ui.meta')
+          th.px-3.py-2= t('ui.actions')
 
       = render 'accounts/transactions_table_body', account: account, transactions: example_transactions, ransack: nil
 - else
-  h3.text-lg.font-semibold.mt-6.mb-3.text-gray-500 Нет примеров транзакций
+  h3.text-lg.font-semibold.mt-6.mb-3.text-gray-500= t('ui.no_examples')

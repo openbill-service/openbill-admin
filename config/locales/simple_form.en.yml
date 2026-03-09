@@ -1,0 +1,55 @@
+en:
+  simple_form:
+    "yes": "yes"
+    "no": "no"
+    required:
+      text: required
+      mark: "*"
+    error_notification:
+      default_message: "Errors were found, please review them"
+      blank: "Can't be blank"
+    confirm: Are you sure?
+    button:
+      disable_with:
+        sending: Sending...
+        saving: Saving...
+        waiting: Please wait...
+        adding: Adding...
+    labels:
+      defaults:
+        key_cont: Name contains
+        details_cont: Details contain
+        amount_cents_lteq: Amount less than or equal to
+        amount_cents_gteq: Amount greater than or equal to
+        date_gteq: Date greater than or equal to
+        date_lteq: Date less than or equal to
+        from_account_id_eq: Source account
+        to_account_id_eq: Destination account
+        from_account_id_or_to_account_id_cont: Any account
+      account:
+        key_cont: key_cont
+        category: Account category
+        category_id: Account category
+        meta: Metadata
+        details: Comment
+        key: Key
+        mount: Balance
+      account_transaction_form:
+        opposite_account_id: Opposite account
+        amount_cents: Amount
+        key: Unique key
+        details: Details
+        date: Bank operation date
+    hints:
+      defaults:
+        row_order_position: Position, starting from 0
+      account_transaction_form:
+        date: Optional
+    placeholders:
+      defaults:
+        title: Title
+    include_blanks:
+      user_goods_search_form:
+        category_id_eq: Any category
+      q:
+        category_id_eq: Any category

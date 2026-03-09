@@ -1,18 +1,18 @@
 div.flex.items-center.justify-between.mb-4
-  h1.text-xl.font-semibold Policies
-  = tw_button_link 'New policy', new_policy_path, variant: :success, size: :sm
+  h1.text-xl.font-semibold= t('ui.policies.title')
+  = tw_button_link t('ui.policies.new'), new_policy_path, variant: :success, size: :sm
 
 div.overflow-x-auto
   table.w-full.text-sm.text-left
     thead
       tr.border-b.border-gray-200.bg-gray-50
-        th.px-3.py-2 Name
-        th.px-3.py-2 From category
-        th.px-3.py-2 To category
-        th.px-3.py-2 From account
-        th.px-3.py-2 To account
-        th.px-3.py-2 Allow reverse
-        th.px-3.py-2.text-right= t :actions
+        th.px-3.py-2= t('ui.policies.name')
+        th.px-3.py-2= t('ui.policies.from_category')
+        th.px-3.py-2= t('ui.policies.to_category')
+        th.px-3.py-2= t('ui.policies.from_account')
+        th.px-3.py-2= t('ui.policies.to_account')
+        th.px-3.py-2= t('ui.policies.allow_reverse')
+        th.px-3.py-2.text-right= t('ui.actions')
     tbody
       - policies.each do |policy|
         tr.border-b.border-gray-100.even:bg-gray-50.hover:bg-gray-100

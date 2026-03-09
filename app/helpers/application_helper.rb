@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def export_csv_link
-    link_to 'Export to CSV', url_for(request.query_parameters.merge format: :csv),
+    link_to t('ui.export_csv'), url_for(request.query_parameters.merge format: :csv),
             class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50',
             target: '_blank'
   end
@@ -69,7 +69,7 @@ module ApplicationHelper
         "#{content_tag(:span, first, class: 'whitespace-nowrap')} - #{content_tag(:span, last, class: 'whitespace-nowrap')}".html_safe
       else
         last = l period.last, format: :long
-        "до #{content_tag(:span, last, class: 'whitespace-nowrap')}".html_safe
+        t('ui.until_date', date: content_tag(:span, last, class: 'whitespace-nowrap')).html_safe
       end
     end
   end

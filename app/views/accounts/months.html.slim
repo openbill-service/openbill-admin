@@ -4,7 +4,7 @@ div.overflow-x-auto
   table.w-full.text-sm.text-left
     thead
       tr.border-b.border-gray-200.bg-gray-50
-        th.px-3.py-2 Аккаунт
+        th.px-3.py-2= t('ui.accounts.account_label')
         - periods.each do |m|
           th.px-3.py-2= humanized_period m
     tbody

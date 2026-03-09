@@ -1,10 +1,10 @@
 div.flex.flex-wrap.items-center.gap-2.mt-1
   = edit_button edit_account_path(account.id)
-  = link_to t(:reports), account_reports_path(account.id), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-blue-500 text-white hover:bg-blue-600'
-  = link_to 'months', months_account_path(account.id), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
+  = link_to t('ui.reports'), account_reports_path(account.id), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-blue-500 text-white hover:bg-blue-600'
+  = link_to t('ui.months'), months_account_path(account.id), class: 'inline-flex items-center font-medium rounded-md transition px-3 py-1.5 text-xs bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
   = export_csv_link
   = render 'account_actions', account: account
 h1
-  | Account
+  = t('ui.accounts.show')
   = link_to "##{account.key}", account_path(account.id)
 p= account.details

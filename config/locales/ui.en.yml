@@ -1,0 +1,77 @@
+en:
+  ui:
+    show_filter: Show filter
+    search: Search
+    reset_filter: Reset filter
+    export_csv: Export to CSV
+    confirm_delete: Are you sure you want to delete?
+    close: Close
+    no_transactions: No transactions matching this query
+    no_examples: No example transactions
+    until_date: "until %{date}"
+    total_on_date: "Total as of %{date}"
+    total: Total
+    actions: Actions
+    meta: Meta
+    reports: Reports
+    months: Months
+    accounts:
+      title: "Accounts (%{filtered} of %{total})"
+      at_date: Accounts at date
+      new: New account
+      edit: "Edit account"
+      show: Account
+      amount_at_date: Amount at date
+      account_label: Account
+    transactions:
+      title: "Transactions (%{count})"
+      new: New transaction
+      show: "Transaction (%{id})"
+      create_time: Create time
+      record_date: Record date
+      source_account: Source account
+      destination_account: Destination account
+      amount: Amount
+      details: Details
+      key: Key
+      reversed: "Reversed (Original transaction)"
+      original: Original transaction
+      reversation: Reversation transaction
+      reverse: Reverse
+      make_reverse: Make a reverse transaction
+      opposite_account: Opposite account
+      time: Time
+      no_transactions: No transactions
+      username: Username
+      id: ID
+      category: Category
+      created_at: Created at
+    categories:
+      title: Categories
+      new: New category
+      edit: Edit category
+      name: Name
+      parent: Parent
+      accounts_count: Accounts count
+    policies:
+      title: Policies
+      new: New policy
+      edit: Edit policy
+      name: Name
+      from_category: From category
+      to_category: To category
+      from_account: From account
+      to_account: To account
+      allow_reverse: Allow reverse
+    account_transactions:
+      new_title: Account deposit
+      creating_direction: "Creating %{direction} transaction"
+      example_title: Example transactions
+      creation_time: Creation time
+      date: Date
+      opposite_account: Opposite account
+      amount: Amount
+      key: Key
+    welcome:
+      title: Welcome#index
+      find_me: Find me in app/views/welcome/index.html.slim

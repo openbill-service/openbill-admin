@@ -17,7 +17,7 @@ tbody
         span.text-gray-500= t.details
       td.px-3.py-2= humanized_meta t.meta
       td.px-3.py-2
-        = link_to 'Show', transaction_path(t.id)
+        = show_button transaction_path(t.id)
         - if t.reverse_transaction_id.present?
           br
-          = link_to "Reversed (Original transaction)", transaction_path(t.reverse_transaction_id)
+          = link_to t('ui.transactions.reversed'), transaction_path(t.reverse_transaction_id)

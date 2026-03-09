@@ -1,7 +1,7 @@
-h1 Зачисление на счет
+h1= t('ui.account_transactions.new_title')
 = account_title account
 
-em= "Создаем #{account_transaction_form.direction} транзакцию"
+em= t('ui.account_transactions.creating_direction', direction: account_transaction_form.direction)
 
 = render 'form', account_transaction_form: account_transaction_form, opposite_accounts_collection: opposite_accounts_collection
 
